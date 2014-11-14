@@ -8,5 +8,7 @@ class CreateStation < ActiveRecord::Migration
       t.decimal :latitude
       t.decimal :price
     end
+    
+    drop_table :widgets
   end
 end
