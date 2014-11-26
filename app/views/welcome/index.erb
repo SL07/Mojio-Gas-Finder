@@ -1,26 +1,24 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBd36LENIhwUv1SPYxOGrZTVf5w5Kqj_Q4"></script>
 <script type="text/javascript">
   function initialize() {
+    var myLatlng = new google.maps.LatLng(49.250, -123.100);
     var mapOptions = {center: {lat: 49.250, lng: -123.100}, zoom: 12};
     var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    var market = new google.maps.Marker({
+    position:myLatlng,
+    map:map,
+    title:"Hello world"
+  })
   }
   google.maps.event.addDomListener(window, 'load', initialize);
 </script>
-
-<div id="map"></div>
-
-<!--<result>
-  <%= link_to 'Login', new_widget_path %>
-</result>
-
-<%= image_tag("3dDoge.gif") %>
 
 <div class = "navbar navbar-default navbar-static-bottom">
     <div class = "container">
       <p class = "navbar-text">Search</p>
     </div>
 </div>
--->
+
 <div class = "container">
   <form class = "navbar-form" role = "search">
     <div class = "input-group">
@@ -34,3 +32,30 @@
   </form>
 </div>
 
+<div id="map"></div>
+
+<!--
+<%= image_tag("3dDoge.gif") %>
+-->
+
+<!--
+<div class = "navbar navbar-default navbar-static-bottom">
+    <div class = "container">
+      <p class = "navbar-text">Search</p>
+    </div>
+</div>
+
+
+<div class = "container">
+  <form class = "navbar-form" role = "search">
+    <div class = "input-group">
+        <input type = "text" class = "form-control" placeholder = "Search">
+        <div class = "input-group-btn">
+          <button class = "btn btn-default" type = "submit">
+            <i class = "glyphicon glyphicon-chevron-right"></i>
+          </button>
+        </div>
+    </div>
+  </form>
+</div>
+-->
