@@ -1,4 +1,4 @@
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBd36LENIhwUv1SPYxOGrZTVf5w5Kqj_Q4"></script>
+6<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBd36LENIhwUv1SPYxOGrZTVf5w5Kqj_Q4"></script>
 <script type="text/javascript">
 
 
@@ -36,6 +36,7 @@
 
 function initialize() {
   geocoder = new google.maps.Geocoder();
+  map = new google.maps.Map(document.getElementById('map'), mapOptions);
   var latlng = new google.maps.LatLng(-34.397, 150.644);
   var mapOptions = {
     zoom: 8,
