@@ -10,63 +10,28 @@
 <body>
   <script src="jquery-1.11.1.js"></script>
   <script src="bootstrap.min.js"></script>
-  <div class = "navbar navbar-inverse navbar-static-top">
-    <div class = "container">
-      <div class = "navbar-header">
-       <a href = "#" class = "navbar-brand"><img src = "https://www.moj.io/wp-content/uploads/2013/09/mojioappicon.png" height = "25" width = "25"></a>
-       <button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
-        <span class = "icon-bar"></span>
-        <span class = "icon-bar"></span>
-        <span class = "icon-bar"></span>
-       </button>
-      </div>
-      
-      <div class = "collapse navbar-collapse navHeaderCollapse">
-        <ul class = "nav navbar-nav navbar-right">
-          <li class = "active"><%= link_to "Login", root_path %></li>
-          <li><a href = "stations">Gas Stations</a></li>
-          <li><a href = "map">Map</a></li>
-        </ul>
-      </div>
-
+  
+  
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <img alt="Brand" src="/assets/navbar_badge.png" height = "40" style="margin-top:5px; margin-left:25px">
+        
+        
+       </div> 
+        
+       <div class = "collapse navbar-collapse navHeaderCollapse" >
+         <ul class = "nav navbar-right nav-pills" style="margin-top:5px; margin-right: 10px">
+           <li role="presentation"><%= link_to "Login", root_path %></li>
+           <li role="presentation"><a href = "stations">Gas Stations</a></li>
+           <li role="presentation"><a href = "map">Map</a></li>
+         </ul>
+       </div>
+    
     </div>
-  </div>
-
-  
-  
+   </nav> 
+   
 <%= yield %>
 
 </body>
 </html>
-
-
-<!-- remove this line to uncomment
-<!DOCTYPE html>
-<html>
-  <head>
-    <style type="text/css">
-      html { height: 100%}
-	  body { height: 100%; margin: 0; padding: 0} 
-	  #map-canvas { height: 100%; margin: 20%; padding: 0}
-	  
-    </style>
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=API_KEY">
-    </script>
-    <script type="text/javascript">
-      function initialize() {
-        var mapOptions = {
-          center: { lat: -34.397, lng: 150.644},
-          zoom: 12
-        };
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
-            mapOptions);
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-  </head>
-  <body>
-<div id="map-canvas"></div>
-  </body>
-</html>
--->
