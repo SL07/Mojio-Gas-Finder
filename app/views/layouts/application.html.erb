@@ -16,13 +16,19 @@
     <div class="container-fluid">
       <div class="navbar-header">
         <%= image_tag("navbar_badge.png", :alt => "brand", :size => "268x40", :style => "margin-top:5px; margin-left:25px")%>
+       
+        <button class = "navbar-toggle visible-xs" data-toggle = "collapse" data-target = "#collapse-pills">
+          <span class = "icon-bar"></span>
+          <span class = "icon-bar"></span>
+          <span class = "icon-bar"></span>
+        </button>
        </div> 
-        
-       <div class = "collapse navbar-collapse navHeaderCollapse" >
-         <ul class = "nav navbar-right nav-pills" style="margin-top:5px; margin-right: 10px">
-           <li role="presentation"><%= link_to "Login", root_path %></li>
-           <li role="presentation"><a href = "stations">Gas Stations</a></li>
-           <li role="presentation"><a href = "map">Map</a></li>
+       
+       <div class = "collapse navbar-collapse" id = "colapse-pills">
+         <ul class = "nav navbar-right nav-pills " style="margin-top:5px; margin-right: 10px">
+           <li><%= link_to "Login", root_path %></li>
+           <li><a href = "stations">Gas Stations</a></li>
+           <li><a href = "map">Map</a></li>
          </ul>
        </div>
     
