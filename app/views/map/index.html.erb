@@ -1,35 +1,27 @@
 <h1>Map</h1>
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBd36LENIhwUv1SPYxOGrZTVf5w5Kqj_Q4"></script>
-<script type="text/javascript">
-
-
-
+<script type="text/javascript"></script>
 
   <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Geocoding service</title>
     <style>
-      html, body, #map {
+      html, body, #map 
+      {
         height: 100%;
         margin: 0px;
-        padding: 0px
+        padding: 0px;
       }
-      #panel {
-        position: absolute;
-        top: 5px;
-        left: 50%;
-        margin-left: -180px;
-        z-index: 5;
-        background-color: #fff;
+      #panel
+      {
         padding: 5px;
-        border: 1px solid #999;
       }
+  
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-    <script>
+  </head>
+    
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 
+<script>
 
 var geocoder;
 var map;
@@ -182,38 +174,29 @@ google.maps.event.addDomListener(window, 'load', initialize);
   });
 }
 
-  
-
-
 google.maps.event.addDomListener(window, 'load', initialize);
 
-
-
-
-
-
 </script>
-  </head>
-  <body >
-    <div id="panel">
+
+  <body>
+    <script src="bootstrap.min.js"></script>
+    <script src="jquery-1.11.1.js"></script>
+    <div class= "container-fluid" id="panel">
       <input id="address" type="textbox" value="Burnaby">
       <input type="button" value="Get direction" onclick="codeAddress()">
     </div>
   </body>
   <div id = "map"></div>
 
-
-
-   </script>
-  </head>
-  <body>
+ 
+<!--  <body>
     <div id="panel">
     </div>
     <div id="map-canvas"></div>
     &nbsp;
     <div id="warnings_panel" style="width:100%;height:10%;text-align:center"></div>
   </body>
-
+-->
 
 
 
