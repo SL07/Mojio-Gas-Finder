@@ -5,12 +5,18 @@
   <title>Mojio Cheap Gas</title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag 'bootstrap.min.css', media: 'all' %>
+  <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
 
+   <%=javascript_include_tag "application"%>
 </head>
 
 <body>
   <script src="jquery-1.11.1.js"></script>
   <script src="bootstrap.min.js"></script>
+
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.js"></script>
   
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">

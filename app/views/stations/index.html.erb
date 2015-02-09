@@ -1,15 +1,15 @@
 <h1>Listing stations</h1>
 
-<table class= "table">
+<table class="display" id="initializeTable-noPaging">
   <thead>
     <tr>
       <th>Name</th>
       <th>Address</th>
       <th>City</th>
-      <th>Long</th>
-      <th>Lat</th>
-      <th>Price</th>
-      <th colspan="3"></th>
+      <th>Unleased Price</th>
+      <th>Mid Grade Price</th>
+      <th>Premium Price</th>
+      <th>Disel Price</th>
     </tr>
   </thead>
 
@@ -19,12 +19,10 @@
         <td><%= station.name %></td>
         <td><%= station.address %></td>
         <td><%= station.city %></td>
-        <td><%= station.long %></td>
-        <td><%= station.lat %></td>
-        <td><%= station.price %></td>
-        <td><!%= link_to 'Show', station %></td>
-        <td><!%= link_to 'Edit', edit_station_path(station) %></td>
-        <td><!%= link_to 'Destroy', station, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= station.unleased %></td>
+        <td><%= station.midGrade %></td>
+        <td><%= station.premium %></td>
+        <td><%= station.disel %></td>
       </tr>
     <% end %>
   </tbody>

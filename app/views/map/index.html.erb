@@ -1,5 +1,4 @@
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBd36LENIhwUv1SPYxOGrZTVf5w5Kqj_Q4"></script>
-<script type="text/javascript"></script> 
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBd36LENIhwUv1SPYxOGrZTVf5w5Kqj_Q4"></script> 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 
 <script>
@@ -184,14 +183,41 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <h1>Map</h1>
 
   <body>
-    <script src="bootstrap.min.js"></script>
-    <script src="jquery-1.11.1.js"></script>
     <div class= "container-fluid" id="panel">
       <input id="address" type="textbox" value="Burnaby">
       <input type="button" value="Get direction" onclick="codeAddress()">
     </div>
   </body>
   <div id = "map"></div>
+
+<table class="display" id="initializeTable-default">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>Unleased Price</th>
+      <th>Mid Grade Price</th>
+      <th>Premium Price</th>
+      <th>Disel Price</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stations.each do |station| %>
+      <tr>
+        <td><%= station.name %></td>
+        <td><%= station.address %></td>
+        <td><%= station.city %></td>
+        <td><%= station.unleased %></td>
+        <td><%= station.midGrade %></td>
+        <td><%= station.premium %></td>
+        <td><%= station.disel %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 
  
 <!--  <body>
