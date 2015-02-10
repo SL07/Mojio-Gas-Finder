@@ -33,18 +33,49 @@
     <footer>
     </footer>
 
+  
+
+
+
+    <script type="text/javascript" charset="utf-8" src="public/jquery-1.11.1.js"></script>
+    <script type="text/javascript" charset="utf-8" src="public/mojio-js.js"></script>
+    
+    <!-- 
+    <script type="text/javascript" charset="utf-8" src="jquery.signalR-2.0.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/LoginTest.js"></script>
+    -->
+
+    <script>
+    alert("starting mojio configuration");
+    var App, MojioClient, config, mojio_client;
+    config = {
+        application: '434f01ce-504b-4f72-a919-5a81dee7d506', // Fill in your app id here!
+        redirect_uri: 'https://mojio.herokuapp.com/', // Fill in you redirect uri here! (Ex. 'http://localhost:4093/index.html')
+        hostname: 'api.moj.io',
+        version: 'v1',
+        port: '443',
+        scheme: 'https',
+        live: false // This will connect your app to the sandbox environment, change it to true to go live.
+    };
+    mojio_client = new MojioClient(config)
+    </script>
+
     <script>
     alert("starting Mojio client connection");
     mojio_client.authorize(config.redirect_uri);       
     </script>
 
-    
-
-    <script type="text/javascript" charset="utf-8" src="public/jquery-1.11.1.js"></script>
-    <script type="text/javascript" charset="utf-8" src="jquery.signalR-2.0.2.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="public/mojio-js.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/LoginTest.js"></script>
-
+    <script>
+    mojio_client.token(function(error, result) {
+        if (error) {
+            alert("Authorize Redirect, token could not be retreived:" + error);
+        } else {
+            alert("Authorization Successful.");
+            div = $("#welcome");
+            div.html('Authorization Result:');
+            div.append(JSON.stringify(result));
+        }
+    </script>
     
     </body>
 </html>
