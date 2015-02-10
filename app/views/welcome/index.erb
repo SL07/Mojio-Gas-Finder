@@ -69,12 +69,17 @@
     mojio_client.token(function(error, result) {
         if (error) {
             alert("Authorize Redirect, token could not be retreived:" + error);
+            div = $("#welcome");
+            div.html('The token could not be retreived');
         } else {
             alert("Authorization Successful.");
             div = $("#welcome");
             div.html('Authorization Result:');
             div.append(JSON.stringify(result));
         }
+          }
+    });
+
     </script>
     
     </body>
