@@ -1,3 +1,42 @@
+<script>
+function mojioLogin(){
+ alert("starting mojio configuration");
+    var App, MojioClient, config, mojio_client;
+    config = {
+        application: '434f01ce-504b-4f72-a919-5a81dee7d506', // Fill in your app id here!
+        redirect_uri: 'https://mojio.herokuapp.com/', // Fill in you redirect uri here! (Ex. 'http://localhost:4093/index.html')
+        hostname: 'api.moj.io',
+        version: 'v1',
+        port: '443',
+        scheme: 'https',
+        live: false // This will connect your app to the sandbox environment, change it to true to go live.
+    };
+    mojio_client = new MojioClient(config)
+
+
+    alert("starting Mojio client connection");
+    mojio_client.authorize(config.redirect_uri);     
+}
+
+function showToken(){
+    mojio_client.token(function(error, result) {
+            if (error) {
+                alert("Authorize Redirect, token could not be retreived:" + error);
+            } else {
+                alert("Authorization Successful.");
+                div = $("#welcome");
+                div.html('Authorization Result:');
+                div.append(JSON.stringify(result));
+                console.log(JSON.stringify(result));  //alternate output to console
+            }
+        });
+
+
+}
+
+</script>
+
+
 
 <html>
     <head>
@@ -10,6 +49,9 @@
             <br>
             Password<input type="password" name="pswrd"/> </br>
             <input type="button" onclick="check(this.form)" value="Login"/>
+            <input type="button" value="Mojio Login" onclick="mojioLogin()">
+            <input type="button" value="Show token" onclick="showToken()">
+
             <input type="reset" value="Cancel"/>
             <input type="button" value ="Sign up" />
         </form>
@@ -47,7 +89,7 @@
     <script type="text/javascript" charset="utf-8" src="jquery.signalR-2.0.2.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/LoginTest.js"></script>
     -->
-
+<!--
     <script>
     alert("starting mojio configuration");
     var App, MojioClient, config, mojio_client;
@@ -67,24 +109,6 @@
     mojio_client.authorize(config.redirect_uri);       
     </script>
 
-    <!--
-    <script>
-    mojio_client.token(function(error, result) {
-        if (error) {
-            alert("Authorize Redirect, token could not be retreived:" + error);
-            div = $("#welcome");
-            div.html('The token could not be retreived');
-        } else {
-            alert("Authorization Successful.");
-            div = $("#welcome");
-            div.html('Authorization Result:');
-            div.append(JSON.stringify(result));
-        }
-          }
-    });
-
-    </script>
-    -->
 
     <script>
     mojio_client.token(function(error, result) {
@@ -98,6 +122,7 @@
         }
     });
     </script>
+   -->
     
     </body>
 </html>
