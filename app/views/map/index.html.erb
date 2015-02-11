@@ -160,7 +160,23 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 <h1>Map</h1>
 
+      <script>
+    mojio_client.token(function(error, result) {
+        if (error) {
+            alert("Authorize Redirect, token could not be retreived:" + error);
+        } else {
+            alert("Authorization Successful.");
+            div = $("#welcome");
+            div.html('Authorization Result:');
+            div.append(JSON.stringify(result));
+        }
+    });
+    </script>
+
   <body>
+      
+    <div id="welcome"></div> 
+
     <div class= "container-fluid" id="panel">
       <input id="address" type="textbox" value="Burnaby">
       <input type="button" value="Get direction" onclick="codeAddress()">
