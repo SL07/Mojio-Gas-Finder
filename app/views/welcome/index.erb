@@ -58,9 +58,8 @@
         live: false // This will connect your app to the sandbox environment, change it to true to go live.
     };
     mojio_client = new MojioClient(config)
-    </script>
 
-    <script>
+
     alert("starting Mojio client connection");
     mojio_client.authorize(config.redirect_uri);       
     </script>
