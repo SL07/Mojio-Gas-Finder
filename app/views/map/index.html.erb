@@ -1,6 +1,9 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBd36LENIhwUv1SPYxOGrZTVf5w5Kqj_Q4"></script> 
-<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>-->
+<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 <script type="text/javascript" charset="utf-8" src="https://djaqzxyxnyyiy.cloudfront.net/mojio-js.js"></script>
+-->
+<script type="text/javascript" charset="utf-8" src="mojio-js.js"></script>
+
 
 <script>
 
@@ -193,6 +196,19 @@ google.maps.event.addDomListener(window, 'load', initialize);
             div.html('Authorization Result:');
             div.append(JSON.stringify(result));
             console.log(JSON.stringify(result));
+        }
+    });
+    </script>
+
+    <script>
+    var Trip = mojio_client.model("Trip"); // Gets a trip model schema.
+    mojio_client.get(Trip, {}, function(error, result) {
+        var str = "";
+        if (error) {
+            console.log(error); // Some error occured.
+        } else {
+            var trips = mojio_client.getResults(Trip, result);  // Helper function to get the results.
+            console.log(trips);
         }
     });
     </script>
