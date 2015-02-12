@@ -1,5 +1,7 @@
 <h1>Listing stations</h1>
 
+<p> Last Updated: <%= @jobs.inspect %></p>
+
 <table class="display" id="initializeTable-noPaging">
   <thead>
     <tr>
@@ -28,7 +30,4 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Station', new_station_path %>
 

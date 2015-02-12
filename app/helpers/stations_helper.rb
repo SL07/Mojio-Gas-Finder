@@ -96,6 +96,9 @@ module StationsHelper
       Station.create(:brand => brand, :address => address, :city => city, :unleaded => unleaded, :midGrade => midGrade, :premium => premium, :disel => disel) 
       index = index + 1
     end
+    
+    updatedTime = Time.now
+    Job.create(:timestamp => updatedTime)
   end    
   
   def getStationAddressAll
