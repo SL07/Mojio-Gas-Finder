@@ -5,7 +5,7 @@ class StationsController < ApplicationController
   # GET /stations.json
   def index
     @stations = Station.all
-    @jobs= Job.select("timestamp").first
+    @jobs= Job.select("timestamp").last
   end
 
   # GET /stations/new
