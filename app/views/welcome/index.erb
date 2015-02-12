@@ -27,7 +27,7 @@ function mojioLogin(){
 
         alert("starting Mojio client connection");
         isLoggedIn = true;
-        mojio_client.authorize(config.redirect_uri);
+        mojio_client.authorize(config.redirect_uri);   
         console.log("login status after redirect is:" + isLoggedIn);
     }
     else if (isLoggedIn == true){
@@ -63,6 +63,21 @@ function showToken(){
         });
 }
 
+function showTrip(){
+    var Trip = mojio_client.model("Trip"); // Gets a trip model schema.
+    mojio_client.get(Trip, {}, function(error, result) {
+        var str = "";
+        if (error) {
+            console.log(error); // Some error occured.
+        } else {
+            var trips = mojio_client.getResults(Trip, result);  // Helper function to get the results.
+            console.log(trips);
+        }
+    });
+
+
+}
+
 
 </script>
 
@@ -81,6 +96,7 @@ function showToken(){
             <input type="button" onclick="check(this.form)" value="Login"/>
             <input type="button" value="Mojio Login" onclick="mojioLogin()">
             <input type="button" value="Show token" onclick="showToken()">
+            <input type="button" value="Show trip status" onclick="showTrip()">            
 
             <input type="reset" value="Cancel"/>
             <input type="button" value ="Sign up" />
