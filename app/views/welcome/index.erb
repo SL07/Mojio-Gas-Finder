@@ -31,7 +31,8 @@ function mojioLogin(){
         console.log("login status after redirect is:" + isLoggedIn);
     }
     else if (isLoggedIn == true){
-           mojio_client.token(function(error, result) {
+            console.log("got into part 2 of mojioLogin");
+            mojio_client.token(function(error, result) {
                 if (error) {
                     alert("Authorize Redirect, token could not be retreived:" + error);
                 } else {
