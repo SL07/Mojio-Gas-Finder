@@ -32,17 +32,17 @@ function mojioLogin(){
         console.log("login status after redirect is:" + isLoggedIn);
     }
     else if (isLoggedIn == true){
-        mojio_client.token(function(error, result) {
-        if (error) {
-            alert("Authorize Redirect, token could not be retreived:" + error);
-        } else {
-            alert("Authorization Successful.");
-            div = $("#welcome");
-            div.html('Authorization Result:');
-            div.append(JSON.stringify(result));
-            console.log(JSON.stringify(result));  //alternate output to console
-            }
-        }
+           mojio_client.token(function(error, result) {
+                if (error) {
+                    alert("Authorize Redirect, token could not be retreived:" + error);
+                } else {
+                    alert("Authorization Successful.");
+                    div = $("#welcome");
+                    div.html('Authorization Result:');
+                    div.append(JSON.stringify(result));
+                    console.log(JSON.stringify(result))
+                }
+            });
 
     }
 
