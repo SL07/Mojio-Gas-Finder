@@ -9,7 +9,23 @@ var isLoggedIn = false;
 
 function mojioLogin(){
  
-    if (isLoggedIn == false){
+    if (isLoggedIn == true){
+        console.log("got into part 2 of mojioLogin");
+            mojio_client.token(function(error, result) {
+                if (error) {
+                    alert("Authorize Redirect, token could not be retreived:" + error);
+                } else {
+                    alert("Authorization Successful.");
+                    div = $("#welcome");
+                    div.html('Authorization Result:');
+                    div.append(JSON.stringify(result));
+                    console.log(JSON.stringify(result))
+                }
+            });
+
+    }
+    else if (isLoggedIn == false){
+            
 
      alert("starting mojio configuration");
         console.log("login status is:" + isLoggedIn);
@@ -29,20 +45,8 @@ function mojioLogin(){
         isLoggedIn = true;
         mojio_client.authorize(config.redirect_uri);   
         console.log("login status after redirect is:" + isLoggedIn);
-    }
-    else if (isLoggedIn == true){
-            console.log("got into part 2 of mojioLogin");
-            mojio_client.token(function(error, result) {
-                if (error) {
-                    alert("Authorize Redirect, token could not be retreived:" + error);
-                } else {
-                    alert("Authorization Successful.");
-                    div = $("#welcome");
-                    div.html('Authorization Result:');
-                    div.append(JSON.stringify(result));
-                    console.log(JSON.stringify(result))
-                }
-            });
+
+
 
     }
 
