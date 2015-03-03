@@ -49,7 +49,7 @@ module StationsHelper
       nodeSet_unleaded = station_element.xpath('//Unleaded_Price')
       nodeSet_midGrade = station_element.xpath('//MidGrade_Price')
       nodeSet_premium = station_element.xpath('//Premium_Price')
-      nodeSet_disel = station_element.xpath('//Diesel_Price')
+      nodeSet_diesel = station_element.xpath('//Diesel_Price')
       
       if nodeSet_address[index] == nil
         address = 'N/A'
@@ -87,13 +87,13 @@ module StationsHelper
         premium = nodeSet_premium[index].content
       end
 
-      if nodeSet_disel[index] == nil
-        disel = 'N/A'
+      if nodeSet_diesel[index] == nil
+        diesel = 'N/A'
       else 
-        disel = nodeSet_disel[index].content
+        disel = nodeSet_diesel[index].content
       end
 
-      Station.create(:brand => brand, :address => address, :city => city, :unleaded => unleaded, :midGrade => midGrade, :premium => premium, :disel => disel) 
+      Station.create(:brand => brand, :address => address, :city => city, :unleaded => unleaded, :midGrade => midGrade, :premium => premium, :diesel => disel) 
       index = index + 1
     end
     
