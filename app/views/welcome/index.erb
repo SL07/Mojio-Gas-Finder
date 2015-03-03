@@ -93,6 +93,8 @@ function mojioLogin(){
     }
 
 }
+
+
 function getVehicleData(){
     return mojio_client.get(mojio_client.model("Vehicle"), {}, function(error, result) {
         var i, lat, lng;
@@ -108,13 +110,14 @@ function getVehicleData(){
             }
 
 
-        }
+        });
         console.log("location of vehicle is: LAT:"+ lat[0]+" " + "LONG:" +lng[0]);
         console.log("location of vehicle is: LAT:"+ lat[1]+" " + "LONG:" +lng[1]);
 
-    }
+    });
 
 }
+
 
 
 function showToken(){
