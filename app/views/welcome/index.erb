@@ -16,7 +16,14 @@ config = {
             live: false // This will connect your app to the sandbox environment, change it to true to go live. 
         };
         mojio_client = new MojioClient(config)
+       
+        if (localStorage["mojio_token"] == NULL){
+           console.log("localStorge not made yet");   
+        }
+        else 
+        console.log("value of token is: " + localStorage["mojio_token"]);
         mojio_client.auth_token = JSON.parse(localStorage["mojio_token"]); //need to destring before passing in
+
 
 if (mojio_client.isLoggedIn() == false){  //use this to test for login status
     console.log("checking for login token");
@@ -33,6 +40,9 @@ if (mojio_client.isLoggedIn() == false){  //use this to test for login status
 
                 }
             });
+}
+else if(mojio_client.isLoggedIn() == true){
+    alert("already logged in to Mojio");
 }
 
 
