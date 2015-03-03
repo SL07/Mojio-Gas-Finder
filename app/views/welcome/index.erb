@@ -93,6 +93,28 @@ function mojioLogin(){
     }
 
 }
+function getVehicleData(){
+    return mojio_client.get(mojio_client.model("Vehicle"), {}, function(error, result) {
+        var i, lat, lng;
+        lat = [];
+        lng = [];
+        i =0;
+        $.each(result.Data, function(key, value) {
+            if ((value.LastLocation != null) && (value.LastLocation.Lat != null) && (value.LastLocation.Lng != null)) {
+                lat[i]= value.LastLocation.Lat;
+                lng[i]= value.LastLocation.Lng;
+                return i++;
+
+            }
+
+
+        }
+        console.log("location of vehicle is: LAT:"+ lat[0]+" " + "LONG:" +lng[0]);
+        console.log("location of vehicle is: LAT:"+ lat[1]+" " + "LONG:" +lng[1]);
+
+    }
+
+}
 
 
 function showToken(){
@@ -140,9 +162,10 @@ function showTrip(){
             Username<input type="text" name="userid"/>
             <br>
             Password<input type="password" name="pswrd"/> </br>
-            <input type="button" value="Login" onclick="mojioLogin()">         
+            <input type="button" value="Login" onclick="mojioLogin()"> 
+            <input type="button" value="Vehicle Data" onclick="getVehicleData()">         
             <input type="reset" value="Cancel"/>
-            <input type="button" value ="Sign up" />
+            <input type="button" value ="login out" onclick="mojioLogout()" />
         </form>
         <script language="javascript">
             function check(form) { /*function to check userid & password*/
