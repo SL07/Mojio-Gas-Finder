@@ -17,8 +17,8 @@ config = {
         };
         mojio_client = new MojioClient(config)
        
-        if (localStorage["mojio_token"] == NULL){
-           console.log("localStorge not made yet");   
+        if (localStorage["mojio_token"] == null){
+           console.log("localStorge not made yet, need to login");   
         }
         else 
         console.log("value of token is: " + localStorage["mojio_token"]);
