@@ -1,0 +1,38 @@
+:javascript
+  function initialize() {
+      var latlng = new google.maps.LatLng(49.25, -123.100);
+      var mapOptions = {
+          zoom: 12,
+          center: latlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  }
+  google.maps.event.addDomListener(window, "load", initialize);
+
+.container-fluid
+  %h1 Map
+  #map
+  %p Vehicle Location:
+  
+  .row
+    %button.btn.btn-primary.col-md-3{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-target" => "#collapseFindClosestStation", "data-toggle" => "collapse", :type => "button"}
+      Find Closest Gas Staion
+
+    %button.btn.btn-primary.col-md-3.col-md-offset-1{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-target" => "#collapseFindCheapestStation", "data-toggle" => "collapse", :type => "button"}
+      Find Cheapest Gas Staion
+
+    %button.btn.btn-primary.col-md-3.col-md-offset-1{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-target" => "#collapseRoute", "data-toggle" => "collapse", :type => "button"}
+      Route
+  
+  .row
+    .collapse{:id => "collapseFindClosestStation"}
+      .well
+        asdf
+    .collapse{:id => "collapseFindCheapestStation"}
+      .well
+        asdf asdf
+    .collapse{:id => "collapseRoute"}
+      .well
+        asdf asdf asdf
+        

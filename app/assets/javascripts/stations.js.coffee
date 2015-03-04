@@ -7,6 +7,5 @@ initializeTable = ->
         "paging":   false
   });
   $('#initializeTable-default').DataTable();
-
-
+  
 $(document).ready(initializeTable)
