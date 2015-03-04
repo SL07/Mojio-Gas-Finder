@@ -132,20 +132,18 @@ function mojioLogout (){
 
 function showToken(){
     
-       mojio_client.token(function(error, result) {
-            if (error) {alert(error);}
-            else if (result != null)
-            {
-                alert("Token found");
-                div = $("#welcome");
-                div.html('Token Result:');
-                div.append(JSON.stringify(result));
-                console.log("value of token is: " + localStorage["mojio_token"]); 
-            }
+    mojio_client.token(function(error, result) {
+        if (error) {
+            alert(error);
+        } else {
+            alert("token retained successfully.");
+            div = $("#welcome");
+            div.html('Authorization Result:');
+            div.append(JSON.stringify(result));
+            console.log("value of token outside is: " + localStorage["mojio_token"]); 
 
-
-            }
-        });
+        }
+    });
         console.log("value of token outside is: " + localStorage["mojio_token"]); 
 
 }
