@@ -95,7 +95,7 @@ function mojioLogin(){
 }
 
 
-function getVehicleData(){
+function getVehicleData(){  
     return mojio_client.get(mojio_client.model("Vehicle"), {}, function(error, result) {
         var i, lat, lng;
         lat = [];
@@ -118,6 +118,12 @@ function getVehicleData(){
 
 }
 
+function mojioLogout (){
+
+    mojio_client.unauthorize(config.redirect_uri);
+    //if (mojio_client.isLoggedIn() == false)
+    //console.log("Logged out of Mojio API");
+}
 
 
 function showToken(){
