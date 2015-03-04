@@ -122,7 +122,6 @@ function mojioLogout (){
 
     localStorage.removeItem("mojio_token");
     console.log("log out redirrect URL is: "+ config.redirect_uri);
-    console.log("current token is: "+ localStorage["mojio_token"]);
     mojio_client.unauthorize(config.redirect_uri);
     if (mojio_client.isLoggedIn() == false)
     console.log("Logged out of Mojio API");
@@ -135,7 +134,7 @@ function showToken(){
     
        mojio_client.token(function(error, result) {
             if (error) {
-                alert("Token not found" + error);
+                alert(error);
             } else {
                 alert("Token found");
                 div = $("#welcome");
