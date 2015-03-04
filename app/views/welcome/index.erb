@@ -119,9 +119,9 @@ function getVehicleData(){
 }
 
 function mojioLogout (){
+    console.log("log out redirrect URL is: "+ config.redirect_uri);
     localStorage.removeItem("mojio_token");
-
-    //mojio_client.unauthorize(config.redirect_uri);
+    mojio_client.unauthorize(config.redirect_uri);
     if (mojio_client.isLoggedIn() == false)
     console.log("Logged out of Mojio API");
     else console.log("still logged in to Mojio");
@@ -176,7 +176,7 @@ function showTrip(){
             <input type="button" value="Login" onclick="mojioLogin()"> 
             <input type="button" value="Vehicle Data" onclick="getVehicleData()">         
             <input type="reset" value="Cancel"/>
-            <input type="button" value ="login out" onclick="mojioLogout()" />
+            <input type="button" value ="Log Out" onclick="mojioLogout()" />
         </form>
         <script language="javascript">
             function check(form) { /*function to check userid & password*/
