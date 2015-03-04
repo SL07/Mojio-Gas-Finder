@@ -121,29 +121,33 @@ function getVehicleData(){
 function mojioLogout (){
 
     localStorage.removeItem("mojio_token");
-    console.log("log out redirrect URL is: "+ config.redirect_uri);
+  //  console.log("log out redirrect URL is: "+ config.redirect_uri);
  //   mojio_client.unauthorize(config.redirect_uri);
     if (mojio_client.isLoggedIn() == false)
     console.log("Logged out of Mojio API");
     else console.log("still logged in to Mojio");
-        console.log("token still is:" +  localStorage["mojio_token"]);
+        console.log("localStoreage token is:" +  localStorage["mojio_token"]);
 }
 
 
 function showToken(){
     
        mojio_client.token(function(error, result) {
-            if (error) {
-                alert(error);
-            } else {
+            if (error) {alert(error);}
+            else if (result != null)
+            {
                 alert("Token found");
                 div = $("#welcome");
                 div.html('Token Result:');
                 div.append(JSON.stringify(result));
-                console.log("value of token is: " + localStorage["mojio_token"]);
+                console.log("value of token is: " + localStorage["mojio_token"]); 
+            }
+
 
             }
         });
+        console.log("value of token outside is: " + localStorage["mojio_token"]); 
+
 }
 
 function showTrip(){
