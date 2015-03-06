@@ -170,16 +170,19 @@ function showTrip(){
     <head>
         <title>Login page</title>
     </head>
-    <body>
+    <body class = "text-center">
         <h1>Simple Login Page</h1>
         <form name="login">
-            Username<input type="text" name="userid"/>
-            <br>
-            Password<input type="password" name="pswrd"/> </br>
-            <input type="button" value="Login" onclick="mojioLogin()"> 
-            <input type="button" value="Vehicle Data" onclick="getVehicleData()">         
-            <input type="button" value="Show token" onclick="showToken()" />
-            <input type="button" value ="Log Out" onclick="mojioLogout()" />
+            <div class="row">Username: <input type="text" name="userid"/> </div>
+            <div class"row" style="
+    margin-top: 6px;">
+            Password: <input type="password" name="pswrd"/> </div>
+            <div class = "row" style="padding-top: 18px;">
+            <input type="button" class="btn btn-danger" value="Login" onclick="mojioLogin()"> 
+            <input type="button" class="btn btn-info" value="Vehicle Data" onclick="getVehicleData()">         
+            <input type="button" class="btn btn-success" value="Show token" onclick="showToken()" />
+            <input type="button" class="btn btn-danger " value ="Log Out" onclick="mojioLogout()" />
+        </div>
         </form>
         <script language="javascript">
             function check(form) { /*function to check userid & password*/
