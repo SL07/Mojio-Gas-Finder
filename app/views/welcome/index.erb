@@ -31,7 +31,7 @@ if (mojio_client.isLoggedIn() == false){  //use this to test for login status
     console.log("checking for login token");
             mojio_client.token(function(error, result) {
                 if (error) {
-                    alert("Authorize Redirect, token could not be retreived:" + error); //take out later 
+                   // alert("Authorize Redirect, token could not be retreived:" + error); //take out later 
                 } else {
                   //  alert("Authorization Successful.");   //taken out for video demo
                     div = $("#welcome");
@@ -44,7 +44,7 @@ if (mojio_client.isLoggedIn() == false){  //use this to test for login status
             });
 }
 else if(mojio_client.isLoggedIn() == true){
-    alert("already logged in to Mojio");
+   console.log("already logged in to Mojio");
 }
 
 
