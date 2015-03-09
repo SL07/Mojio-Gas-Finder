@@ -33,7 +33,7 @@ if (mojio_client.isLoggedIn() == false){  //use this to test for login status
                 if (error) {
                     alert("Authorize Redirect, token could not be retreived:" + error); //take out later 
                 } else {
-                    alert("Authorization Successful.");
+                  //  alert("Authorization Successful.");   //taken out for video demo
                     div = $("#welcome");
                     div.html('Authorization Result:');
                     div.append(JSON.stringify(result));
@@ -68,7 +68,7 @@ function mojioLogin(){
     else if (isLoggedIn == false){
             
 
-     alert("starting mojio configuration");
+     //alert("starting mojio configuration"); //taken out for video demo
         console.log("login status is:" + isLoggedIn);
         config = {
             application: '434f01ce-504b-4f72-a919-5a81dee7d506', // Fill in your app id here!
@@ -83,7 +83,7 @@ function mojioLogin(){
         mojio_client = new MojioClient(config)
 
 
-        alert("starting Mojio client connection");
+     //   alert("starting Mojio client connection"); //taken out for video demo
         isLoggedIn = true;
         mojio_client.authorize(config.redirect_uri);   
         console.log("login status after redirect is:" + isLoggedIn);
@@ -98,7 +98,7 @@ function mojioLogin(){
 function getVehicleData(){  
     return mojio_client.get(mojio_client.model("Vehicle"), {}, function(error, result) {
         var i, lat, lng;
-        lat = [];
+        lat = [];  //can pass these values directly to Google maps
         lng = [];
         i =0;
         $.each(result.Data, function(key, value) {
@@ -118,6 +118,30 @@ function getVehicleData(){
 
 }
 
+/*
+buildMojioMap = function(mojioLat, mojioLng) {
+    var map;
+    map = new GMaps({
+      el: '#map',
+      lat: mojioLat, //these are values returned directly from Mojio using  lat[0], lng[0]
+      lng: mojioLng,
+      panControl: false,
+      streetViewControl: false,
+      mapTypeControl: false,
+      overviewMapControl: false
+    });
+    return setTimeout(function() {
+      return map.addMarker({
+        lat: mojioLat,
+        lng: mojioLng,
+        animation: google.maps.Animation.DROP,
+        draggable: false,
+        title: 'Current Mojio Location'
+      }, 1000);
+    });
+  };
+*/
+
 function mojioLogout (){
 
     localStorage.removeItem("mojio_token");
@@ -134,7 +158,7 @@ function showToken(){
     
     mojio_client.token(function(error, result) {
         if (error) {
-            alert(error);
+           // alert(error); //taken out for video demo
         } else {
             alert("token retained successfully.");
             div = $("#welcome");
