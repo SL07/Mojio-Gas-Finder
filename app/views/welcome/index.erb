@@ -15,7 +15,7 @@ config = {
             scheme: 'https',
             live: false // This will connect your app to the sandbox environment, change it to true to go live. 
         };
-        mojio_client = new MojioClient(config)
+        mojio_client = new MojioClient(config);
        
     if (localStorage["mojio_token"] == null){
        console.log("localStorge not made yet, need to login");   
@@ -80,7 +80,7 @@ function mojioLogin(){
             scheme: 'https',
             live: false // This will connect your app to the sandbox environment, change it to true to go live.
         };
-        mojio_client = new MojioClient(config)
+        mojio_client = new MojioClient(config);
 
 
      //   alert("starting Mojio client connection"); //taken out for video demo
