@@ -9,12 +9,21 @@
     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
     console.log("Latitude of car is: "+ localStorage["latitude"]);
     console.log("Latitude of car is: "+ localStorage["longitude"]);
+    var Carlatlng = new google.maps.LatLng(localStorage["latitude"],localStorage["longitude"]);
+    console.log("adding current location marker");
+    var marker = new google.maps.Marker({
+      position: Carlatlng,
+      map: map,
+      title: 'Current Location'
+    });
+    console.log("finished adding current location marker");
   }
 
   function do_somthing () {
     console.log("Longitude of car is: "+ localStorage["longitude"]);
     console.log("Latitude of car is: "+ localStorage["latitude"]);
   }
+
 
   google.maps.event.addDomListener(window, "load", initialize);
 
