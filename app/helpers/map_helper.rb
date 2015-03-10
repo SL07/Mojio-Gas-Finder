@@ -1,3 +1,7 @@
+require "uri"
+require 'net/http'
+require 'nokogiri'
+
 module MapHelper
 
    def http_get(link)

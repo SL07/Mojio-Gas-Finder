@@ -30,43 +30,43 @@ task :getStationsByCity => :environment do
     nodeSet_diesel = station_element.xpath('//Diesel_Price')
       
     if nodeSet_address[index] == nil
-      address = 'N/A'
+      address = nil
     else 
       address = nodeSet_address[index].content
     end
 
     if nodeSet_city[index] == nil
-      city = 'N/A'
+      city = nil
     else 
       city = nodeSet_city[index].content
     end
 
     if nodeSet_brand[index] == nil
-      brand = 'N/A'
+      brand = nil
     else 
       brand = nodeSet_brand[index].content
     end
 
     if nodeSet_unleaded[index] == nil
-      unleaded = 'N/A'
+      unleaded = nil
     else 
       unleaded = nodeSet_unleaded[index].content
     end
 
     if nodeSet_midGrade[index] == nil
-      midGrade = 'N/A'
+      midGrade = nil
     else 
       midGrade = nodeSet_midGrade[index].content
     end
 
     if nodeSet_premium[index] == nil
-      premium = 'N/A'
+      premium = nil
     else 
       premium = nodeSet_premium[index].content
     end
 
     if nodeSet_diesel[index] == nil
-      diesel = 'N/A'
+      diesel = nil
     else 
       disel = nodeSet_diesel[index].content
     end
