@@ -1,16 +1,21 @@
 :javascript
   function initialize() {
-      var latlng = new google.maps.LatLng(49.25, -123.100);
+    var latlng = new google.maps.LatLng(49.25, -123.100);
       var mapOptions = {
-          zoom: 12,
-          center: latlng,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+        zoom: 12,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
       };
-      var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-      console.log("Latitude of car is: "+ localStorage["latitude"]);
-      console.log("Latitude of car is: "+ localStorage["longitude"]);
-
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    console.log("Latitude of car is: "+ localStorage["latitude"]);
+    console.log("Latitude of car is: "+ localStorage["longitude"]);
   }
+
+  function do_somthing () {
+    console.log("Longitude of car is: "+ localStorage["longitude"]);
+    console.log("Latitude of car is: "+ localStorage["latitude"]);
+  }
+
   google.maps.event.addDomListener(window, "load", initialize);
 
 .container-fluid
