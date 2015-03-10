@@ -30,7 +30,10 @@
 .container-fluid
   %h1 Map
   #map
-  %p Vehicle Location: document.getElementByID("carLong").innerHTML=localStorage.getItem("longitude"), document.getElementByID("carLong").innerHTML=localStorage.getItem("latitude")
+  %p Vehicle Location: 
+    #latitude
+    , 
+    #longitude
   
   #accordion.panel-group{"aria-multiselectable" => "true", :role => "tablist"}
   .panel.panel-default.col-md-3
