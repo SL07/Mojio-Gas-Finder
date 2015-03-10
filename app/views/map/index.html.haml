@@ -15,24 +15,60 @@
   #map
   %p Vehicle Location:
   
-  .row
-    %button.btn.btn-primary.col-md-3{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-target" => "#collapseFindClosestStation", "data-toggle" => "collapse", :type => "button"}
-      Find Closest Gas Staion
-
-    %button.btn.btn-primary.col-md-3.col-md-offset-1{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-target" => "#collapseFindCheapestStation", "data-toggle" => "collapse", :type => "button"}
-      Find Cheapest Gas Staion
-
-    %button.btn.btn-primary.col-md-3.col-md-offset-1{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-target" => "#collapseRoute", "data-toggle" => "collapse", :type => "button"}
-      Route
-  
-  .row
-    .collapse{:id => "collapseFindClosestStation"}
-      .well
-        asdf
-    .collapse{:id => "collapseFindCheapestStation"}
-      .well
-        asdf asdf
-    .collapse{:id => "collapseRoute"}
-      .well
-        asdf asdf asdf
+  #accordion.panel-group{"aria-multiselectable" => "true", :role => "tablist"}
+  .panel.panel-default.col-md-3
+    #headingOne.panel-heading{:role => "tab"}
+      %h4.panel-title
+        %a.collapsed{"aria-controls" => "collapseOne", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseOne"}
+          Find Closest Station
+    #collapseOne.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel"}
+      .panel-body
+        Preference:
+        .dropdown
+          %button#dLabel{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+            Fuel Brand
+            %span.caret
+          %ul.dropdown-menu{"aria-labelledby" => "dLabel", :role => "menu"}
+            %li
+              %a{:href => "#"} Esso
+            %li
+              %a{:href => "#"} Petro Canada
         
+  .panel.panel-default.col-md-3.col-md-offset-1
+    #headingTwo.panel-heading{:role => "tab"}
+      %h4.panel-title
+        %a.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseTwo"}
+          Find Cheapest Station
+    #collapseTwo.panel-collapse.collapse{"aria-labelledby" => "headingTwo", :role => "tabpanel"}
+      .panel-body
+        %h4 Preference:
+        .dropdown
+          %button#dLabel{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+            Fuel Grade
+            %span.caret
+          %ul.dropdown-menu{"aria-labelledby" => "dLabel", :role => "menu"}
+            %li
+              %a{:href => "#"} Regular
+            %li
+              %a{:href => "#"} Mid Grade
+            %li
+              %a{:href => "#"} Premium
+            %li
+              %a{:href => "#"} Diesel
+        %br/      
+        %form
+          Search Range:
+          %input{:name => "range", :type => "number"}/
+          km
+        %br/  
+        .btn-group{"aria-label" => "...", :role => "group"}
+          %button.btn.btn-default{:type => "button"} Search
+        
+  .panel.panel-default.col-md-3.col-md-offset-1
+    #headingThree.panel-heading{:role => "tab"}
+      %h4.panel-title
+        %a.collapsed{"aria-controls" => "collapseThree", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseThree"}
+          Route
+    #collapseThree.panel-collapse.collapse{"aria-labelledby" => "headingThree", :role => "tabpanel"}
+      .panel-body
+        Third
