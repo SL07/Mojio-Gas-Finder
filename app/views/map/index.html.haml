@@ -24,8 +24,63 @@
     console.log("Latitude of car is: "+ localStorage["latitude"]);
   }
 
+  function autoUpdate() {
+
+    getVehicleData();
+    var newPoint = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
+
+    if (marker) {
+      // Marker already created - Move it
+      marker.setPosition(newPoint);
+    }
+    else {
+      // Marker does not exist - Create it
+      marker = new google.maps.Marker({
+        position: newPoint,
+        map: map
+        title: 'Current Location'
+      });
+    }
+
+    // Center the map on the new position
+    map.setCenter(newPoint);
+  }); 
+
+  // Call the autoUpdate() function every 1 seconds
+  setTimeout(autoUpdate, 1000);
+  }
+
+  function getVehicleData(){   //move this function to map page later  
+    return mojio_client.get(mojio_client.model("Vehicle"), {}, function(error, result) {
+        var i, lat, lng;
+        lat = [];  //can pass these values directly to Google maps
+        lng = [];
+        i =0;
+        $.each(result.Data, function(key, value) {
+            if ((value.LastLocation != null) && (value.LastLocation.Lat != null) && (value.LastLocation.Lng != null)) {
+                lat[i]= value.LastLocation.Lat;
+                lng[i]= value.LastLocation.Lng;
+                localStorage["latitude"] = value.LastLocation.Lat; //store long and lat into local storage
+                localStorage["longitude"] = value.LastLocation.Lng;
+                return i++;
+
+            }
+
+
+        });
+        console.log("location of vehicle is: LAT:"+ localStorage["latitude"]+" " + "LONG:" +localStorage["longitude"]);
+    //    console.log("location of vehicle is: LAT:"+ lat[1]+" " + "LONG:" +lng[1]);
+
+
+    });
+
+  }
+
 
   google.maps.event.addDomListener(window, "load", initialize);
+  autoUpdate();
+  
+
   
 .container-fluid
   %h1 Map
