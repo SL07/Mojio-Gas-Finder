@@ -105,6 +105,8 @@ function getVehicleData(){
             if ((value.LastLocation != null) && (value.LastLocation.Lat != null) && (value.LastLocation.Lng != null)) {
                 lat[i]= value.LastLocation.Lat;
                 lng[i]= value.LastLocation.Lng;
+                localStorage["latitude"] = value.LastLocation.Lat; //store long and lat into local storage
+                localStorage["longitude"] = value.LastLocation.Lng;
                 return i++;
 
             }
@@ -113,6 +115,7 @@ function getVehicleData(){
         });
         console.log("location of vehicle is: LAT:"+ lat[0]+" " + "LONG:" +lng[0]);
         console.log("location of vehicle is: LAT:"+ lat[1]+" " + "LONG:" +lng[1]);
+
 
     });
 
@@ -145,6 +148,8 @@ buildMojioMap = function(mojioLat, mojioLng) {
 function mojioLogout (){
 
     localStorage.removeItem("mojio_token");
+    localStorage.removeItem("longitude");
+    localStorage.removeItem("latitude");
   //  console.log("log out redirrect URL is: "+ config.redirect_uri);
  //   mojio_client.unauthorize(config.redirect_uri);
     if (mojio_client.isLoggedIn() == false)
