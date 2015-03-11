@@ -68,6 +68,7 @@
 
     getVehicleData();  //updates the value of localStorage["latitude"], localStorage["longitude"]
     var newPoint = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
+    var map = google.maps.Map(document.getElementById("map"));
 
     if (Current_marker) {
       // Marker already created - Move it
