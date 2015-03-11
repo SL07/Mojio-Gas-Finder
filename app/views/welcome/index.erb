@@ -150,6 +150,7 @@ function mojioLogout (){
     localStorage.removeItem("mojio_token");
     localStorage.removeItem("longitude");
     localStorage.removeItem("latitude");
+    isLoggedIn = false;
   //  console.log("log out redirrect URL is: "+ config.redirect_uri);
  //   mojio_client.unauthorize(config.redirect_uri);
     if (mojio_client.isLoggedIn() == false)
