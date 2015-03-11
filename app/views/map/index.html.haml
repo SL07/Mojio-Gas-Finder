@@ -25,6 +25,7 @@
       console.log("checking for login token");
               mojio_client.token(function(error, result) {
                   if (error) {
+                      console.log(error);
                      // alert("Authorize Redirect, token could not be retreived:" + error); //take out later 
                   } else {
                     //  alert("Authorization Successful.");   //taken out for video demo
@@ -68,7 +69,14 @@
 
     getVehicleData();  //updates the value of localStorage["latitude"], localStorage["longitude"]
     var newPoint = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
-    var map = google.maps.Map(document.getElementById("map"));
+    var latlng = new google.maps.LatLng(49.25, -123.100);
+    var mapOptions = {
+      zoom: 12,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
     if (Current_marker) {
       // Marker already created - Move it
