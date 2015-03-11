@@ -1,6 +1,7 @@
 :javascript
-  var App, MojioClient, config, mojio_client; //some variables needed to initialize data 
+  var App, MojioClient, config, mojio_client, Current_marker; //some variables needed to initialize data 
   var isLoggedIn = false;
+  Current_marker = null;
   config = {
             application: '434f01ce-504b-4f72-a919-5a81dee7d506', // Fill in your app id here!
             redirect_uri: 'https://mojio.herokuapp.com/map', // Fill in you redirect uri here! (Ex. 'http://localhost:4093/index.html')
@@ -65,16 +66,16 @@
 
   function autoUpdate() {
 
-    getVehicleData();
+    getVehicleData();  //updates the value of localStorage["latitude"], localStorage["longitude"]
     var newPoint = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
 
-    if (marker) {
+    if (Current_marker) {
       // Marker already created - Move it
-      marker.setPosition(newPoint);
+      Current_marker.setPosition(newPoint);
     }
     else {
       // Marker does not exist - Create it
-      marker = new google.maps.Marker({
+      Current_marker = new google.maps.Marker({
         position: newPoint,
         map: map,
         title: 'Current Location'
