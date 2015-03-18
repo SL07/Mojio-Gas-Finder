@@ -96,7 +96,7 @@
    // map.setCenter(newPoint);
     // Call the autoUpdate() function every 1 seconds
     console.log("timer has expired, runnning autoupdate");
-    setTimeout(autoUpdate, 1000);
+    setTimeout(autoUpdate, 1000); //want to change this to setInterval 
   }
 
   function getVehicleData(){   //move this function to map page later  
@@ -125,14 +125,24 @@
 
   function timeoutTest () {
     console.log("GOT INTO timeoutTest");
-    setTimeout(timeoutTest, 1500); 
+    setTimeout(timeoutTest, 1500); //rerun every 1.5 seconds
+  }
+
+ 
+    
+
+  function myTimer() {
+    //var d = new Date();
+    //document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+    console.log("inside timer function");
+    alert("timer is working!!");
   }
 
   google.maps.event.addDomListener(window, "load", initialize);
-  autoUpdate();  
-  timeoutTest();
+  autoUpdate(); 
+  var myVar = setInterval(function () {myTimer()}, 1500); 
 
-  
+
 
   
 .container-fluid
