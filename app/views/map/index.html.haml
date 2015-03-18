@@ -96,8 +96,8 @@
     // Center the map on the new position
    // map.setCenter(newPoint);
     // Call the autoUpdate() function every 1 seconds
-    console.log("timer has expired, runnning autoupdate");
-    setTimeout(autoUpdate, 1000); //want to change this to setInterval 
+    //console.log("timer has expired, runnning autoupdate");
+    //setTimeout(autoUpdate, 1000); //want to change this to setInterval 
   }
 
   function getVehicleData(){   //move this function to map page later  
@@ -130,7 +130,7 @@
   }
 
  
-  var myVar = setInterval(function () {myTimer()}, 100000); //enable this to call repeating function  
+  var myVar = setInterval(function () {myTimer()}, 5000); //enable this to call repeating function  
 
   function myTimer() {
     //var d = new Date();
