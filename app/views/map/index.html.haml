@@ -82,7 +82,7 @@
 
     if (Current_marker != null ) {
       // Marker already created - Move it
-      Current_marker.setPosition(newPoint);
+      Current_marker.setPosition(newPoint);  //somehow marker disappear on 2nd autoUpdate call???????????
     }
     else {
       // Marker does not exist - Create it
@@ -132,7 +132,7 @@
   }
 
  
-  var myVar = setInterval(function () {myTimer()}, 5000); //enable this to call repeating function  
+  //var myVar = setInterval(function () {myTimer()}, 5000); //enable this to call repeating function  
 
   function myTimer() {
     //var d = new Date();
