@@ -4,8 +4,6 @@
   Current_marker = null;
   var count;
 
-  //var myVar = setInterval(function () {myTimer()}, 1500); timer works, just have to start inside javascript block 
-
   config = {
             application: '434f01ce-504b-4f72-a919-5a81dee7d506', // Fill in your app id here!
             redirect_uri: 'https://mojio.herokuapp.com/map', // Fill in you redirect uri here! (Ex. 'http://localhost:4093/index.html')
@@ -132,7 +130,7 @@
   }
 
  
-  var myVar = setInterval(function () {myTimer()}, 1500); 
+  //var myVar = setInterval(function () {myTimer()}, 1500); enable this to call repeating function  
 
   function myTimer() {
     //var d = new Date();
@@ -142,7 +140,7 @@
   }
 
 
-  
+
   google.maps.event.addDomListener(window, "load", initialize);
   autoUpdate();
 
