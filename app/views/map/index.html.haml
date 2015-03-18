@@ -3,7 +3,7 @@
   var isLoggedIn = false;
   Current_marker = null;
   var count;
-  autoUpdate(); 
+
   //var myVar = setInterval(function () {myTimer()}, 1500); timer works, just have to start inside javascript block 
 
   config = {
@@ -141,8 +141,10 @@
     alert("timer is working!!");
   }
 
-  google.maps.event.addDomListener(window, "load", initialize);
+
   
+  google.maps.event.addDomListener(window, "load", initialize);
+  autoUpdate();
 
 
 
