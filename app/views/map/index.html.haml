@@ -96,9 +96,11 @@
     // Center the map on the new position
    // map.setCenter(newPoint);
     // Call the autoUpdate() function every 1 seconds
-    //console.log("timer has expired, runnning autoupdate");
+    //console.log("timer has expired, runnning autoupdate")  
     //setTimeout(autoUpdate, 1000); //want to change this to setInterval 
+    console.log("END of autoUpdate");
   }
+
 
   function getVehicleData(){   //move this function to map page later  
     return mojio_client.get(mojio_client.model("Vehicle"), {}, function(error, result) {
