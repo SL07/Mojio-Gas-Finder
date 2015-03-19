@@ -1,7 +1,7 @@
 :javascript
   var App, MojioClient, config, mojio_client, Current_marker; //some variables needed to initialize data 
   var isLoggedIn = false;
-  var Current_marker = null;
+  Current_marker = null;
   var count;
 
   config = {
@@ -70,8 +70,8 @@
   function autoUpdate() {
 
     getVehicleData();  //updates the value of localStorage["latitude"], localStorage["longitude"]
-    var newPoint = google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
-    var latlng = google.maps.LatLng(49.25, -123.100);  //vancouver location 
+    var newPoint = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
+    var latlng = new google.maps.LatLng(49.25, -123.100);  //vancouver location 
     /* old code
     var newPoint = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
     var latlng = new google.maps.LatLng(49.25, -123.100);
@@ -82,7 +82,7 @@
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    var map = google.maps.Map(document.getElementById("map"), mapOptions);
+    var map =  new google.maps.Map(document.getElementById("map"), mapOptions);
 
     if (Current_marker != null ) {
       // Marker already created - Move it
