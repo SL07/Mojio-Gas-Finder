@@ -1,7 +1,7 @@
 :javascript
   var App, MojioClient, config, mojio_client, Current_marker; //some variables needed to initialize data 
   var isLoggedIn = false;
-  Current_marker = null;
+  var Current_marker = null;
   var count;
 
   config = {
@@ -70,19 +70,24 @@
   function autoUpdate() {
 
     getVehicleData();  //updates the value of localStorage["latitude"], localStorage["longitude"]
+    var newPoint = google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
+    var latlng = google.maps.LatLng(49.25, -123.100);  //vancouver location 
+    /* old code
     var newPoint = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
     var latlng = new google.maps.LatLng(49.25, -123.100);
+    */
     var mapOptions = {
       zoom: 12,
-      center: latlng,
+      center: newPoint,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    var map = google.maps.Map(document.getElementById("map"), mapOptions);
 
     if (Current_marker != null ) {
       // Marker already created - Move it
       Current_marker.setPosition(newPoint);  //somehow marker disappear on 2nd autoUpdate call???????????
+      console.log("current marker updated");
     }
     else {
       // Marker does not exist - Create it
@@ -132,7 +137,7 @@
   }
 
  
-  //var myVar = setInterval(function () {myTimer()}, 5000); //enable this to call repeating function  
+  var myVar = setInterval(function () {myTimer()}, 3000); //enable this to call repeating function(ie: AutoUpdate() function)  
 
   function myTimer() {
     //var d = new Date();
