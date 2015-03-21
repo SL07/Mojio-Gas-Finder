@@ -2,6 +2,8 @@
   var App, MojioClient, config, mojio_client, Current_marker; //some variables needed to initialize data 
   var isLoggedIn = false;
   Current_marker = null;
+  var count;
+
   config = {
             application: '434f01ce-504b-4f72-a919-5a81dee7d506', // Fill in your app id here!
             redirect_uri: 'https://mojio.herokuapp.com/map', // Fill in you redirect uri here! (Ex. 'http://localhost:4093/index.html')
@@ -69,34 +71,46 @@
 
     getVehicleData();  //updates the value of localStorage["latitude"], localStorage["longitude"]
     var newPoint = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
+    var latlng = new google.maps.LatLng(49.25, -123.100);  //vancouver location 
+    /* old code
+    var newPoint = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
     var latlng = new google.maps.LatLng(49.25, -123.100);
+    */
     var mapOptions = {
       zoom: 12,
-      center: latlng,
+      center: newPoint,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    var map =  new google.maps.Map(document.getElementById("map"), mapOptions); //new declartinon may be causing refreshing
 
-    if (Current_marker) {
+    if (Current_marker != null ) {
       // Marker already created - Move it
-      Current_marker.setPosition(newPoint);
+      Current_marker.setPosition(newPoint);  //somehow marker disappear on 2nd autoUpdate call???????????
+      console.log("current marker updated");
     }
+    
     else {
       // Marker does not exist - Create it
+      console.log("creating first location marker");
       Current_marker = new google.maps.Marker({
         position: newPoint,
         map: map,
         title: 'Current Location'
       });
     }
+    
+    // To add the marker to the map, call setMap(); can use use last parameter of map to display the marker
+    //marker.setMap(map);
 
     // Center the map on the new position
    // map.setCenter(newPoint);
     // Call the autoUpdate() function every 1 seconds
-    console.log("timer has expired, runnning autoupdate");
-    setTimeout(autoUpdate, 1000);
+    //console.log("timer has expired, runnning autoupdate")  
+    //setTimeout(autoUpdate, 1000); //want to change this to setInterval 
+    console.log("END of autoUpdate");
   }
+
 
   function getVehicleData(){   //move this function to map page later  
     return mojio_client.get(mojio_client.model("Vehicle"), {}, function(error, result) {
@@ -122,9 +136,27 @@
 
   }
 
+  function timeoutTest () {
+    console.log("GOT INTO timeoutTest");
+    setTimeout(timeoutTest, 1500); //rerun every 1.5 seconds
+  }
+
+ 
+  var myVar = setInterval(function () {myTimer()}, 3000); //enable this to call repeating function(ie: AutoUpdate() function)  
+
+  function myTimer() {
+    //var d = new Date();
+    //document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+    console.log("inside timer function");
+    autoUpdate();
+  }
+
+
+
   google.maps.event.addDomListener(window, "load", initialize);
-  autoUpdate();  
-  
+  //autoUpdate();
+
+
 
   
 .container-fluid
