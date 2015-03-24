@@ -6,7 +6,7 @@
   var testLat = 49.25; 
   var testLong = -123.1;
 
-  var gasStationAddress= "7282 Knight St";
+  var gasStationAddress= "7282 Knight St, Vancouver";
   var geocoder;
   var map;
 
@@ -74,8 +74,9 @@
     console.log("finished adding current location marker");
     //map.panTo( center); //center map on vancouver 
     //map.panTo(center);
-    moveMarker( map, marker);  //new function to move car marker
-    directToGasStation();
+     directToGasStation();
+     moveMarker();
+    
 
   }
 
@@ -97,6 +98,7 @@
     geocoder.geocode( { 'address': gasStationAddress }, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
         //  map.setCenter(results[0].geometry.location);
+        console.log(results[0].geometry.location);
         console.log("marker for gas station");
           var marker = new google.maps.Marker({
               map: map,
