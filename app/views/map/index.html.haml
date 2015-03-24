@@ -8,6 +8,7 @@
 
   var gasStationAddress= "7282 Knight St";
   var geocoder;
+  var map;
 
   config = {
             application: '434f01ce-504b-4f72-a919-5a81dee7d506', // Fill in your app id here!
@@ -60,7 +61,7 @@
         center: latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    map = new google.maps.Map(document.getElementById("map"), mapOptions);
     console.log("Latitude of car is: "+ localStorage["latitude"]);
     console.log("Latitude of car is: "+ localStorage["longitude"]);
     var Carlatlng = new google.maps.LatLng(localStorage["latitude"],localStorage["longitude"]);
