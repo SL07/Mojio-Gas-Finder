@@ -52,7 +52,7 @@
   function initialize() {
     var latlng = new google.maps.LatLng(49.25, -123.100);
       var mapOptions = {
-        zoom: 12,
+        zoom: 16,
         center: latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
@@ -74,11 +74,11 @@
   function moveMarker ( map, marker){    
   //delayed so you can see it move
       setInterval( function(){
-      //getVehicleData();
-      testLat += 0.0001;
-      testLong += 0.0001;
-      center = new google.maps.LatLng(testLat, testLong); //only to test marker movement
-      //center = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
+      getVehicleData();
+      //testLat += 0.0001;
+      //testLong += 0.0001;
+      //center = new google.maps.LatLng(testLat, testLong); //only to test marker movement
+      center = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
       marker.setPosition( center );
       map.panTo( center );
       console.log("marker position updated");      
