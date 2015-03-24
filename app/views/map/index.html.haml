@@ -70,7 +70,7 @@
       title: 'Current Location'
     });
     console.log("finished adding current location marker");
-    map.panTo( center); //center map on vancouver 
+    //map.panTo( center); //center map on vancouver 
     //map.panTo(center);
     moveMarker( map, marker);  //new function to move car marker
     //directToGasStation();
@@ -91,19 +91,19 @@
       }, 1500 );  //update every 1.5 sec
   };
  
- function directToGasStation (){
-  geocoder.geocode( { 'address': gasStationAddress }, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        map.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location
-        });
-      } else {
-        alert("Geocode was not successful for the following reason: " + status);
-      }
-    });
- }
+  function directToGasStation (){
+    geocoder.geocode( { 'address': gasStationAddress }, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          map.setCenter(results[0].geometry.location);
+          var marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+          });
+        } else {
+          alert("Geocode was not successful for the following reason: " + status);
+        }
+      });
+  }
 
   function autoUpdate() {
 
