@@ -75,7 +75,8 @@
       getVehicleData();
       center = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
       marker.setPosition( center );
-      map.panTo( center );      
+      map.panTo( center );
+      console.log("marker position updated");      
       }, 1500 );  //update every 1.5 sec
   };
  
