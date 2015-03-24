@@ -6,6 +6,9 @@
   var testLat = 49.25; 
   var testLong = -123.1;
 
+  var gasStationAddress= "7282 Knight St";
+  var geocoder;
+
   config = {
             application: '434f01ce-504b-4f72-a919-5a81dee7d506', // Fill in your app id here!
             redirect_uri: 'https://mojio.herokuapp.com/map', // Fill in you redirect uri here! (Ex. 'http://localhost:4093/index.html')
@@ -68,6 +71,7 @@
     });
     console.log("finished adding current location marker");
     moveMarker( map, marker);  //new function to move car marker
+    directToGasStation();
 
   }
 
@@ -85,6 +89,19 @@
       }, 1500 );  //update every 1.5 sec
   };
  
+ function directToGasStation (){
+  geocoder.geocode( { 'address': gasStationAddress }, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    });
+ }
 
 
 
