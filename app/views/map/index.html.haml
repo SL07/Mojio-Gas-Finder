@@ -100,6 +100,7 @@
           var marker = new google.maps.Marker({
               map: map,
               position: results[0].geometry.location
+              console.log("marker for gas station");
           });
         } else {
           alert("Geocode was not successful for the following reason: " + status);
