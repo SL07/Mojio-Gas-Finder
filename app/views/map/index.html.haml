@@ -65,7 +65,22 @@
       title: 'Current Location'
     });
     console.log("finished adding current location marker");
+    moveMarker( map, marker);  //new function to move car marker
+
   }
+
+  function moveMarker ( map, marker){    
+  //delayed so you can see it move
+      setInterval( function(){
+      getVehicleData();
+      center = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
+      marker.setPosition( center );
+      map.panTo( center );      
+      }, 1500 );  //update every 1.5 sec
+  };
+ 
+
+
 
   function autoUpdate() {
 
@@ -142,7 +157,7 @@
   }
 
  
-  var myVar = setInterval(function () {myTimer()}, 3000); //enable this to call repeating function(ie: AutoUpdate() function)  
+  //var myVar = setInterval(function () {myTimer()}, 3000); //enable this to call repeating function(ie: AutoUpdate() function)  
 
   function myTimer() {
     //var d = new Date();
