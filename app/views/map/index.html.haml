@@ -53,6 +53,7 @@
   /////////////////////////////////////////////////
 
   function initialize() {
+    geocoder = new google.maps.Geocoder();
     var latlng = new google.maps.LatLng(49.25, -123.100);
       var mapOptions = {
         zoom: 14,
