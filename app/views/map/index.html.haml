@@ -157,12 +157,53 @@
   //autoUpdate();
 
   
-  JQuery(function ($) {
-    $(document).on('change', 'input:radio[id^="midGrade"]', function (event) {
-      alert("hi");
-    }); 
-  }); 
+  jQuery(function ($) {
+    $(document).on('click', 'label[id^="regular"]', function(event) {
+        alert("regular");
+    });
+  });
   
+  jQuery(function ($) {
+    $(document).on('click', 'label[id^="midGrade"]', function(event) {
+        alert("midGrade");
+    });
+  });
+  
+  jQuery(function ($) {
+    $(document).on('click', 'label[id^="premium"]', function(event) {
+        alert("premium");
+    });
+  });
+  
+  jQuery(function ($) {
+    $(document).on('click', 'label[id^="diesel"]', function(event) {
+        alert("diesel");
+    });
+  });
+  
+  jQuery(function ($) {
+    $(document).on('click', 'label[id^="range_1"]', function(event) {
+        alert("1");
+    });
+  });
+  
+  jQuery(function ($) {
+    $(document).on('click', 'label[id^="range_2"]', function(event) {
+        alert("2");
+    });
+  });
+  
+  jQuery(function ($) {
+    $(document).on('click', 'label[id^="range_5"]', function(event) {
+        alert("5");
+    });
+  });
+  
+  jQuery(function ($) {
+    $(document).on('click', 'label[id^="range_0"]', function(event) {
+        alert("10");
+    });
+  });
 .container-fluid
   %h1 Map
   #map
@@ -190,36 +231,34 @@
         %h4 Preference:
         %h5 Fuel Type:
         .btn{"data-toggle" => "buttons"}
-          %label.btn.btn-primary
-            %input#regualr{:autocomplete => "off", :checked => "checked", :name => "options", :type => "radio"}/
+          %label#regular.btn.btn-primary
+            %input#regular{:autocomplete => "off", :checked => "checked", :name => "options", :type => "radio"}/
             Regular
-          %label.btn.btn-primary
+          %label#midGrade.btn.btn-primary
             %input#midGrade{:autocomplete => "off", :name => "options", :type => "radio"}/
             Mid-Grade
-          %label.btn.btn-primary
+          %label#premium.btn.btn-primary
             %input#premium{:autocomplete => "off", :name => "options", :type => "radio"}/
             Premium
-          %label.btn.btn-primary
+          %label#diesel.btn.btn-primary
             %input#diesel{:autocomplete => "off", :name => "options", :type => "radio"}/
             Diesel
         %h5 Search Range (km):
         .btn{"data-toggle" => "buttons"}
-          %label.btn.btn-primary
-            %input#1{:autocomplete => "off", :checked => "checked", :name => "options", :type => "radio"}/
+          %label#range_1.btn.btn-primary
+            %input#range_1{:autocomplete => "off", :checked => "checked", :name => "options", :type => "radio"}/
             1
-          %label.btn.btn-primary
-            %input#2{:autocomplete => "off", :name => "options", :type => "radio"}/
+          %label#range_2.btn.btn-primary
+            %input#range_2{:autocomplete => "off", :name => "options", :type => "radio"}/
             2
-          %label.btn.btn-primary
-            %input#5{:autocomplete => "off", :name => "options", :type => "radio"}/
+          %label#range_5.btn.btn-primary
+            %input#range_5{:autocomplete => "off", :name => "options", :type => "radio"}/
             5
-          %label.btn.btn-primary
-            %input#10{:autocomplete => "off", :name => "options", :type => "radio"}/
+          %label#range_0.btn.btn-primary
+            %input#range_0{:autocomplete => "off", :name => "options", :type => "radio"}/
             10 
         .btn-group{"aria-label" => "...", :role => "group"}
           %button.btn.btn-default{:type => "button"} Search
-        
-        	
         
   .panel.panel-default.col-md-3.col-md-offset-1
     #headingThree.panel-heading{:role => "tab"}
