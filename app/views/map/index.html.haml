@@ -6,8 +6,8 @@
   var testLat = 49.25; 
   var testLong = -123.1;
 
-  //var gasStationAddress= "7282 Knight St";
-  //var geocoder;
+  var gasStationAddress= "7282 Knight St";
+  var geocoder;
 
   config = {
             application: '434f01ce-504b-4f72-a919-5a81dee7d506', // Fill in your app id here!
@@ -53,6 +53,7 @@
   /////////////////////////////////////////////////
 
   function initialize() {
+    geocoder = new google.maps.Geocoder();
     var latlng = new google.maps.LatLng(49.25, -123.100);
       var mapOptions = {
         zoom: 14,
@@ -73,7 +74,7 @@
     //map.panTo( center); //center map on vancouver 
     //map.panTo(center);
     moveMarker( map, marker);  //new function to move car marker
-    //directToGasStation();
+    directToGasStation();
 
   }
 
@@ -86,7 +87,7 @@
       //center = new google.maps.LatLng(testLat, testLong); //only to test marker movement
       center = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
       marker.setPosition( center );
-      map.panTo( center );
+      //map.panTo( center );
       console.log("marker position updated");      
       }, 1500 );  //update every 1.5 sec
   };
@@ -95,7 +96,7 @@
     geocoder.geocode( { 'address': gasStationAddress }, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           map.setCenter(results[0].geometry.location);
-          var marker = new google.maps.Marker({
+          var marker2 = new google.maps.Marker({
               map: map,
               position: results[0].geometry.location
           });
