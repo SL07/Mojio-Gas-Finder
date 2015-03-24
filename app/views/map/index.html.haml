@@ -52,7 +52,7 @@
   function initialize() {
     var latlng = new google.maps.LatLng(49.25, -123.100);
       var mapOptions = {
-        zoom: 16,
+        zoom: 14,
         center: latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
@@ -67,6 +67,7 @@
       title: 'Current Location'
     });
     console.log("finished adding current location marker");
+    map.panTo( center); //center map on vancouver 
     moveMarker( map, marker);  //new function to move car marker
 
   }
@@ -85,8 +86,6 @@
       }, 1500 );  //update every 1.5 sec
   };
  
-
-
 
   function autoUpdate() {
 
@@ -149,10 +148,14 @@
 
             }
 
+            if (value.FuelLevel != null ){
+              localStorage["fuellevel"] = value.FuelLevel;
+            }
+
 
         });
         console.log("location of vehicle is: LAT:"+ localStorage["latitude"]+" " + "LONG:" +localStorage["longitude"]);
-    //    console.log("location of vehicle is: LAT:"+ lat[1]+" " + "LONG:" +lng[1]);
+        console.log("Fuel level of car: "+ localStorage["fuellevel"]);
     });
 
   }
