@@ -76,7 +76,7 @@ module MapHelper
     end
 
     address_display = address[0].content + ', ' + city[0].content
-    distance_display =  '%.2f'% distance[0].content
+    distance_display =  '%.2f'% covertMiletoKm(distance[0].content.to_f)
     price_display =  '%.2f'% price[0].content
     
     return brand[0].content, address_display, distance_display, price_display
@@ -115,7 +115,7 @@ module MapHelper
     end
 
     address_display = address[closestStation_index].content + ', ' + city[closestStation_index].content
-    distance_display =  '%.2f'% distance[closestStation_index].content
+    distance_display =  '%.2f'% convertMiletoKm(distance[closestStation_index].content.to_f)
     price_display =  '%.2f'% price[closestStation_index].content
     
     return brand[closestStation_index].content, address_display, distance_display, price_display

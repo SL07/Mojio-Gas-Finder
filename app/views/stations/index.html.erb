@@ -1,6 +1,33 @@
+<script>
+  $(document).ready(function(){
+    $('#initializeTable-noPaging').DataTable({
+      "bPaginate": false
+      });
+  });
+  
+  jQuery(function ($) {
+    $(document).on('change', 'input:radio[id^="q_op_"]', function(event) {
+        alert("click fired");
+    });
+  });
+</script>
+
 <h1>Listing stations</h1>
 
 <p> Last Updated: <%= @jobs.inspect %></p>
+
+<div id="q_opt" class="btn-group" data-toggle="buttons">
+    <label class="btn btn-default active" id="d_op_0">
+        <input id="q_op_0" name="op" type="radio" value="0" />22%</label>
+    <label class="btn btn-default" id="d_op_1">
+        <input id="q_op_1" name="op" type="radio" value="1" />19%</label>
+    <label class="btn btn-default" id="d_op_2">
+        <input id="q_op_2" name="op" type="radio" value="2" />11%</label>
+    <label class="btn btn-default" id="d_op_3">
+        <input id="q_op_3" name="op" type="radio" value="3" />42%</label>
+    <label class="btn btn-default" id="d_op_4">
+        <input id="q_op_4" name="op" type="radio" value="4" />8%</label>
+</div>
 
 <table class="display" id="initializeTable-noPaging">
   <thead>

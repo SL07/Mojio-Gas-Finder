@@ -156,8 +156,12 @@
   google.maps.event.addDomListener(window, "load", initialize);
   //autoUpdate();
 
-
-
+  
+  JQuery(function ($) {
+    $(document).on('change', 'input:radio[id^="midGrade"]', function (event) {
+      alert("hi");
+    }); 
+  }); 
   
 .container-fluid
   %h1 Map
@@ -174,15 +178,7 @@
     #collapseOne.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel"}
       .panel-body
         Preference:
-        .dropdown
-          %button#dLabel{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-            Fuel Brand
-            %span.caret
-          %ul.dropdown-menu{"aria-labelledby" => "dLabel", :role => "menu"}
-            %li
-              %a{:href => "#"} Esso
-            %li
-              %a{:href => "#"} Petro Canada
+        
         
   .panel.panel-default.col-md-3.col-md-offset-1
     #headingTwo.panel-heading{:role => "tab"}
@@ -192,27 +188,38 @@
     #collapseTwo.panel-collapse.collapse{"aria-labelledby" => "headingTwo", :role => "tabpanel"}
       .panel-body
         %h4 Preference:
-        .dropdown
-          %button#dLabel{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-            Fuel Grade
-            %span.caret
-          %ul.dropdown-menu{"aria-labelledby" => "dLabel", :role => "menu"}
-            %li
-              %a{:href => "#"} Regular
-            %li
-              %a{:href => "#"} Mid Grade
-            %li
-              %a{:href => "#"} Premium
-            %li
-              %a{:href => "#"} Diesel
-        %br/      
-        %form
-          Search Range:
-          %input{:name => "range", :type => "number"}/
-          km
-        %br/  
+        %h5 Fuel Type:
+        .btn{"data-toggle" => "buttons"}
+          %label.btn.btn-primary
+            %input#regualr{:autocomplete => "off", :checked => "checked", :name => "options", :type => "radio"}/
+            Regular
+          %label.btn.btn-primary
+            %input#midGrade{:autocomplete => "off", :name => "options", :type => "radio"}/
+            Mid-Grade
+          %label.btn.btn-primary
+            %input#premium{:autocomplete => "off", :name => "options", :type => "radio"}/
+            Premium
+          %label.btn.btn-primary
+            %input#diesel{:autocomplete => "off", :name => "options", :type => "radio"}/
+            Diesel
+        %h5 Search Range (km):
+        .btn{"data-toggle" => "buttons"}
+          %label.btn.btn-primary
+            %input#1{:autocomplete => "off", :checked => "checked", :name => "options", :type => "radio"}/
+            1
+          %label.btn.btn-primary
+            %input#2{:autocomplete => "off", :name => "options", :type => "radio"}/
+            2
+          %label.btn.btn-primary
+            %input#5{:autocomplete => "off", :name => "options", :type => "radio"}/
+            5
+          %label.btn.btn-primary
+            %input#10{:autocomplete => "off", :name => "options", :type => "radio"}/
+            10 
         .btn-group{"aria-label" => "...", :role => "group"}
           %button.btn.btn-default{:type => "button"} Search
+        
+        	
         
   .panel.panel-default.col-md-3.col-md-offset-1
     #headingThree.panel-heading{:role => "tab"}

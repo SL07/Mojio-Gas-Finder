@@ -2,10 +2,3 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-initializeTable = ->
-  $('#initializeTable-noPaging').DataTable( {
-        "paging":   false
-  });
-  $('#initializeTable-default').DataTable();
-  
-$(document).ready(initializeTable)
