@@ -281,9 +281,9 @@
   #map
   %p
     Fuel level:
-      %b#fuel unknown
+    %b#fuel unknown
     :javascript
-      document.getElementById("fuel").innerHTML = localStorage["correctFuelLevel"];
+      /*<![CDATA[*/document.getElementById("fuel").innerHTML = localStorage["correctFuelLevel"];/*]]>*/
 
   
   #accordion.panel-group{"aria-multiselectable" => "true", :role => "tablist"}
