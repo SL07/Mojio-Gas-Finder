@@ -231,51 +231,64 @@
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="regular"]', function(event) {
-        alert("regular");
+        sessionStorage["gasGrade"] = "Unleaded";
     });
   });
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="midGrade"]', function(event) {
-        alert("midGrade");
+    	sessionStorage["gasGrade"] = "Midgrade";
     });
   });
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="premium"]', function(event) {
-        alert("premium");
+    	sessionStorage["gasGrade"] = "Premium";
     });
   });
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="diesel"]', function(event) {
-        alert("diesel");
+    	sessionStorage["gasGrade"] = "Diesel";
     });
   });
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="range_1"]', function(event) {
-        alert("1");
+        sessionStorage["range"] = "1";
     });
   });
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="range_2"]', function(event) {
-        alert("2");
+        sessionStorage["range"] = "2";
     });
   });
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="range_5"]', function(event) {
-        alert("5");
+        sessionStorage["range"] = "5";
     });
   });
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="range_0"]', function(event) {
-        alert("10");
+        sessionStorage["range"] = "10";
     });
   });
+  
+  function getCheapest(){
+    $.get("map/getCheapest", {longitude_input: "-123.126777", latitude_input: "49.277892", product_input: sessionStorage["gasGrade"], distance_input: sessionStorage["range"]})
+    .done(function( data ) {
+      console.log(data);
+      $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#foo" );
+      $("<p> Address: "+data.address_out+"</p>").appendTo( "#foo" );
+      $("<p> Distance: "+data.distance_out+"</p>").appendTo( "#foo" );
+      $("<p> Price: "+data.price_out+"</p>").appendTo( "#foo" );
+    }); 
+  }
+  
+  
 .container-fluid
   %h1 Map
   #map
@@ -295,8 +308,7 @@
     #collapseOne.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel"}
       .panel-body
         Preference:
-        
-        
+              
   .panel.panel-default.col-md-3.col-md-offset-1
     #headingTwo.panel-heading{:role => "tab"}
       %h4.panel-title
@@ -334,15 +346,12 @@
             %input#range_0{:autocomplete => "off", :name => "options", :type => "radio"}/
             10 
         .btn-group{"aria-label" => "...", :role => "group"}
-          %button.btn.btn-default{:type => "button"} Search
-        
-  .panel.panel-default.col-md-3.col-md-offset-1
-    #headingThree.panel-heading{:role => "tab"}
-      %h4.panel-title
-        %a.collapsed{"aria-controls" => "collapseThree", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseThree"}
-          Route
-    #collapseThree.panel-collapse.collapse{"aria-labelledby" => "headingThree", :role => "tabpanel"}
-      .panel-body
-        Third
+          %button.btn.btn-default#getCheapestStation{:type => "button", :onClick => "getCheapest()"}/
+          Search
+
+  .col-md-3.col-md-offset-2
+    %h5 Result
+    %br/
+    #foo 
 
   
