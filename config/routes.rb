@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   
   resources :stations
   get 'map/getCheapest', :to => 'map#getCheapest'
+  get 'map/getClosest', :to => 'map#getClosest'
   resources :map
 
   # The priority is based upon order of creation: first created -> highest priority.

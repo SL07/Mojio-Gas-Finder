@@ -227,7 +227,6 @@
   }
 
   google.maps.event.addDomListener(window, "load", initialize);
-
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="regular"]', function(event) {
@@ -288,6 +287,17 @@
     }); 
   }
   
+  function getClosest(){
+    $.get("map/getClosest", {longitude_input: "-123.126777", latitude_input: "49.277892", product_input: sessionStorage["gasGrade"]})
+    .done(function( data ) {
+      console.log(data);
+      $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#foo" );
+      $("<p> Address: "+data.address_out+"</p>").appendTo( "#foo" );
+      $("<p> Distance: "+data.distance_out+"</p>").appendTo( "#foo" );
+      $("<p> Price: "+data.price_out+"</p>").appendTo( "#foo" );
+    }); 
+  }
+  
   
 .container-fluid
   %h1 Map
@@ -307,7 +317,24 @@
           Find Closest Station
     #collapseOne.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel"}
       .panel-body
-        Preference:
+        %h4 Preference:
+        %h5 Fuel Type:
+        .btn{"data-toggle" => "buttons"}
+          %label#regular.btn.btn-primary.active
+            %input#regular{:autocomplete => "off", :checked => "checked", :name => "options", :type => "radio"}/
+            Regular
+          %label#midGrade.btn.btn-primary
+            %input#midGrade{:autocomplete => "off", :name => "options", :type => "radio"}/
+            Mid-Grade
+          %label#premium.btn.btn-primary
+            %input#premium{:autocomplete => "off", :name => "options", :type => "radio"}/
+            Premium
+          %label#diesel.btn.btn-primary
+            %input#diesel{:autocomplete => "off", :name => "options", :type => "radio"}/
+            Diesel
+        .btn-group{"aria-label" => "...", :role => "group"}
+          %button.btn.btn-default#getCheapestStation{:type => "button", :onClick => "getClosest()"}/
+          Search
               
   .panel.panel-default.col-md-3.col-md-offset-1
     #headingTwo.panel-heading{:role => "tab"}
@@ -319,7 +346,7 @@
         %h4 Preference:
         %h5 Fuel Type:
         .btn{"data-toggle" => "buttons"}
-          %label#regular.btn.btn-primary
+          %label#regular.btn.btn-primary.active
             %input#regular{:autocomplete => "off", :checked => "checked", :name => "options", :type => "radio"}/
             Regular
           %label#midGrade.btn.btn-primary
@@ -333,7 +360,7 @@
             Diesel
         %h5 Search Range (km):
         .btn{"data-toggle" => "buttons"}
-          %label#range_1.btn.btn-primary
+          %label#range_1.btn.btn-primary.active
             %input#range_1{:autocomplete => "off", :checked => "checked", :name => "options", :type => "radio"}/
             1
           %label#range_2.btn.btn-primary
