@@ -74,8 +74,6 @@
     //map.panTo(center);
     // directToGasStation();
      moveMarker(map, marker);
-    
-
   }
 
   function moveMarker ( map, marker){    
@@ -172,7 +170,7 @@
                 //console.log("odometer is: "+ lastodometer);
                 localStorage["latitude"] = value.LastLocation.Lat; //store long and lat into local storage
                 localStorage["longitude"] = value.LastLocation.Lng;
-                localStorage["fuellevel"] = value.FuelLevel;
+                localStorage["fuellevel"] = value.FuelLevel;  //displays 0 when mojio device isnt connected to network
                 return i++;
 
             }
@@ -183,7 +181,6 @@
         console.log("location of vehicle is: LAT:"+ localStorage["latitude"]+" " + "LONG:" +localStorage["longitude"]);
         console.log("Fuel level of car: "+ localStorage["fuellevel"]);
     });
-
   }
 
   function printVehicle_data() {
