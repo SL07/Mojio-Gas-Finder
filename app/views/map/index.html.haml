@@ -42,7 +42,7 @@
                       div.append(JSON.stringify(result));
                       console.log(JSON.stringify(result));
                       localStorage["mojio_token"] = JSON.stringify(result);  //save the token into local storage
-
+                      getVehicleData(); //update all long, lat and fuel level data on first load
                   }
               });
   }
@@ -211,8 +211,6 @@
     console.log("inside timer function");
     autoUpdate();
   }
-
-
 
   google.maps.event.addDomListener(window, "load", initialize);
 
