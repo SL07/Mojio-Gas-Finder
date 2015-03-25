@@ -5,6 +5,7 @@
   var count;
   var testLat = 49.25; 
   var testLong = -123.1;
+  localStorage["correctFuelLevel"] = 55;  //random number to initialize, will be over written 
 
   var gasStationAddress= "7282 Knight St, Vancouver";
   var geocoder;
@@ -73,13 +74,14 @@
     //map.panTo( center); //center map on vancouver 
     //map.panTo(center);
     // directToGasStation();
-     moveMarker(map, marker);
+    moveMarker(map, marker);
   }
 
   function moveMarker ( map, marker){    
   //delayed so you can see it move
       setInterval( function(){
       getVehicleData();
+      correctFuelLevel(); 
    //   printVehicle_data(); //testing all returned outputs
       //testLat += 0.0001;
       //testLong += 0.0001;
@@ -87,9 +89,21 @@
       center = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
       marker.setPosition( center );
       map.panTo( center );
-      console.log("marker position updated");      
+      console.log("marker position updated"); 
+
       }, 1500 );  //update every 1.5 sec
   };
+
+  function correctFuelLevel(){
+      
+      if (localStorage["fuellevel"] == 0){
+          localStorage["correctFuelLevel"] = localStorage["correctFuelLevel"]; //need to put in last known value non zero value of fuel level 
+      }
+      else //non zero fuel level
+        localStorage["correctFuelLevel"] = localStorage["fuellevel"]; //update to corrected fuel level
+      console.log("Last FuelLevel is: "+ localStorage["correctFuelLevel"]);
+  }
+
   /* 
   function directToGasStation (){
     geocoder.geocode( { 'address': gasStationAddress }, function(results, status) {
@@ -160,7 +174,6 @@
         lng = [];
         i =0;
         fuellevel = 0;
-
         $.each(result.Data, function(key, value) {
             if ((value.LastLocation != null) && (value.LastLocation.Lat != null) && (value.LastLocation.Lng != null)) {
                 lat[i]= value.LastLocation.Lat;
@@ -168,6 +181,7 @@
                 fuellevel = value.FuelLevel;
                 //lastodometer = value.LastOdometer;
                 //console.log("odometer is: "+ lastodometer);
+
                 localStorage["latitude"] = value.LastLocation.Lat; //store long and lat into local storage
                 localStorage["longitude"] = value.LastLocation.Lng;
                 localStorage["fuellevel"] = value.FuelLevel;  //displays 0 when mojio device isnt connected to network
@@ -265,7 +279,10 @@
 .container-fluid
   %h1 Map
   #map
-  %p Vehicle Location: 
+  %h2#fuel Fuel Level: unknown
+    :javascript
+      var element = document.getElementById("fuel");
+      element.innerHTML = "Fuel Level: "+ localStorage["correctFuelLevel"]; 
 
   
   #accordion.panel-group{"aria-multiselectable" => "true", :role => "tablist"}
