@@ -72,7 +72,7 @@
     console.log("finished adding current location marker");
     //map.panTo( center); //center map on vancouver 
     //map.panTo(center);
-     directToGasStation();
+    // directToGasStation();
      moveMarker();
     
 
@@ -82,7 +82,7 @@
   //delayed so you can see it move
       setInterval( function(){
       getVehicleData();
-      printVehicle_data(); //testing all returned outputs
+   //   printVehicle_data(); //testing all returned outputs
       //testLat += 0.0001;
       //testLong += 0.0001;
       //center = new google.maps.LatLng(testLat, testLong); //only to test marker movement
@@ -167,8 +167,8 @@
                 lat[i]= value.LastLocation.Lat;
                 lng[i]= value.LastLocation.Lng;
                 fuellevel = value.FuelLevel;
-                lastodometer = value.LastOdometer;
-                console.log("odometer is: "+ lastodometer);
+                //lastodometer = value.LastOdometer;
+                //console.log("odometer is: "+ lastodometer);
                 localStorage["latitude"] = value.LastLocation.Lat; //store long and lat into local storage
                 localStorage["longitude"] = value.LastLocation.Lng;
                 localStorage["fuellevel"] = value.FuelLevel;
