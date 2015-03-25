@@ -279,7 +279,7 @@
 .container-fluid
   %h1 Map
   #map
-  %h2#fuel Fuel Level: unknown
+  %p #fuel Fuel Level: unknown
     :javascript
       var element = document.getElementById("fuel");
       element.innerHTML = "Fuel Level: "+ localStorage["correctFuelLevel"]; 
