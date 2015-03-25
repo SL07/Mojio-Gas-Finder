@@ -51,8 +51,6 @@
   }
   
 
-  /////////////////////////////////////////////////
-
   function initialize() {
     geocoder = new google.maps.Geocoder();
     var latlng = new google.maps.LatLng(49.25, -123.100);
@@ -169,6 +167,8 @@
                 lat[i]= value.LastLocation.Lat;
                 lng[i]= value.LastLocation.Lng;
                 fuellevel = value.FuelLevel;
+                lastodometer = value.LastOdometer;
+                console.log("odometer is: "+ lastodometer);
                 localStorage["latitude"] = value.LastLocation.Lat; //store long and lat into local storage
                 localStorage["longitude"] = value.LastLocation.Lng;
                 localStorage["fuellevel"] = value.FuelLevel;
