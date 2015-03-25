@@ -83,6 +83,7 @@
   //delayed so you can see it move
       setInterval( function(){
       getVehicleData();
+      printVehicle_data(); //testing all returned outputs
       //testLat += 0.0001;
       //testLong += 0.0001;
       //center = new google.maps.LatLng(testLat, testLong); //only to test marker movement
@@ -160,6 +161,7 @@
         lng = [];
         i =0;
         fuellevel = 0;
+
         $.each(result.Data, function(key, value) {
             if ((value.LastLocation != null) && (value.LastLocation.Lat != null) && (value.LastLocation.Lng != null)) {
                 lat[i]= value.LastLocation.Lat;
@@ -173,8 +175,24 @@
             }
 
         });
+        
+
         console.log("location of vehicle is: LAT:"+ localStorage["latitude"]+" " + "LONG:" +localStorage["longitude"]);
         console.log("Fuel level of car: "+ localStorage["fuellevel"]);
+    });
+
+  }
+
+  function printVehicle_data() {
+    var Vehicle = mojio_client.model("Vehicle"); // Gets a trip model schema.
+    mojio_client.get(Vehicle, {}, function(error, result) {
+        var str = "";
+        if (error) {
+            console.log(error); // Some error occured.
+        } else {
+            var vehicle = mojio_client.getResults(Vehicle, result);  // Helper function to get the results.
+            console.log(vehicle);
+        }
     });
 
   }
