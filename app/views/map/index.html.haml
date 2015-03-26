@@ -138,17 +138,17 @@
             destination:stationAddress,
             travelMode: google.maps.TravelMode.DRIVING
             };
-              directionsService.route(request, function(result, status) {
+             /* directionsService.route(request, function(result, status) {
               if (status == google.maps.DirectionsStatus.OK) {
               directionsDisplay.setDirections(result);
               }
-            });
+            });*/
 
-            /*directionsService.route(request, function(response, status) {
+              directionsService.route(request, function(response, status) {
               if (status == google.maps.DirectionsStatus.OK) {
               directionsDisplay.setDirections(response);
               }
-            });*/
+            });
           }
         } else {
           alert("Geocoder failed due to: " + status);
@@ -340,9 +340,9 @@
     #fuelDisplay
   %p
     #ResultField
-  /*%P
+  %P
     directions-panel
-    control*/
+    control
 
   
   #accordion.panel-group{"aria-multiselectable" => "true", :role => "tablist"}
