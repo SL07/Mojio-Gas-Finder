@@ -79,7 +79,8 @@
     //map.panTo( center); //center map on vancouver 
     //map.panTo(center);
     directionsDisplay.setMap(map);
-    directToGasStation();
+    console.log(sessionStorage["stationAddress"]);
+    directToGasStation(sessionStorage["stationAddress"]);
 
     //moveMarker(map, marker);
   }
@@ -115,7 +116,7 @@
   }
 
   
-  function directToGasStation() {
+  function directToGasStation(stationAddress) {
       //localStorage["latitude"]=49.277892;
       //localStorage["longitude"]=-123.126777;
       var address;
@@ -131,7 +132,7 @@
 
             var request = {                             //Get the direction from the current location to gas station 
             origin:results[1].formatted_address,
-            destination:gasStationAddress,
+            destination:stationAddress,
             travelMode: google.maps.TravelMode.DRIVING
           };
           directionsService.route(request, function(result, status) {
@@ -147,51 +148,6 @@
       console.log(address);
       return address;
     }
-
-
-  function autoUpdate() {
-
-    getVehicleData();  //updates the value of localStorage["latitude"], localStorage["longitude"]
-    var newPoint = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
-    var latlng = new google.maps.LatLng(49.25, -123.100);  //vancouver location 
-    /* old code
-    var newPoint = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
-    var latlng = new google.maps.LatLng(49.25, -123.100);
-    */
-    var mapOptions = {
-      zoom: 12,
-      center: newPoint,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-
-    var map =  new google.maps.Map(document.getElementById("map"), mapOptions); //new declartinon may be causing refreshing
-
-    if (Current_marker != null ) {
-      // Marker already created - Move it
-      Current_marker.setPosition(newPoint);  //somehow marker disappear on 2nd autoUpdate call???????????
-      console.log("current marker updated");
-    }
-    
-    else {
-      // Marker does not exist - Create it
-      console.log("creating first location marker");
-      Current_marker = new google.maps.Marker({
-        position: newPoint,
-        map: map,
-        title: 'Current Location'
-      });
-    }
-    
-    // To add the marker to the map, call setMap(); can use use last parameter of map to display the marker
-    //marker.setMap(map);
-
-    // Center the map on the new position
-   // map.setCenter(newPoint);
-    // Call the autoUpdate() function every 1 seconds
-    //console.log("timer has expired, runnning autoupdate")  
-    //setTimeout(autoUpdate, 1000); //want to change this to setInterval 
-    console.log("END of autoUpdate");
-  }
 
 
   function getVehicleData(){   //move this function to map page later  
@@ -338,7 +294,7 @@
   function getCheapest(){
     $.get("map/getCheapest", {longitude_input: "-123.126777", latitude_input: "49.277892", product_input: sessionStorage["gasGrade"], distance_input: sessionStorage["range"]})
     .done(function( data ) {
-      sessionStorage["stationInfo"] = data;
+      sessionStorage["stationAddress"] = data.address_out;
       $("#ResultField").empty();
       $("<p> Search Result: </p>").appendTo( "#ResultField" );
       $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
@@ -370,6 +326,7 @@
   %p
     Fuel level:
     #fuelDisplay
+  %p
     #ResultField
 
   
