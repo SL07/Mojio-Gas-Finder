@@ -276,29 +276,29 @@
     });
   });
   
-  
-  
   function getCheapest(){
     $.get("map/getCheapest", {longitude_input: "-123.126777", latitude_input: "49.277892", product_input: sessionStorage["gasGrade"], distance_input: sessionStorage["range"]})
     .done(function( data ) {
       sessionStorage["stationInfo"] = data 
-      console.log(data);
-      $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#foo" );
-      $("<p> Address: "+data.address_out+"</p>").appendTo( "#foo" );
-      $("<p> Distance: "+data.distance_out+"</p>").appendTo( "#foo" );
-      $("<p> Price: "+data.price_out+"</p>").appendTo( "#foo" );
+      $("#ResultField").empty();
+      $("<p> Search Result: <p>").appendTo("#ResultField");
+      $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
+      $("<p> Address: "+data.address_out+"</p>").appendTo( "#ResultField" );
+      $("<p> Distance: "+data.distance_out+"</p>").appendTo( "#ResultField" );
+      $("<p> Price: "+data.price_out+"</p>").appendTo( "#ResultField" );
     }); 
   }
   
   function getClosest(){
     $.get("map/getClosest", {longitude_input: "-123.126777", latitude_input: "49.277892", product_input: sessionStorage["gasGrade"]})
     .done(function( data ) {
-      console.log(data);
-      $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#foo" );
-      $("<p> Address: "+data.address_out+"</p>").appendTo( "#foo" );
-      $("<p> Distance: "+data.distance_out+"</p>").appendTo( "#foo" );
-      $("<p> Price: "+data.price_out+"</p>").appendTo( "#foo" );
-    }); 
+      $("#ResultField").empty();
+      $("<p> Search Result: <p>").appendTo("#result");
+      $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#result" );
+      $("<p> Address: "+data.address_out+"</p>").appendTo( "#result" );
+      $("<p> Distance: "+data.distance_out+"</p>").appendTo( "#result" );
+      $("<p> Price: "+data.price_out+"</p>").appendTo( "#result" );
+    });
   }
   
   
@@ -310,6 +310,7 @@
     %b#fuel unknown
     :javascript
       /*<![CDATA[*/document.getElementById("fuel").innerHTML = localStorage["correctFuelLevel"];/*]]>*/
+    #result
 
   
   #accordion.panel-group{"aria-multiselectable" => "true", :role => "tablist"}
@@ -335,9 +336,7 @@
           %label#diesel.btn.btn-primary
             %input#diesel{:autocomplete => "off", :name => "options", :type => "radio"}/
             Diesel
-        .btn-group{"aria-label" => "...", :role => "group"}
-          %button.btn.btn-default#getCheapestStation{:type => "button", :onClick => "getClosest()"}/
-          Search
+        %input.pull-right.btn.btn-default{:type => "button", :value => "Search", :onClick => "getClosest()"}
               
   .panel.panel-default.col-md-3.col-md-offset-1
     #headingTwo.panel-heading{:role => "tab"}
@@ -375,13 +374,7 @@
           %label#range_0.btn.btn-primary
             %input#range_0{:autocomplete => "off", :name => "options", :type => "radio"}/
             10 
-        .btn-group{"aria-label" => "...", :role => "group"}
-          %button.btn.btn-default#getCheapestStation{:type => "button", :onClick => "getCheapest()"}/
-          Search
+        %input.pull-right.btn.btn-default{:type => "button", :value => "Search", :onClick => "getCheapest()"}
 
-  .col-md-3.col-md-offset-2
-    %h5 Result
-    %br/
-    #foo 
 
   
