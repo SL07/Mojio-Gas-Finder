@@ -20,8 +20,7 @@ body {
 	color: #333;
 	background-color: #fff;
 	background-image: url(https://www.moj.io/wp-content/uploads/mojio_spiderweb_bkg.jpg);
-	padding-top: 40px;
-	margin: auto;
+	padding: 40px;
 }
 
 @media (max-width: 350px) {
@@ -29,6 +28,11 @@ body {
     	padding-top: 95px;
   	}
 }
+
+.navbar-brand {
+    margin-top: -10px;
+}
+
 
 @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css");
 
