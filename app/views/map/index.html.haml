@@ -311,9 +311,9 @@
   function getCheapest(){
     $.get("map/getCheapest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"], distance_input: sessionStorage["range"]})
     .done(function( data ) {
-      sessionStorage["stationInfo"] = data 
+      sessionStorage["stationInfo"] = data;
       $("#ResultField").empty();
-      $("<p> Search Result: <p>").appendTo("#ResultField");
+      $("<p> Search Result: </p>").appendTo( "#ResultField" );
       $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
       $("<p> Address: "+data.address_out+"</p>").appendTo( "#ResultField" );
       $("<p> Distance: "+data.distance_out+"</p>").appendTo( "#ResultField" );
@@ -325,12 +325,12 @@
     $.get("map/getClosest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"]})
     .done(function( data ) {
       $("#ResultField").empty();
-      $("<p> Search Result: <p>").appendTo("#result");
-      $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#result" );
-      $("<p> Address: "+data.address_out+"</p>").appendTo( "#result" );
-      $("<p> Distance: "+data.distance_out+"</p>").appendTo( "#result" );
-      $("<p> Price: "+data.price_out+"</p>").appendTo( "#result" );
-    });
+      $("<p> Search Result: </p>").appendTo( "#ResultField" );
+      $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
+      $("<p> Address: "+data.address_out+"</p>").appendTo( "#ResultField" );
+      $("<p> Distance: "+data.distance_out+"</p>").appendTo( "#ResultField" );
+      $("<p> Price: "+data.price_out+"</p>").appendTo( "#ResultField" );
+    }); 
   }
   
   
@@ -342,7 +342,7 @@
     %b#fuel unknown
     :javascript
       /*<![CDATA[*/document.getElementById("fuel").innerHTML = localStorage["correctFuelLevel"];/*]]>*/
-    #result
+    #ResultField
 
   
   #accordion.panel-group{"aria-multiselectable" => "true", :role => "tablist"}
@@ -356,7 +356,7 @@
         %h4 Preference:
         %h5 Fuel Type:
         .btn-inline{"data-toggle" => "buttons"}
-          %label#regular.btn.btn-primary
+          %label#regular.btn.btn-primary.active
             %input#regular{:autocomplete => "off", :checked => "checked", :name => "options", :type => "radio"}/
             Regular
           %label#midGrade.btn.btn-primary
@@ -380,12 +380,12 @@
         %h4 Preference:
         %h5 Fuel Type:
         .btn-inline{"data-toggle" => "buttons"}
-          %label#regular.btn.btn-primary
+          %label#regular.btn.btn-primary.active
             %input#regular{:autocomplete => "off", :checked => "checked", :name => "options", :type => "radio"}/
             Regular
           %label#midGrade.btn.btn-primary
             %input#midGrade{:autocomplete => "off", :name => "options", :type => "radio"}/
-            Mid-Grade    
+            Mid-Grade
           %label#premium.btn.btn-primary
             %input#premium{:autocomplete => "off", :name => "options", :type => "radio"}/
             Premium
@@ -394,7 +394,7 @@
             Diesel
         %h5 Search Range (km):
         .btn{"data-toggle" => "buttons"}
-          %label#range_1.btn.btn-primary
+          %label#range_1.btn.btn-primary.active
             %input#range_1{:autocomplete => "off", :checked => "checked", :name => "options", :type => "radio"}/
             1
           %label#range_2.btn.btn-primary
