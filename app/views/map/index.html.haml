@@ -86,7 +86,7 @@
       setInterval( function(){
       getVehicleData();
       correctFuelLevel(); 
-    //  printVehicle_data();
+      printVehicle_data();
    //   printVehicle_data(); //testing all returned outputs
       //testLat += 0.0001;
       //testLong += 0.0001;
@@ -139,7 +139,7 @@
           directionsService.route(request, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
              // directionsDisplay.setDirections(result);
-              directionsDisplay.setDirections(response);
+              /*directionsDisplay.setDirections(response);
               var route = response.routes[0];
               var summaryPanel = document.getElementById('directions_panel');
               summaryPanel.innerHTML = '';
@@ -150,23 +150,17 @@
                 summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
                 summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
                 summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-              }
+              }*/
+              directionsDisplay.setDirections(result);
             }
            });
           }
         } else {
-<<<<<<< HEAD
           alert("Geocode was not successful for the following reason: " + status);
         }
       });
   }
-  */
-=======
-          alert("Geocoder failed due to: " + status);
-          }
-        });
-    }
->>>>>>> 220fede4cbba21e6d60ad3f2b8ef49c8f9a7c497
+
 
 
   function getVehicleData(){   //move this function to map page later  
