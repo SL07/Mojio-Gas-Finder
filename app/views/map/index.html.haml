@@ -130,9 +130,9 @@
             destination:stationAddress,
             travelMode: google.maps.TravelMode.DRIVING
           };
-          directionsService.route(request, function(result, status) {
+          directionsService.route(request, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
-              directionsDisplay.setDirections(result);
+             // directionsDisplay.setDirections(result);
               directionsDisplay.setDirections(response);
               var route = response.routes[0];
               var summaryPanel = document.getElementById('directions_panel');
