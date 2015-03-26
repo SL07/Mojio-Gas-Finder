@@ -67,8 +67,7 @@
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
     console.log("Latitude of car is: "+ localStorage["latitude"]);
     console.log("Latitude of car is: "+ localStorage["longitude"]);
-    //var Carlatlng = new google.maps.LatLng(localStorage["latitude"],localStorage["longitude"]);  //for live demo
-    var Carlatlng = new google.maps.LatLng(49.277892,-123.126777);   //to test on local host using fake car location
+    var Carlatlng = new google.maps.LatLng(localStorage["latitude"],localStorage["longitude"]);  //for live demo
     console.log("adding current location marker");
     var marker = new google.maps.Marker({
       position: Carlatlng,
@@ -79,9 +78,6 @@
     //map.panTo( center); //center map on vancouver 
     //map.panTo(center);
     directionsDisplay.setMap(map);
-    //console.log(sessionStorage["stationAddress"]);
-   // directToGasStation(sessionStorage["stationAddress"]);
-
     //moveMarker(map, marker);
   }
 
@@ -119,7 +115,6 @@
   function directToGasStation(stationAddress) {
       //localStorage["latitude"]=49.277892;
       //localStorage["longitude"]=-123.126777;
-      var address;
       var lat = parseFloat(localStorage["latitude"]);
       var lng = parseFloat(localStorage["longitude"]);
       var latlng = new google.maps.LatLng(lat, lng);
@@ -145,8 +140,7 @@
           alert("Geocoder failed due to: " + status);
           }
         });
-      console.log(address);
-      return address;
+  
     }
 
 
