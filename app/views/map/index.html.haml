@@ -6,10 +6,13 @@
   var testLat = 49.25; 
   var testLong = -123.1;
   localStorage["correctFuelLevel"] = 55;  //random number to initialize, will be over written 
+  //var Carlatlng;
 
   var gasStationAddress= "7282 Knight St, Vancouver";
   var geocoder;
   var map;
+  var directionsDisplay;
+  var directionsService = new google.maps.DirectionsService();
 
   config = {
             application: '434f01ce-504b-4f72-a919-5a81dee7d506', // Fill in your app id here!
@@ -54,6 +57,7 @@
 
   function initialize() {
     geocoder = new google.maps.Geocoder();
+    directionsDisplay = new google.maps.DirectionsRenderer();
     var latlng = new google.maps.LatLng(49.25, -123.100);
       var mapOptions = {
         zoom: 14,
@@ -63,7 +67,8 @@
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
     console.log("Latitude of car is: "+ localStorage["latitude"]);
     console.log("Latitude of car is: "+ localStorage["longitude"]);
-    var Carlatlng = new google.maps.LatLng(localStorage["latitude"],localStorage["longitude"]);
+    //var Carlatlng = new google.maps.LatLng(localStorage["latitude"],localStorage["longitude"]);  //for live demo
+    var Carlatlng = new google.maps.LatLng(49.277892,-123.126777);   //to test on local host using fake car location
     console.log("adding current location marker");
     var marker = new google.maps.Marker({
       position: Carlatlng,
@@ -73,8 +78,10 @@
     console.log("finished adding current location marker");
     //map.panTo( center); //center map on vancouver 
     //map.panTo(center);
-    // directToGasStation();
-    moveMarker(map, marker);
+    directionsDisplay.setMap(map);
+    directToGasStation();
+
+    //moveMarker(map, marker);
   }
 
   function moveMarker ( map, marker){    
@@ -105,23 +112,40 @@
       console.log("Last FuelLevel is: "+ localStorage["correctFuelLevel"]);
   }
 
-  /* 
-  function directToGasStation (){
-    geocoder.geocode( { 'address': gasStationAddress }, function(results, status) {
+  
+  function directToGasStation() {
+      //localStorage["latitude"]=49.277892;
+      //localStorage["longitude"]=-123.126777;
+      var address;
+      var lat = parseFloat(localStorage["latitude"]);
+      var lng = parseFloat(localStorage["longitude"]);
+      var latlng = new google.maps.LatLng(lat, lng);
+      geocoder.geocode({'latLng': latlng}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-        //  map.setCenter(results[0].geometry.location);
-        console.log(results[0].geometry.location);
-        console.log("marker for gas station");
-          var marker = new google.maps.Marker({
-              map: map,
-              position: results[0].geometry.location
-          });
+          if (results[1]) {
+           // console.log(results[1].formatted_address);
+            address=results[1].formatted_address;       //Get the address in string of current location of the car
+            console.log(address);
+
+            var request = {                             //Get the direction from the current location to gas station 
+            origin:results[1].formatted_address,
+            destination:gasStationAddress,
+            travelMode: google.maps.TravelMode.DRIVING
+          };
+          directionsService.route(request, function(result, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+              directionsDisplay.setDirections(result);
+            }
+           });
+          }
         } else {
-          alert("Geocode was not successful for the following reason: " + status);
-        }
-      });
-  }
-  */
+          alert("Geocoder failed due to: " + status);
+          }
+        });
+      console.log(address);
+      return address;
+    }
+
 
   function autoUpdate() {
 
