@@ -288,7 +288,7 @@
   function getCheapest(){
     $.get("map/getCheapest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"], distance_input: sessionStorage["range"]})
     .done(function( data ) {
-      sessionStorage["stationAddress"] = data.address_out;
+      sessionStorage["stationAddress"] = data.address_out+",CA";
       console.log ( sessionStorage["stationAddress"]);
       $("#ResultField").empty();
       $("<p> Search Result: </p>").appendTo( "#ResultField" );
@@ -304,7 +304,8 @@
   function getClosest(){
     $.get("map/getClosest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"]})
     .done(function( data ) {
-      sessionStorage["stationAddress"] = data.address_out;
+      sessionStorage["stationAddress"] = data.address_out+",CA";
+      console.log ( sessionStorage["stationAddress"]);
       $("#ResultField").empty();
       $("<p> Search Result: </p>").appendTo( "#ResultField" );
       $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
