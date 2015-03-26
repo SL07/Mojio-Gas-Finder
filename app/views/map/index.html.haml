@@ -5,7 +5,7 @@
   var count;
   var testLat = 49.25; 
   var testLong = -123.1;
-  localStorage["correctFuelLevel"] = 55;  //random number to initialize, will be over written 
+  localStorage["correctFuelLevel"] = 65;  //random number to initialize, will be over written 
 
   var gasStationAddress= "7282 Knight St, Vancouver";
   var geocoder;
@@ -91,7 +91,7 @@
       marker.setPosition( center );
       map.panTo( center );
       console.log("marker position updated"); 
-
+      
       }, 1500 );  //update every 1.5 sec
   };
 
@@ -103,6 +103,8 @@
       else //non zero fuel level
         localStorage["correctFuelLevel"] = localStorage["fuellevel"]; //update to corrected fuel level
       console.log("Last FuelLevel is: "+ localStorage["correctFuelLevel"]);
+      $("#fuelDisplay").empty();
+      $("<p>"+ localStorage["correctFuelLevel"]+"</p>").appendTo( "#fuelDisplay" );
   }
 
   /* 
@@ -310,7 +312,7 @@
   });
   
   function getCheapest(){
-    $.get("map/getCheapest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"], distance_input: sessionStorage["range"]})
+    $.get("map/getCheapest", {longitude_input: "-123.126777", latitude_input: "49.277892", product_input: sessionStorage["gasGrade"], distance_input: sessionStorage["range"]})
     .done(function( data ) {
       sessionStorage["stationInfo"] = data;
       $("#ResultField").empty();
@@ -324,8 +326,9 @@
   }
   
   function getClosest(){
-    $.get("map/getClosest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"]})
+    $.get("map/getClosest", {longitude_input: "-123.126777", latitude_input: "49.277892", product_input: sessionStorage["gasGrade"]})
     .done(function( data ) {
+      sessionStorage["stationInfo"] = data;
       $("#ResultField").empty();
       $("<p> Search Result: </p>").appendTo( "#ResultField" );
       $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
@@ -342,9 +345,7 @@
   #map
   %p
     Fuel level:
-    %b#fuel unknown
-    :javascript
-      /*<![CDATA[*/document.getElementById("fuel").innerHTML = localStorage["correctFuelLevel"];/*]]>*/
+    #fuelDisplay
     #ResultField
 
   
