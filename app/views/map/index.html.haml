@@ -136,9 +136,9 @@
             destination:stationAddress,
             travelMode: google.maps.TravelMode.DRIVING
           };
-          directionsService.route(request, function(result, status) {
+          directionsService.route(request, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
-              directionsDisplay.setDirections(result);
+             // directionsDisplay.setDirections(result);
               directionsDisplay.setDirections(response);
               var route = response.routes[0];
               var summaryPanel = document.getElementById('directions_panel');
@@ -415,6 +415,8 @@
             %input#range_0{:autocomplete => "off", :name => "options", :type => "radio"}/
             10 
         %input.pull-right.btn.btn-default{:type => "button", :value => "Search", :onClick => "getCheapest()"}
+
+     #directions_panel{:style => "margin:20px;background-color:#FFEE77;"}
 
 
   
