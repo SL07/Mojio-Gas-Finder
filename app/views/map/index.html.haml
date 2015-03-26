@@ -78,7 +78,7 @@
     //map.panTo( center); //center map on vancouver 
     //map.panTo(center);
     directionsDisplay.setMap(map);
-    //moveMarker(map, marker);
+    moveMarker(map, marker);
   }
 
   function moveMarker ( map, marker){    
@@ -86,17 +86,17 @@
       setInterval( function(){
       getVehicleData();
       correctFuelLevel(); 
-      printVehicle_data();
+    //  printVehicle_data();
    //   printVehicle_data(); //testing all returned outputs
       //testLat += 0.0001;
       //testLong += 0.0001;
       //center = new google.maps.LatLng(testLat, testLong); //only to test marker movement
       center = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
       marker.setPosition( center );
-      map.panTo( center );
-      console.log("marker position updated"); 
+      //map.panTo( center );
+      console.log("car marker position updated"); 
       
-      }, 1500 );  //update every 1.5 sec
+      }, 2000 );  //update every 1.5 sec
   };
 
   function correctFuelLevel(){
