@@ -310,7 +310,7 @@
   function getClosest(){
     $.get("map/getClosest", {longitude_input: "-123.126777", latitude_input: "49.277892", product_input: sessionStorage["gasGrade"]})
     .done(function( data ) {
-      sessionStorage["stationInfo"] = data;
+      sessionStorage["stationAddress"] = data.address_out;
       $("#ResultField").empty();
       $("<p> Search Result: </p>").appendTo( "#ResultField" );
       $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
@@ -319,6 +319,7 @@
       $("<p> Gas Type: "+data.product_out+"</p>").appendTo( "#ResultField" );
       $("<p> Price: "+data.price_out+"</p>").appendTo( "#ResultField" );
     }); 
+    directToGasStation(sessionStorage["stationAddress"]);
   }
   
   
