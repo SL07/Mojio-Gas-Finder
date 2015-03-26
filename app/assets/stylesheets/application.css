@@ -23,5 +23,13 @@ body {
 	padding: 40px;
 }
 
+@media (max-width: 350px) {
+  	body {
+    	padding-top: 95px;
+  	}
+}
+
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css");
+
 
 
