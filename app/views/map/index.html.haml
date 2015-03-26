@@ -7,7 +7,7 @@
   var testLong = -123.1;
 
   localStorage["correctFuelLevel"] = 65;  //random number to initialize, will be over written 
-  sessionStorage["fuelAlertDisplayed"] = false;
+
   var gasStationAddress= "7282 Knight St, Vancouver";
   var geocoder;
   var map;
@@ -86,7 +86,7 @@
       setInterval( function(){
       getVehicleData();
       correctFuelLevel(); 
-      printVehicle_data();
+    //  printVehicle_data();
    //   printVehicle_data(); //testing all returned outputs
       //testLat += 0.0001;
       //testLong += 0.0001;
@@ -109,12 +109,6 @@
       console.log("Last FuelLevel is: "+ localStorage["correctFuelLevel"]);
       $("#fuelDisplay").empty();
       $("<p>"+ localStorage["correctFuelLevel"]+"</p>").appendTo( "#fuelDisplay" );
-
-      if (localStorage["correctFuelLevel"] =< 15 ){
-        if (sessionStorage["fuelAlertDisplayed"] == false) 
-          alert("Fuel Level Low!");
-          sessionStorage["fuelAlertDisplayed"] == true;
-      }
   }
 
   
@@ -135,32 +129,19 @@
             origin:results[1].formatted_address,
             destination:stationAddress,
             travelMode: google.maps.TravelMode.DRIVING
-          };
-          directionsService.route(request, function(result, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-             // directionsDisplay.setDirections(result);
-              /*directionsDisplay.setDirections(response);
-              var route = response.routes[0];
-              var summaryPanel = document.getElementById('directions_panel');
-              summaryPanel.innerHTML = '';
-              // For each route, display summary information.
-              for (var i = 0; i < route.legs.length; i++) {
-                var routeSegment = i + 1;
-                summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment + '</b><br>';
-                summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
-                summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-                summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-              }*/
+            };
+            directionsService.route(request, function(result, status) {
+              if (status == google.maps.DirectionsStatus.OK) {
               directionsDisplay.setDirections(result);
-            }
-           });
-        }
+              }
+            });
+          }
         } else {
-          alert("Geocode was not successful for the following reason: " + status);
-        }
-      });
-  }
-
+          alert("Geocoder failed due to: " + status);
+          }
+        });
+  
+    }
 
 
   function getVehicleData(){   //move this function to map page later  
@@ -189,7 +170,7 @@
         
 
         console.log("location of vehicle is: LAT:"+ localStorage["latitude"]+" " + "LONG:" +localStorage["longitude"]);
-        //console.log("Fuel level of car: "+ localStorage["fuellevel"]);
+        console.log("Fuel level of car: "+ localStorage["fuellevel"]);
     });
   }
 
@@ -409,8 +390,6 @@
             %input#range_0{:autocomplete => "off", :name => "options", :type => "radio"}/
             10 
         %input.pull-right.btn.btn-default{:type => "button", :value => "Search", :onClick => "getCheapest()"}
-
-     //#directions_panel{:style => "margin:20px;background-color:#FFEE77;"}
 
 
   
