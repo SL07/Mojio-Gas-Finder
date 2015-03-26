@@ -202,12 +202,12 @@
     return mojio_client.get(mojio_client.model("Vehicle"), {}, function(error, result) {
         var i, lat, lng, fuellevel;
         lat = [];  //can pass these values directly to Google maps
-        lng = [];
+        lng = [];  
         i =0;
         fuellevel = 0;
         $.each(result.Data, function(key, value) {
             if ((value.LastLocation != null) && (value.LastLocation.Lat != null) && (value.LastLocation.Lng != null)) {
-                lat[i]= value.LastLocation.Lat;
+                lat[i]= value.LastLocation.Lat;  //interating through [i] values should give data for dummy car
                 lng[i]= value.LastLocation.Lng;
                 fuellevel = value.FuelLevel;
                 //lastodometer = value.LastOdometer;
@@ -242,6 +242,7 @@
     });
 
   }
+
 
   function timeoutTest () {
     console.log("GOT INTO timeoutTest");
