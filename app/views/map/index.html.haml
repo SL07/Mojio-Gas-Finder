@@ -24,15 +24,17 @@
             live: false // This will connect your app to the sandbox environment, change it to true to go live. 
         };
         mojio_client = new MojioClient(config);
-       
+    /*   
     if (localStorage["mojio_token"] == null){
        console.log("localStorge not made yet, need to login");   
     }
     else{
+    //clear previous token then set new one
+    //localStorage.removeItem("lastname"); syntax to clear localStorage
     console.log("value of token is: " + localStorage["mojio_token"]);
     mojio_client.auth_token = JSON.parse(localStorage["mojio_token"]); //need to destring before passing in
     } 
-
+    */
   if (mojio_client.isLoggedIn() == false){  //use this to test for login status
       console.log("checking for login token");
               mojio_client.token(function(error, result) {
@@ -45,13 +47,19 @@
                       div.html('Authorization Result:');
                       div.append(JSON.stringify(result));
                       console.log(JSON.stringify(result));
+                      localStorage.removeItem["mojio_token"]; //clears the token before appending a new one
                       localStorage["mojio_token"] = JSON.stringify(result);  //save the token into local storage
                       getVehicleData(); //update all long, lat and fuel level data on first load
                   }
               });
+              console.log("value of token is: " + localStorage["mojio_token"]);
+              mojio_client.auth_token = JSON.parse(localStorage["mojio_token"]); //need to destring before passing in
+
   }
   else if(mojio_client.isLoggedIn() == true){
-     console.log("already logged in to Mojio");
+    console.log("already logged in to Mojio");
+    console.log("value of token is: " + localStorage["mojio_token"]);
+
   }
   
 
@@ -174,37 +182,6 @@
     });
   }
 
-  function getVehicleData2(){   //for testing with dummy car 
-    return mojio_client.get(mojio_client.model("Vehicle"), {}, function(error, result) {
-        var i, lat, lng, fuellevel;
-        lat = [];  //can pass these values directly to Google maps
-        lng = [];  
-        i =0;
-        fuellevel = 0;
-        $.each(result.Data, function(key, value) {
-            if ((value.LastLocation != null) && (value.LastLocation.Lat != null) && (value.LastLocation.Lng != null)) {
-                lat[i]= value.LastLocation.Lat;  //interating through [i] values should give data for dummy car
-                lng[i]= value.LastLocation.Lng;
-                fuellevel = value.FuelLevel;
-                //lastodometer = value.LastOdometer;
-                //console.log("odometer is: "+ lastodometer);
-
-                localStorage["latitude"] = value.LastLocation.Lat; //store long and lat into local storage
-                localStorage["longitude"] = value.LastLocation.Lng;
-                localStorage["fuellevel"] = value.FuelLevel;  //displays 0 when mojio device isnt connected to network
-                return i++;
-
-            }
-
-        });
-        
-
-        console.log("location of vehicle is: LAT:"+ localStorage["latitude"]+" " + "LONG:" +localStorage["longitude"]);
-        console.log("Fuel level of car: "+ localStorage["fuellevel"]);
-    });
-  }
-
-
   function printVehicle_data() {
     var Vehicle = mojio_client.model("Vehicle"); // Gets a trip model schema.
     mojio_client.get(Vehicle, {}, function(error, result) {
@@ -218,6 +195,19 @@
     });
 
   }
+
+  function mojioLogout (){
+
+    localStorage.removeItem("mojio_token");
+    localStorage.removeItem("longitude");
+    localStorage.removeItem("latitude");
+    isLoggedIn = false;
+    //mojio_client.unauthorize(config.redirect_uri);
+    if (mojio_client.isLoggedIn() == false)
+    console.log("Logged out of Mojio API");
+    else console.log("still logged in to Mojio");
+        console.log("localStoreage token is:" +  localStorage["mojio_token"]);
+  } 
 
 
   function timeoutTest () {
