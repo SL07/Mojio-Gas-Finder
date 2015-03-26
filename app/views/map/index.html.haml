@@ -341,10 +341,16 @@
   %p
     #ResultField
   %P
-    %button.btn.btn-info{:type => "button"}
-    Direction
-    #directions-panel
-    #control
+  %button.btn.btn-info{:onclick => "myFunction()", :type => "button"}
+  Information
+  %span.caret
+  :javascript
+  function myFunction() {
+      document.getElementById("directions-panel");
+      document.getElementById("control");
+  }
+  #directions-panel
+  #control
 
   
   #accordion.panel-group{"aria-multiselectable" => "true", :role => "tablist"}
