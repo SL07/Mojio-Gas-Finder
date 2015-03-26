@@ -21,9 +21,9 @@ class MapController < ApplicationController
     distance = station_NodeSet.xpath('//distancetostation')
         
     product = product
-    if product == 'Regular'
+    if product == 'Unleaded'
       price = station_NodeSet.xpath('//Unleaded_Price')
-    elsif product == 'Mid Grade'
+    elsif product == 'Midgrade'
       price = station_NodeSet.xpath('//MidGrade_Price')
     elsif product == 'Premium'
       price = station_NodeSet.xpath('//Premium_Price')
@@ -75,9 +75,9 @@ class MapController < ApplicationController
     brand = station_NodeSet.xpath('//Brand_Name')
     distance = station_NodeSet.xpath('//distancetostation')
         
-    if product == 'Regular'
+    if product == 'Unleaded'
       price = station_NodeSet.xpath('//Unleaded_Price')
-    elsif product == 'Mid Grade'
+    elsif product == 'Midgrade'
       price = station_NodeSet.xpath('//MidGrade_Price')
     elsif product == 'Premium'
       price = station_NodeSet.xpath('//Premium_Price')
