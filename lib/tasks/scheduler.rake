@@ -75,7 +75,7 @@ task :getStationsByCity => :environment do
       index = index + 1
   end
     
-  updatedTime = Time.now
+  updatedTime = Time.zone.now
   Job.create(:timestamp => updatedTime)
 end    
 
