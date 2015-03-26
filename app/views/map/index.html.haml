@@ -292,7 +292,7 @@
   });
   
   function getCheapest(){
-    $.get("map/getCheapest", {longitude_input: "-123.126777", latitude_input: "49.277892", product_input: sessionStorage["gasGrade"], distance_input: sessionStorage["range"]})
+    $.get("map/getCheapest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"], distance_input: sessionStorage["range"]})
     .done(function( data ) {
       sessionStorage["stationAddress"] = data.address_out;
       console.log ( sessionStorage["stationAddress"]);
@@ -308,7 +308,7 @@
   }
   
   function getClosest(){
-    $.get("map/getClosest", {longitude_input: "-123.126777", latitude_input: "49.277892", product_input: sessionStorage["gasGrade"]})
+    $.get("map/getClosest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"]})
     .done(function( data ) {
       sessionStorage["stationAddress"] = data.address_out;
       $("#ResultField").empty();
