@@ -9,7 +9,7 @@ class MapController < ApplicationController
     latitude = params[:latitude_input]
     product = params[:product_input]
  
-    station_NodeSet = getStation(longitude, latitude, product, 3)
+    station_NodeSet = getStation(longitude, latitude, product, 10)
     
     current_index = 0
     closestStation_index = 0
@@ -27,28 +27,39 @@ class MapController < ApplicationController
       price = station_NodeSet.xpath('//MidGrade_Price')
     elsif product == 'Premium'
       price = station_NodeSet.xpath('//Premium_Price')
-    elsif prodcut == 'Diesel'
+    elsif product == 'Diesel'
       price = station_NodeSet.xpath('//Diesel_Price')
     end
-
-    while current_index < distance.length
-      if distance[current_index].content.to_f < min_distance.to_f
-        min_distance = distance[current_index].content
-        closestStation_index = current_index
-      end
-      current_index = current_index + 1
-    end
-
-    address_display = address[closestStation_index].content + ', ' + city[closestStation_index].content
-    distance_display =  '%.2f'% convertMiletoKm(distance[closestStation_index].content.to_f)
-    price_display =  '%.3f'% price[closestStation_index].content
-
-    render :json => {
-      :brand_out => brand[closestStation_index].content,
-      :address_out => address_display,
-      :distance_out => distance_display,
-      :price_out => price_display
+    
+    if address.length == 0
+      render :json => {
+        :brand_out => 'No Result Found',
+        :address_out => 'No Result Found', 
+        :distance_out => 'No Result Found',
+        :product_out => product,
+        :price_out => 'No Result Found'
     }
+    else  
+      while current_index < distance.length
+        if distance[current_index].content.to_f < min_distance.to_f
+          min_distance = distance[current_index].content
+          closestStation_index = current_index
+        end
+        current_index = current_index + 1
+      end
+
+      address_display = address[closestStation_index].content + ', ' + city[closestStation_index].content
+      distance_display =  '%.2f'% convertMiletoKm(distance[closestStation_index].content.to_f)
+      price_display =  '%.3f'% price[closestStation_index].content
+
+      render :json => {
+        :brand_out => brand[closestStation_index].content,
+        :address_out => address_display,
+        :distance_out => distance_display,
+        :product_out => product,
+        :price_out => price_display
+      }
+    end
   end
 
   def getCheapest
@@ -64,28 +75,37 @@ class MapController < ApplicationController
     brand = station_NodeSet.xpath('//Brand_Name')
     distance = station_NodeSet.xpath('//distancetostation')
         
-    product = product
     if product == 'Regular'
       price = station_NodeSet.xpath('//Unleaded_Price')
     elsif product == 'Mid Grade'
       price = station_NodeSet.xpath('//MidGrade_Price')
     elsif product == 'Premium'
       price = station_NodeSet.xpath('//Premium_Price')
-    elsif prodcut == 'Diesel'
+    elsif product == 'Diesel'
       price = station_NodeSet.xpath('//Diesel_Price')
     end
 
-    address_display = address[0].content + ', ' + city[0].content
-    distance_display =  '%.2f'% convertMiletoKm(distance[0].content.to_f)
-    price_display =  '%.3f'% price[0].content
-
-    render :json => {
-      :brand_out => brand[0].content,
-      :address_out => address_display,
-      :distance_out => distance_display,
-      :price_out => price_display
+    if address.length == 0
+      render :json => {
+        :brand_out => 'No Result Found',
+        :address_out => 'No Result Found', 
+        :distance_out => 'No Result Found',
+        :product_out => product,
+        :price_out => 'No Result Found'
     }
-    
+    else
+      address_display = address[0].content + ', ' + city[0].content
+      distance_display =  '%.2f'% convertMiletoKm(distance[0].content.to_f)
+      price_display =  '%.3f'% price[0].content
+
+      render :json => {
+        :brand_out => brand[0].content,
+        :address_out => address_display,
+        :distance_out => distance_display,
+         :product_out => product,
+        :price_out => price_display
+      }
+   end 
   end
 end
 

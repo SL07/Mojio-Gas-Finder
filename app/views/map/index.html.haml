@@ -277,7 +277,7 @@
   });
   
   function getCheapest(){
-    $.get("map/getCheapest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"], distance_input: sessionStorage["range"]})
+    $.get("map/getCheapest", {longitude_input: "-123.126777", latitude_input: "49.277892", product_input: sessionStorage["gasGrade"], distance_input: sessionStorage["range"]})
     .done(function( data ) {
       sessionStorage["stationInfo"] = data;
       $("#ResultField").empty();
@@ -285,18 +285,20 @@
       $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
       $("<p> Address: "+data.address_out+"</p>").appendTo( "#ResultField" );
       $("<p> Distance: "+data.distance_out+"</p>").appendTo( "#ResultField" );
+      $("<p> Gas Type: "+data.product_out+"</p>").appendTo( "#ResultField" );
       $("<p> Price: "+data.price_out+"</p>").appendTo( "#ResultField" );
     }); 
   }
   
   function getClosest(){
-    $.get("map/getClosest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"]})
+    $.get("map/getClosest", {longitude_input: "-123.126777", latitude_input: "49.277892", product_input: sessionStorage["gasGrade"]})
     .done(function( data ) {
       $("#ResultField").empty();
       $("<p> Search Result: </p>").appendTo( "#ResultField" );
       $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
       $("<p> Address: "+data.address_out+"</p>").appendTo( "#ResultField" );
       $("<p> Distance: "+data.distance_out+"</p>").appendTo( "#ResultField" );
+      $("<p> Gas Type: "+data.product_out+"</p>").appendTo( "#ResultField" );
       $("<p> Price: "+data.price_out+"</p>").appendTo( "#ResultField" );
     }); 
   }
