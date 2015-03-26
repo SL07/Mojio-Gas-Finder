@@ -304,7 +304,7 @@
       $("<p> Gas Type: "+data.product_out+"</p>").appendTo( "#ResultField" );
       $("<p> Price: "+data.price_out+"</p>").appendTo( "#ResultField" );
     }); 
-    directToGasStation(data.address_out);
+    directToGasStation(sessionStorage["stationAddress"]);
   }
   
   function getClosest(){
