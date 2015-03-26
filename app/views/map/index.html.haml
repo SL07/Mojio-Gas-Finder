@@ -5,11 +5,14 @@
   var count;
   var testLat = 49.25; 
   var testLong = -123.1;
+
   localStorage["correctFuelLevel"] = 65;  //random number to initialize, will be over written 
   sessionStorage["fuelAlertDisplayed"] = false;
   var gasStationAddress= "7282 Knight St, Vancouver";
   var geocoder;
   var map;
+  var directionsDisplay;
+  var directionsService = new google.maps.DirectionsService();
 
   config = {
             application: '434f01ce-504b-4f72-a919-5a81dee7d506', // Fill in your app id here!
@@ -54,6 +57,7 @@
 
   function initialize() {
     geocoder = new google.maps.Geocoder();
+    directionsDisplay = new google.maps.DirectionsRenderer();
     var latlng = new google.maps.LatLng(49.25, -123.100);
       var mapOptions = {
         zoom: 14,
@@ -63,7 +67,7 @@
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
     console.log("Latitude of car is: "+ localStorage["latitude"]);
     console.log("Latitude of car is: "+ localStorage["longitude"]);
-    var Carlatlng = new google.maps.LatLng(localStorage["latitude"],localStorage["longitude"]);
+    var Carlatlng = new google.maps.LatLng(localStorage["latitude"],localStorage["longitude"]);  //for live demo
     console.log("adding current location marker");
     var marker = new google.maps.Marker({
       position: Carlatlng,
@@ -73,7 +77,7 @@
     console.log("finished adding current location marker");
     //map.panTo( center); //center map on vancouver 
     //map.panTo(center);
-    // directToGasStation();
+    directionsDisplay.setMap(map);
     moveMarker(map, marker);
   }
 
@@ -82,17 +86,17 @@
       setInterval( function(){
       getVehicleData();
       correctFuelLevel(); 
-      printVehicle_data();
+    //  printVehicle_data();
    //   printVehicle_data(); //testing all returned outputs
       //testLat += 0.0001;
       //testLong += 0.0001;
       //center = new google.maps.LatLng(testLat, testLong); //only to test marker movement
       center = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
       marker.setPosition( center );
-      map.panTo( center );
-      console.log("marker position updated"); 
+      //map.panTo( center );
+      console.log("car marker position updated"); 
       
-      }, 1500 );  //update every 1.5 sec
+      }, 2000 );  //update every 1.5 sec
   };
 
   function correctFuelLevel(){
@@ -113,23 +117,56 @@
       }
   }
 
-  /* 
-  function directToGasStation (){
-    geocoder.geocode( { 'address': gasStationAddress }, function(results, status) {
+  
+  function directToGasStation(stationAddress) {
+      //localStorage["latitude"]=49.277892;
+      //localStorage["longitude"]=-123.126777;
+      var lat = parseFloat(localStorage["latitude"]);
+      var lng = parseFloat(localStorage["longitude"]);
+      var latlng = new google.maps.LatLng(lat, lng);
+      geocoder.geocode({'latLng': latlng}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-        //  map.setCenter(results[0].geometry.location);
-        console.log(results[0].geometry.location);
-        console.log("marker for gas station");
-          var marker = new google.maps.Marker({
-              map: map,
-              position: results[0].geometry.location
-          });
+          if (results[1]) {
+           // console.log(results[1].formatted_address);
+            address=results[1].formatted_address;       //Get the address in string of current location of the car
+            console.log(address);
+
+            var request = {                             //Get the direction from the current location to gas station 
+            origin:results[1].formatted_address,
+            destination:stationAddress,
+            travelMode: google.maps.TravelMode.DRIVING
+          };
+          directionsService.route(request, function(result, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+              directionsDisplay.setDirections(result);
+              directionsDisplay.setDirections(response);
+              var route = response.routes[0];
+              var summaryPanel = document.getElementById('directions_panel');
+              summaryPanel.innerHTML = '';
+              // For each route, display summary information.
+              for (var i = 0; i < route.legs.length; i++) {
+                var routeSegment = i + 1;
+                summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment + '</b><br>';
+                summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+                summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+                summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+              }
+            }
+           });
+          }
         } else {
+<<<<<<< HEAD
           alert("Geocode was not successful for the following reason: " + status);
         }
       });
   }
   */
+=======
+          alert("Geocoder failed due to: " + status);
+          }
+        });
+    }
+>>>>>>> 220fede4cbba21e6d60ad3f2b8ef49c8f9a7c497
 
 
   function getVehicleData(){   //move this function to map page later  
@@ -274,9 +311,10 @@
   });
   
   function getCheapest(){
-    $.get("map/getCheapest", {longitude_input: "-123.126777", latitude_input: "49.277892", product_input: sessionStorage["gasGrade"], distance_input: sessionStorage["range"]})
+    $.get("map/getCheapest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"], distance_input: sessionStorage["range"]})
     .done(function( data ) {
-      sessionStorage["stationInfo"] = data;
+      sessionStorage["stationAddress"] = data.address_out+",Canada";
+      console.log ( sessionStorage["stationAddress"]);
       $("#ResultField").empty();
       $("<p> Search Result: </p>").appendTo( "#ResultField" );
       $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
@@ -285,12 +323,14 @@
       $("<p> Gas Type: "+data.product_out+"</p>").appendTo( "#ResultField" );
       $("<p> Price: "+data.price_out+"</p>").appendTo( "#ResultField" );
     }); 
+    directToGasStation(sessionStorage["stationAddress"]);
   }
   
   function getClosest(){
-    $.get("map/getClosest", {longitude_input: "-123.126777", latitude_input: "49.277892", product_input: sessionStorage["gasGrade"]})
+    $.get("map/getClosest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"]})
     .done(function( data ) {
-      sessionStorage["stationInfo"] = data;
+      sessionStorage["stationAddress"] = data.address_out+",Canada";
+      console.log ( sessionStorage["stationAddress"]);
       $("#ResultField").empty();
       $("<p> Search Result: </p>").appendTo( "#ResultField" );
       $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
@@ -299,6 +339,7 @@
       $("<p> Gas Type: "+data.product_out+"</p>").appendTo( "#ResultField" );
       $("<p> Price: "+data.price_out+"</p>").appendTo( "#ResultField" );
     }); 
+    directToGasStation(sessionStorage["stationAddress"]);
   }
   
   

@@ -29,7 +29,9 @@
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
-        <%= image_tag("navbar_badge.png", :alt => "brand", :size => "268x40", :style => "margin-top:5px; margin-left:25px")%>
+        <a class="navbar-brand image-respnosive">
+        <img alt="Brand" src="<%= asset_path 'navbar_badge_test.png' %>">
+      </a>
        
         <button class = "navbar-toggle visible-xs" data-toggle = "collapse" data-target = "#collapse-pills">
           <span class = "icon-bar"></span>
