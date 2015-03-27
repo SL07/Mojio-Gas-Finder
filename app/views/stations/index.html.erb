@@ -6,36 +6,37 @@
   });
 </script>
 
-<h1>Listing stations</h1>
+<div class="container-fluid">
+  <h1>Listing stations</h1>
 
-<p> Last Updated: <%= @jobs.timestamp %></p>
+  <p> Last Updated: <%= @jobs.timestamp %></p>
 
-<table class="display" id="initializeTable-noPaging">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>City</th>
-      <th>Regular Price</th>
-      <th>Mid Grade Price</th>
-      <th>Premium Price</th>
-      <th>Diesel Price</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @stations.each do |station| %>
+  <table class="display" id="initializeTable-noPaging">
+    <thead>
       <tr>
-        <td><%= station.brand %></td>
-        <td><%= station.address %></td>
-        <td><%= station.city %></td>
-        <td><%= station.unleaded %></td>
-        <td><%= station.midGrade %></td>
-        <td><%= station.premium %></td>
-        <td><%= station.diesel %></td>
+        <th>Name</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>Regular Price</th>
+        <th>Mid Grade Price</th>
+        <th>Premium Price</th>
+        <th>Diesel Price</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
+    <tbody>
+      <% @stations.each do |station| %>
+        <tr>
+          <td><%= station.brand %></td>
+          <td><%= station.address %></td>
+          <td><%= station.city %></td>
+          <td><%= station.unleaded %></td>
+          <td><%= station.midGrade %></td>
+          <td><%= station.premium %></td>
+          <td><%= station.diesel %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
