@@ -148,46 +148,52 @@ function showTrip(){
 }
 
 
+
 </script>
    
-<div class="container"> 
-   <div id="carouselDisplay" class="carousel slide" data-ride="carousel" style="width:80%; margin: auto">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#carouselDisplay" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselDisplay" data-slide-to="1"></li>
-        <li data-target="#carouselDisplay" data-slide-to="2"></li>
-    </ol>
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-        <div class="item active">
-          <img src="http://www.hurdlerstudios.com/wp-content/uploads/2014/01/web_mojio_hero3.png" alt="..." style="width:100%">
-          <div class="carousel-caption">
-            <h3>MOJIO</h3>
-            <a id="btn-login" href="#" class="btn btn-success"  onclick="mojioLogin()" >Login to Mojio  </a>
-        </div>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+  <!-- Wrapper for Slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <!-- Set the first background image using inline CSS below. -->
+      <div class="fill" style="background-image:url('http://www.magic4walls.com/wp-content/uploads/2013/12/city-wallpaper-1920x1200.jpg');"></div>
+      <div class="carousel-caption">
+        <h2>Caption 1</h2>
+        <a id="btn-login" href="#" class="btn btn-success"  onclick="mojioLogin()" >Login to Mojio  </a>
+      </div>
     </div>
     <div class="item">
-      <img src="http://www.hurdlerstudios.com/wp-content/uploads/2014/01/web_mojio_hero3.png" alt="..." style="width:100%">
+      <!-- Set the second background image using inline CSS below. -->
+      <div class="fill" style="background-image:url('http://www.hdwallpapers.in/walls/spectacular_dubai_city_view-wide.jpg');"></div>
       <div class="carousel-caption">
-          <h3>TEAM</h3>
-          <a id="btn-login" href="#" class="btn btn-success"  onclick="mojioLogin()" >Login to Mojio  </a>
+        <h2>Caption 2</h2>
+        <a id="btn-login" href="#" class="btn btn-success"  onclick="mojioLogin()" >Login to Mojio  </a>
       </div>
-  </div>
-  <div class="item">
-      <img src="http://www.hurdlerstudios.com/wp-content/uploads/2014/01/web_mojio_hero3.png" alt="..." style="width:100%">
+    </div>
+    <div class="item">
+      <!-- Set the third background image using inline CSS below. -->
+      <div class="fill" style="background-image:url('http://www.fullhdwpp.com/wp-content/uploads/City-Bridge_fullhdwpp.com_.jpg');"></div>
       <div class="carousel-caption">
-          <h2>3!!!!!!!!</h2>
-          <a id="btn-login" href="#" class="btn btn-success"  onclick="mojioLogin()" >Login to Mojio  </a>
+        <h2>Caption 3</h2>
+        <a id="btn-login" href="#" class="btn btn-success"  onclick="mojioLogin()" >Login to Mojio  </a>
       </div>
+    </div>
   </div>
+  <!-- Controls -->
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="icon-prev"></span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="icon-next"></span>
+  </a>
 </div>
-<!-- Controls -->
-<a class="left carousel-control" href="#carouselDisplay" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-</a>
-<a class="right carousel-control" href="#carouselDisplay" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-</a>
-<!-- Carousel -->
+
+
+    
 
