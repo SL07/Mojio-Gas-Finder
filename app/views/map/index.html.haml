@@ -347,18 +347,17 @@
   }
   
   
-.container-fluid
+.container-fluid   
+  %h1 Map
   #basicModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "basicModal", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
     .modal-content
       .modal-header
-        %h3#myModalLabel.modal-title{:style => "color:white"} Low Gas Level Warning!
+        %h3#myModalLabel.modal-title{:style => "color:white"} Warning!
       .modal-body
         %h4{:style => "color:white"} Gas Level Below 15%.
       .modal-footer
         %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-        
-  %h1 Map
   #map
   %p
     Fuel level:
