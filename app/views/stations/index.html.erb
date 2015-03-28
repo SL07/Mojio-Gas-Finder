@@ -1,31 +1,13 @@
 <script>
-  
-
   $(document).ready(function(){
     $('#initializeTable-noPaging').DataTable({
       "bPaginate": false
       });
-  });
-  
-  
+  });  
 </script>
-<script>
-function mojioLogin() {
-    var a = '<div class="alert alert-warning alert-dismissible" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> <strong>Warning!</strong> No station found in the given search range. Please select a bigger search range. </div>';
-    $('#hi').append(a);
-  }
-</script>
-
-<a id="btn-login" href="#" class="btn btn-success"  onclick="mojioLogin()" >Login to Mojio  </a>
-
-
 
 <div class="container-fluid">
   <h1>Listing stations</h1>
-  
-  <div id="hi">
-  
-  </div>
 
   <p> Last Updated: <%= @jobs.timestamp %></p>
 
