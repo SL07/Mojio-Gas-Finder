@@ -5,27 +5,29 @@
   <title>Mojio Cheap Gas</title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   
-  <%= stylesheet_link_tag 'bootstrap.min.css', media: 'all' %>
-  <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
+  <!--Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+  
+  <!-- DataTables CSS-->
+  <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
 
   <%=javascript_include_tag "application"%>
 </head>
 
 <body>
-
-  <!-- DataTables-->
-  <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
+  <!-- DataTables Javascript-->
   <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.js"></script>
   
-  <!--GoogleMap-->
+  <!--Bootstrap Javascript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  
+  <!--GoogleMap Javascript-->
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBd36LENIhwUv1SPYxOGrZTVf5w5Kqj_Q4"></script> 
   
-  <!--Mojio API-->
-  <!-- <script type="text/javascript" charset="utf-8" src="mojio-js.js"></script> -->
+  <!--Mojio API Javascript-->
   <script src="https://djaqzxyxnyyiy.cloudfront.net/mojio-js.js"></script>
 
-  
   <!-- General Layout-->
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">

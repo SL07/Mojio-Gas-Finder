@@ -122,8 +122,18 @@
       else //non zero fuel level
         localStorage["correctFuelLevel"] = localStorage["fuellevel"]; //update to corrected fuel level
       console.log("Last FuelLevel is: "+ localStorage["correctFuelLevel"]);
+      
+
       $("#fuelDisplay").empty();
       $("<p>"+ localStorage["correctFuelLevel"]+"</p>").appendTo( "#fuelDisplay" );
+
+      if (localStorage["correctFuelLevel"] <= 15){
+        if (lowFuelWarningdisplayed == false)
+          $('#basicModal').modal('show');    //the pop up window for low fuel
+
+          // end of pop up window 
+          lowFuelWarningdisplayed = true; 
+      }
   }
 
   
@@ -292,9 +302,15 @@
   function getCheapest(){
     $.get("map/getCheapest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"], distance_input: sessionStorage["range"]})
     .done(function( data ) {
+      var message = '<div class="alert alert-warning alert-dismissible" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> <strong>Warning!</strong> No station found in the given search range. Please select a bigger search range. </div>';
+      
       sessionStorage["stationAddress"] = data.address_out+",Canada";
       console.log ( sessionStorage["stationAddress"]);
       $("#ResultField").empty();
+      
+      if(data.address_out == "No Result Found")
+      	$('#ResultField').append(message);
+      
       $("<p> Search Result: </p>").appendTo( "#ResultField" );
       $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
       $("<p> Address: "+data.address_out+"</p>").appendTo( "#ResultField" );
@@ -308,9 +324,16 @@
   function getClosest(){
     $.get("map/getClosest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"]})
     .done(function( data ) {
+      var message = '<div class="alert alert-warning alert-dismissible" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> <strong>Warning!</strong> No station found in the given search range. Please select a bigger search range. </div>';
+    
       sessionStorage["stationAddress"] = data.address_out+",Canada";
       console.log ( sessionStorage["stationAddress"]);
       $("#ResultField").empty();
+      
+      if(data.address_out == "No Result Found")
+      	$('#ResultField').append(message);
+      
+      
       $("<p> Search Result: </p>").appendTo( "#ResultField" );
       $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
       $("<p> Address: "+data.address_out+"</p>").appendTo( "#ResultField" );
@@ -323,6 +346,16 @@
   
   
 .container-fluid
+  #basicModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "basicModal", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h3#myModalLabel.modal-title{:style => "color:white"} Low Gas Level Warning!
+      .modal-body
+        %h4{:style => "color:white"} Gas Level Below 15%.
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+        
   %h1 Map
   #map
   %p
