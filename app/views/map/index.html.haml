@@ -112,11 +112,12 @@
       
 
       $("#fuelDisplay").empty();
-      $("<p>"+ localStorage["correctFuelLevel"]+"</p>").appendTo( "#fuelDisplay" );
+      $("<p>"+ localStorage["correctFuelLevel"]+"%"+"</p>").appendTo( "#fuelDisplay" );
 
       if (localStorage["correctFuelLevel"] <= 15){
         if (lowFuelWarningdisplayed == false)
-          $('#basicModal').modal('show');    //the pop up window for low fuel
+          //$('#basicModal').modal('show');    //the pop up window for low fuel
+          //alert("Fuel level is low!!");
 
           // end of pop up window 
           lowFuelWarningdisplayed = true; 
