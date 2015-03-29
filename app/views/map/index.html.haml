@@ -324,12 +324,6 @@
     }); 
     directToGasStation(sessionStorage["stationAddress"]);
   }
-
-  funtion closeButton(){
-    $('#close').click(function() {
-      $('#modal-dialog').modal('hide');
-    }); 
-  }
   
   function getClosest(){
     $.get("map/getClosest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"]})
