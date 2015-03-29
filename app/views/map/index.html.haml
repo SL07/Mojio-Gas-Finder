@@ -1,13 +1,7 @@
 :javascript
-
-  $(document).ready(function(){
-      if(isLoggedIn == false)
-     	mojioAuthentication();
-
-  });  
-  
-  //var App, MojioClient, config, mojio_client; //some variables needed to initialize data 
-  var Current_marker = null;
+  var App, MojioClient, config, mojio_client, Current_marker; //some variables needed to initialize data 
+  var isLoggedIn = false;
+  Current_marker = null;
   var count;
   var testLat = 49.25; 
   var testLong = -123.1;
@@ -21,34 +15,55 @@
   var directionsService = new google.maps.DirectionsService();
   
   var lowFuelWarningdisplayed = false;
-       
-  function mojioAuthentication(){
-    var mojio_token;
-    if (mojio_client.isLoggedIn() == false){  //use this to test for login status
+
+  config = {
+            application: '434f01ce-504b-4f72-a919-5a81dee7d506', // Fill in your app id here!
+            redirect_uri: 'https://mojio.herokuapp.com/map', // Fill in you redirect uri here! (Ex. 'http://localhost:4093/index.html')
+            hostname: 'api.moj.io',
+            version: 'v1',
+            port: '443',
+            scheme: 'https',
+            live: false // This will connect your app to the sandbox environment, change it to true to go live. 
+        };
+        mojio_client = new MojioClient(config);
+    /*   
+    if (localStorage["mojio_token"] == null){
+       console.log("localStorge not made yet, need to login");   
+    }
+    else{
+    //clear previous token then set new one
+    //localStorage.removeItem("lastname"); syntax to clear localStorage
+    console.log("value of token is: " + localStorage["mojio_token"]);
+    mojio_client.auth_token = JSON.parse(localStorage["mojio_token"]); //need to destring before passing in
+    } 
+    */
+  if (mojio_client.isLoggedIn() == false){  //use this to test for login status
       console.log("checking for login token");
-      mojio_client.token(function(error, result) {
-        if (error) {
-          console.log(error);             
-        } else {          
-          div = $("#welcome");
-          div.html('Authorization Result:');
-          div.append(JSON.stringify(result));
-          console.log(JSON.stringify(result));
-          mojio_token = JSON.stringify(result);
-          sessionStorage["mojio_token"] = JSON.stringify(result);  //save the token into local storage
-        }
-        mojio_client.auth_token = JSON.parse(mojio_token); //need to destring before passing in
-        isLoggedIn = mojio_client.isLoggedIn();
-        changeLogoutIcon();
-        getVehicleData(); //update all long, lat and fuel level data on first load
-        console.log("isLoggedIn= " + isLoggedIn + "Token " + mojio_token);
-      });            
-    }
-    else if(mojio_client.isLoggedIn() == true){
-      console.log("already logged in to Mojio");
-      console.log("value of token is: " + sessionStorage["mojio_token"]);
-    }
-  }  
+              mojio_client.token(function(error, result) {
+                  if (error) {
+                      console.log(error);
+                     // alert("Authorize Redirect, token could not be retreived:" + error); //take out later 
+                  } else {
+                    //  alert("Authorization Successful.");   //taken out for video demo
+                      div = $("#welcome");
+                      div.html('Authorization Result:');
+                      div.append(JSON.stringify(result));
+                      console.log(JSON.stringify(result));
+                      localStorage.removeItem["mojio_token"]; //clears the token before appending a new one
+                      localStorage["mojio_token"] = JSON.stringify(result);  //save the token into local storage
+                      getVehicleData(); //update all long, lat and fuel level data on first load
+                  }
+              });
+              console.log("value of token is: " + localStorage["mojio_token"]);
+              mojio_client.auth_token = JSON.parse(localStorage["mojio_token"]); //need to destring before passing in
+
+  }
+  else if(mojio_client.isLoggedIn() == true){
+    console.log("already logged in to Mojio");
+    console.log("value of token is: " + localStorage["mojio_token"]);
+
+  }
+  
 
   function initialize() {
     geocoder = new google.maps.Geocoder();
@@ -73,6 +88,7 @@
     //map.panTo( center); //center map on vancouver 
     //map.panTo(center);
     directionsDisplay.setMap(map);
+    directionsDisplay.setOptions( { suppressMarkers: true } );
 
     directionsDisplay.setPanel(document.getElementById('directions-panel'));
 
@@ -112,12 +128,11 @@
       
 
       $("#fuelDisplay").empty();
-      $("<p>"+ localStorage["correctFuelLevel"]+"%"+"</p>").appendTo( "#fuelDisplay" );
+      $("<p>"+ localStorage["correctFuelLevel"]+"</p>").appendTo( "#fuelDisplay" );
 
       if (localStorage["correctFuelLevel"] <= 15){
         if (lowFuelWarningdisplayed == false)
           $('#basicModal').modal('show');    //the pop up window for low fuel
-          //alert("Fuel level is low!!");
 
           // end of pop up window 
           lowFuelWarningdisplayed = true; 
@@ -216,7 +231,7 @@
     isLoggedIn = false;
     //mojio_client.unauthorize(config.redirect_uri);
     if (mojio_client.isLoggedIn() == false)
-    console.log("Logged out of Mojio API"); //need to take a second try to update mojio_client.isLoggedIn() status
+    console.log("Logged out of Mojio API");
     else console.log("still logged in to Mojio");
         console.log("localStoreage token is:" +  localStorage["mojio_token"]);
   } 
@@ -247,19 +262,19 @@
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="midGrade"]', function(event) {
-      sessionStorage["gasGrade"] = "Midgrade";
+    	sessionStorage["gasGrade"] = "Midgrade";
     });
   });
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="premium"]', function(event) {
-      sessionStorage["gasGrade"] = "Premium";
+    	sessionStorage["gasGrade"] = "Premium";
     });
   });
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="diesel"]', function(event) {
-      sessionStorage["gasGrade"] = "Diesel";
+    	sessionStorage["gasGrade"] = "Diesel";
     });
   });
   
@@ -297,7 +312,7 @@
       $("#ResultField").empty();
       
       if(data.address_out == "No Result Found")
-        $('#ResultField').append(message);
+      	$('#ResultField').append(message);
       
       $("<p> Search Result: </p>").appendTo( "#ResultField" );
       $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
@@ -307,6 +322,12 @@
       $("<p> Price: "+data.price_out+"</p>").appendTo( "#ResultField" );
     }); 
     directToGasStation(sessionStorage["stationAddress"]);
+  }
+
+  funtion closeButton(){
+    $('#close').click(function() {
+      $('#modal-dialog').modal('hide');
+    }); 
   }
   
   function getClosest(){
@@ -319,7 +340,7 @@
       $("#ResultField").empty();
       
       if(data.address_out == "No Result Found")
-        $('#ResultField').append(message);
+      	$('#ResultField').append(message);
       
       
       $("<p> Search Result: </p>").appendTo( "#ResultField" );
@@ -331,25 +352,27 @@
     }); 
     directToGasStation(sessionStorage["stationAddress"]);
   }
-  
+
+
   
 .container-fluid   
   %h1 Map
   #basicModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "basicModal", :role => "dialog", :tabindex => "-1"}
 
-    .modal.fade
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-            %span{"aria-hidden" => "true"} ×
-          //%h4.modal-title Modal Warning !
-          %h3#myModalLabel.modal-title{:style => "color:white"} Warning!
-        .modal-body
-          //%p Gas Level Below
-          %h4{:style => "color:white"} Gas Level Below 15%.
-        .modal-footer
-          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+  .modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button", :onClick => "closeButton()"}
+          %span{"aria-hidden" => "true"} ×
+        //%h4.modal-title Modal Warning !
+        %h3#myModalLabel.modal-title{:style => "color:white"} Warning!
+      .modal-body
+        //%p Gas Level Below
+        %h4{:style => "color:white"} Gas Level Below 15%.
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+
 
   #map
   %p
@@ -369,7 +392,7 @@
         %a.collapsed{"aria-controls" => "collapseOne", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseOne"}
           Find Closest Station
     #collapseOne.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel"}
-      .panel-body
+      .panel-body  
         %h4 Preference:
         %h5 Fuel Type:
         .btn-inline{"data-toggle" => "buttons"}
