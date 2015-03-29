@@ -2,15 +2,15 @@
 
   $(document).ready(function(){
     mojio_client = new MojioClient(config);
-    
-    mojioLoginCheck();
 
-    isLoggedIn = true;
-    mojioLoginCheck();  
+    mojioAuthentication();
+
+    isLoggedIn = mojio_client.isLoggedIn();
+ 
 
   });  
   
-  var App, MojioClient, config, mojio_client; //some variables needed to initialize data 
+  //var App, MojioClient, config, mojio_client; //some variables needed to initialize data 
   var Current_marker = null;
   var count;
   var testLat = 49.25; 
@@ -48,7 +48,7 @@
     mojio_client.auth_token = JSON.parse(localStorage["mojio_token"]); //need to destring before passing in
     } 
     */
-function mojioLoginCheck(){
+function mojioAuthentication(){
   if (mojio_client.isLoggedIn() == false){  //use this to test for login status
       console.log("checking for login token");
               mojio_client.token(function(error, result) {
