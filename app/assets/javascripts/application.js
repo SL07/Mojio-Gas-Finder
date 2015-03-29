@@ -34,7 +34,8 @@ config = {
 $(document).ready(function(){
   mojio_client = new MojioClient(config);
   isLoggedIn = mojio_client.isLoggedIn();
-  changeLogoutIcon();   
+  console.log("isLoggedIn status before change icon() is:"+isLoggedIn);
+  changeLogoutIcon();
 });  
 
 
