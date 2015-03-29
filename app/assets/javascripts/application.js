@@ -31,6 +31,10 @@ config = {
             live: isLive // This will connect your app to the sandbox environment, change it to true to go live. 
         };
 
+$(document).ready(function(){
+     mojio_client = new MojioClient(config);
+});  
+
 
 
 function changeLogoutIcon(){
