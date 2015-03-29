@@ -49,7 +49,6 @@
     */
   function mojioAuthentication(){
     var mojio_token;
-    
     if (mojio_client.isLoggedIn() == false){  //use this to test for login status
         console.log("checking for login token");
                 mojio_client.token(function(error, result) {
@@ -65,10 +64,12 @@
                         //localStorage.removeItem["mojio_token"]; //clears the token before appending a new one
                         mojio_token = JSON.stringify(result);
                         sessionStorage["mojio_token"] = JSON.stringify(result);  //save the token into local storage
+                        alert(mojio_token);
                     }
                 });
-                console.log("value of token is: " + sessionStorage["mojio_token"]);
+                console.log("value of token is: " + mojio_token);
                 mojio_client.auth_token = JSON.parse(mojio_token); //need to destring before passing in
+                alert("Auth");
                 getVehicleData(); //update all long, lat and fuel level data on first load
 
     }
@@ -77,6 +78,7 @@
       console.log("value of token is: " + sessionStorage["mojio_token"]);
 
     }
+    alert("Exit");
   }  
 
   function initialize() {
