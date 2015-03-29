@@ -1,13 +1,12 @@
 :javascript
 
   $(document).ready(function(){
-    isLogin = true;
+    isLoggedin = true;
     changeLogoutIcon();    
   });  
   
-  var App, MojioClient, config, mojio_client, Current_marker; //some variables needed to initialize data 
-  var isLoggedIn = false;
-  Current_marker = null;
+  var App, MojioClient, config, mojio_client; //some variables needed to initialize data 
+  var Current_marker = null;
   var count;
   var testLat = 49.25; 
   var testLong = -123.1;
@@ -236,7 +235,7 @@
     isLoggedIn = false;
     //mojio_client.unauthorize(config.redirect_uri);
     if (mojio_client.isLoggedIn() == false)
-    console.log("Logged out of Mojio API");
+    console.log("Logged out of Mojio API"); //need to take a second try to update mojio_client.isLoggedIn() status
     else console.log("still logged in to Mojio");
         console.log("localStoreage token is:" +  localStorage["mojio_token"]);
   } 

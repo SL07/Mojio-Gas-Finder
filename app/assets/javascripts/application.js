@@ -14,10 +14,12 @@
 //= require jquery_ujs
 //= require_tree .
 
-var isLogin = false;
+//var isLogin = false;
+
+var isLoggedIn = false; //for mojioLogin() and mojioLogout() 
 
 function changeLogoutIcon(){
-  if(isLogin == true)
+  if(isLoggedin == true)
     $("#loginButton").replaceWith("<a id=\"logoutButton\" onClick=\"\">Logout</a>");
   else
     $("#logoutButton").replaceWith("<a id=\"loginButton\" onClick=\"\">Login</a>");
