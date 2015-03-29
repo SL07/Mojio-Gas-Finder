@@ -1,18 +1,17 @@
 :javascript
 
+  
+
   $(document).ready(function(){
      mojio_client = new MojioClient(config);
      isLoggedIn = mojio_client.isLoggedIn();
      alert(isLoggedIn); 
      
      if(isLoggedIn == false){
-       mojioAuthentication();
-       isLoggedIn = mojio_client.isLoggedIn();
-       alert("Exit");
+		mojioAuthentication();
      }
-
+    
 	
-    changeLogoutIcon();    
   });  
   
   //var App, MojioClient, config, mojio_client; //some variables needed to initialize data 
@@ -54,6 +53,7 @@
     } 
     */
   function mojioAuthentication(){
+    
     var mojio_token;
     
     mojio_client.token(function(error, result) {
@@ -72,6 +72,9 @@
         alert(mojio_token);
         mojio_client.auth_token = JSON.parse(mojio_token); //need to destring before passing in
         alert("done auth");
+        isLoggedIn = mojio_client.isLoggedIn()
+        alert(isLoggedIn);
+        changeLogoutIcon();
       }
       alert("done auth 2");
       getVehicleData(); //update all long, lat and fuel level data on first load
