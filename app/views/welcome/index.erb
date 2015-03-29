@@ -1,97 +1,33 @@
 <script>
-//var App, MojioClient, config, mojio_client; //moved to be global scope 
-var isLoggedIn = false;
-mojio_client = new MojioClient(config);
+$(document).ready(function(){
+     isLoggedIn = mojio_client.isLoggedIn();
 
-/*
-config = {
-            application: '434f01ce-504b-4f72-a919-5a81dee7d506', // Fill in your app id here!
-            redirect_uri: 'https://mojio.herokuapp.com/map', // Fill in you redirect uri here! (Ex. 'http://localhost:4093/index.html')
-            hostname: 'api.moj.io',
-            version: 'v1',
-            port: '443',
-            scheme: 'https',
-            live: false // This will connect your app to the sandbox environment, change it to true to go live. 
-        };
-*/
-        //mojio_client = new MojioClient(config);  //assume loaded in application.js
-       
-    if (localStorage["mojio_token"] == null){
-       console.log("localStorge not made yet, need to login");   
-    }
-    else{
-    console.log("value of token is: " + localStorage["mojio_token"]);
-    mojio_client.auth_token = JSON.parse(localStorage["mojio_token"]); //need to destring before passing in, passing in token to mojio client
-    } 
-
-if (mojio_client.isLoggedIn() == false){  //use this to test for login status
-    console.log("checking for login token");
-            mojio_client.token(function(error, result) {
-                if (error) {
-                   // alert("Authorize Redirect, token could not be retreived:" + error); //take out later 
-                } else {
-                  //  alert("Authorization Successful.");   //taken out for video demo
-                    div = $("#welcome");
-                    div.html('Authorization Result:');
-                    div.append(JSON.stringify(result));
-                    console.log(JSON.stringify(result));
-                    localStorage["mojio_token"] = JSON.stringify(result);  //save the token into local storage
-
-                }
-            });
-}
-else if(mojio_client.isLoggedIn() == true){
-   console.log("already logged in to Mojio");
-}
+});
 
 function mojioLogin(){
- 
-    if (isLoggedIn == true){
-        console.log("got into part 2 of mojioLogin");
-            mojio_client.token(function(error, result) {
-                if (error) {
-                    alert("Authorize Redirect, token could not be retreived:" + error);
-                } else {
-                    alert("Authorization Successful.");
-                    div = $("#welcome");
-                    div.html('Authorization Result:');
-                    div.append(JSON.stringify(result));
-                    console.log(JSON.stringify(result))
-                }
-            });
-
-    }
-    else if (isLoggedIn == false){
-            
-
-     //alert("starting mojio configuration"); //taken out for video demo
-        console.log("login status is:" + isLoggedIn);
-        /*
-        config = {
-            application: '434f01ce-504b-4f72-a919-5a81dee7d506', // Fill in your app id here!
-            redirect_uri: 'https://mojio.herokuapp.com/map', // Fill in you redirect uri here! (Ex. 'http://localhost:4093/index.html')
-            //for running on localhost, need to start a local server first using an application!!!!!!
-            hostname: 'api.moj.io',
-            version: 'v1',
-            port: '443',
-            scheme: 'https',
-            live: false // This will connect your app to the sandbox environment, change it to true to go live.
-        };
-        */
-        //mojio_client = new MojioClient(config);  //assume client made in application.js
-
-
-
-        //isLoggedIn = true;
-        
-        mojio_client.authorize(config.redirect_uri);   
-        //console.log("login status after redirect is:" + isLoggedIn);
-    }
+  if (isLoggedIn == true){
+    console.log("got into part 2 of mojioLogin");
+    mojio_client.token(function(error, result) {
+      if (error) {
+        alert("Authorize Redirect, token could not be retreived:" + error);
+      } else {
+        alert("Authorization Successful.");
+        div = $("#welcome");
+        div.html('Authorization Result:');
+        div.append(JSON.stringify(result));
+        console.log(JSON.stringify(result))
+      }
+    });
+  }
+  else if (isLoggedIn == false){
+    //alert("starting mojio configuration"); //taken out for video demo
+    console.log("login status is:" + isLoggedIn); 
+    mojio_client.authorize(config.redirect_uri);   
+    //console.log("login status after redirect is:" + isLoggedIn);
+  }
 }
 
-
 function mojioLogout (){
-
     localStorage.removeItem("mojio_token");
     localStorage.removeItem("longitude");
     localStorage.removeItem("latitude");
@@ -99,9 +35,9 @@ function mojioLogout (){
   //  console.log("log out redirrect URL is: "+ config.redirect_uri);
  //   mojio_client.unauthorize(config.redirect_uri);
     if (mojio_client.isLoggedIn() == false)
-    console.log("Logged out of Mojio API");
+      console.log("Logged out of Mojio API");
     else console.log("still logged in to Mojio");
-        console.log("localStoreage token is:" +  localStorage["mojio_token"]);
+      console.log("localStoreage token is:" +  localStorage["mojio_token"]);
 }
 
 //not used right now
@@ -116,8 +52,6 @@ function showTrip(){
             console.log(trips);
         }
     });
-}
-
 
 
 </script>

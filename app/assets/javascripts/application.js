@@ -43,7 +43,7 @@ function changeLogoutIcon(){
     redirectURL = 'https://mojio.herokuapp.com';
   }
   else {
-  	$("#logoutButton").replaceWith("<a id=\"loginButton\" onClick=\"\">Login</a>");
+  	$("#logoutButton").replaceWith("<a id=\"loginButton\" onClick=\"mojioLogin()\">Login</a>");
     redirectURL = 'https://mojio.herokuapp.com/map';
   }
     

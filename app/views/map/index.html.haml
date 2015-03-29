@@ -23,29 +23,7 @@
   var directionsService = new google.maps.DirectionsService();
   
   var lowFuelWarningdisplayed = false;
-  /*
-  config = {
-            application: '434f01ce-504b-4f72-a919-5a81dee7d506', // Fill in your app id here!
-            redirect_uri: 'https://mojio.herokuapp.com/map', // Fill in you redirect uri here! (Ex. 'http://localhost:4093/index.html')
-            hostname: 'api.moj.io',
-            version: 'v1',
-            port: '443',
-            scheme: 'https',
-            live: false // This will connect your app to the sandbox environment, change it to true to go live. 
-        };
-  */
        
-    /*   
-    if (localStorage["mojio_token"] == null){
-       console.log("localStorge not made yet, need to login");   
-    }
-    else{
-    //clear previous token then set new one
-    //localStorage.removeItem("lastname"); syntax to clear localStorage
-    console.log("value of token is: " + localStorage["mojio_token"]);
-    mojio_client.auth_token = JSON.parse(localStorage["mojio_token"]); //need to destring before passing in
-    } 
-    */
   function mojioAuthentication(){
     var mojio_token;
     if (mojio_client.isLoggedIn() == false){  //use this to test for login status
