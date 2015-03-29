@@ -49,36 +49,26 @@
     */
   function mojioAuthentication(){
     var mojio_token;
-    if (mojio_client.isLoggedIn() == false){  //use this to test for login status
-        console.log("checking for login token");
-                mojio_client.token(function(error, result) {
-                    if (error) {
-                        console.log(error);
-                       // alert("Authorize Redirect, token could not be retreived:" + error); //take out later 
-                    } else {
-                      //  alert("Authorization Successful.");   //taken out for video demo
-                        div = $("#welcome");
-                        div.html('Authorization Result:');
-                        div.append(JSON.stringify(result));
-                        console.log(JSON.stringify(result));
-                        //localStorage.removeItem["mojio_token"]; //clears the token before appending a new one
-                        mojio_token = JSON.stringify(result);
-                        sessionStorage["mojio_token"] = JSON.stringify(result);  //save the token into local storage
-                        alert(mojio_token);
-                    }
-                });
-                console.log("value of token is: " + mojio_token);
-                mojio_client.auth_token = JSON.parse(mojio_token); //need to destring before passing in
-                alert("Auth");
-                getVehicleData(); //update all long, lat and fuel level data on first load
-
-    }
-    else if(mojio_client.isLoggedIn() == true){
-      console.log("already logged in to Mojio");
-      console.log("value of token is: " + sessionStorage["mojio_token"]);
-
-    }
-    alert("Exit");
+    
+    mojio_client.token(function(error, result) {
+      if (error) {
+        console.log(error);
+        // alert("Authorize Redirect, token could not be retreived:" + error); //take out later 
+      } else {
+        //  alert("Authorization Successful.");   //taken out for video demo
+        div = $("#welcome");
+        div.html('Authorization Result:');
+        div.append(JSON.stringify(result));
+        console.log(JSON.stringify(result));
+        //localStorage.removeItem["mojio_token"]; //clears the token before appending a new one
+        mojio_token = JSON.stringify(result);
+        sessionStorage["mojio_token"] = JSON.stringify(result);  //save the token into local storage
+        alert(mojio_token);
+      }
+      alert("HI");
+      mojio_client.auth_token = JSON.parse(mojio_token); //need to destring before passing in
+      getVehicleData(); //update all long, lat and fuel level data on first load
+    });                     
   }  
 
   function initialize() {
