@@ -13,3 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+var isLogin = false;
+
+function changeLogoutIcon(){
+  if(isLogin == true)
+    $("#loginButton").replaceWith("<a id=\"logoutButton\" onClick=\"\">Logout</a>");
+  else
+    $("#logoutButton").replaceWith("<a id=\"loginButton\" onClick=\"\">Login</a>");
+}
+

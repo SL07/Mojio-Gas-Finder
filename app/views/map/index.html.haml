@@ -1,4 +1,10 @@
 :javascript
+
+  $(document).ready(function(){
+    isLogin = true;
+    changeLogoutIcon();    
+  });  
+  
   var App, MojioClient, config, mojio_client, Current_marker; //some variables needed to initialize data 
   var isLoggedIn = false;
   Current_marker = null;
