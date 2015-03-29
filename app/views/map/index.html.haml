@@ -2,10 +2,16 @@
 
   $(document).ready(function(){
      mojio_client = new MojioClient(config);
-     mojioAuthentication();
+     isLoggedIn = mojio_client.isLoggedIn();
+     alert(isLoggedIn); 
+     
+     if(isLoggedIn == false){
+       mojioAuthentication();
+       isLoggedIn = mojio_client.isLoggedIn();
+       alert("Exit");
+     }
 
-    isLoggedIn = mojio_client.isLoggedIn();
-    alert(isLoggedIn);
+	
     changeLogoutIcon();    
   });  
   
@@ -64,9 +70,10 @@
         mojio_token = JSON.stringify(result);
         sessionStorage["mojio_token"] = JSON.stringify(result);  //save the token into local storage
         alert(mojio_token);
+        mojio_client.auth_token = JSON.parse(mojio_token); //need to destring before passing in
+        alert("done auth");
       }
-      alert("HI");
-      mojio_client.auth_token = JSON.parse(mojio_token); //need to destring before passing in
+      alert("done auth 2");
       getVehicleData(); //update all long, lat and fuel level data on first load
     });                     
   }  
