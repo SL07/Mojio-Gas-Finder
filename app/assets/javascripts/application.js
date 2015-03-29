@@ -19,7 +19,7 @@
 var isLoggedIn = false; //for mojioLogin() and mojioLogout() 
 
 function changeLogoutIcon(){
-  if(isLoggedin == true)
+  if(isLoggedIn == true)
     $("#loginButton").replaceWith("<a id=\"logoutButton\" onClick=\"\">Logout</a>");
   else
     $("#logoutButton").replaceWith("<a id=\"loginButton\" onClick=\"\">Login</a>");
