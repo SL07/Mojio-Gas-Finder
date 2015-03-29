@@ -30,6 +30,8 @@ config = {
             scheme: 'https',
             live: isLive // This will connect your app to the sandbox environment, change it to true to go live. 
         };
+        
+mojio_client = new MojioClient(config);
 
 function changeLogoutIcon(){
   if(isLoggedIn == true) {

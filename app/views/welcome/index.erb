@@ -12,7 +12,7 @@ config = {
             live: false // This will connect your app to the sandbox environment, change it to true to go live. 
         };
 */
-        mojio_client = new MojioClient(config);
+        //mojio_client = new MojioClient(config);  //assume loaded in application.js
        
     if (localStorage["mojio_token"] == null){
        console.log("localStorge not made yet, need to login");   
@@ -76,36 +76,17 @@ function mojioLogin(){
             live: false // This will connect your app to the sandbox environment, change it to true to go live.
         };
         */
-        mojio_client = new MojioClient(config);
+        //mojio_client = new MojioClient(config);  //assume client made in application.js
 
 
-     //   alert("starting Mojio client connection"); //taken out for video demo
-        isLoggedIn = true;
+
+        //isLoggedIn = true;
+        
         mojio_client.authorize(config.redirect_uri);   
-        console.log("login status after redirect is:" + isLoggedIn);
+        //console.log("login status after redirect is:" + isLoggedIn);
     }
 }
 
-
-function getVehicleData(){   //move this function to map page later  
-    return mojio_client.get(mojio_client.model("Vehicle"), {}, function(error, result) {
-        var i, lat, lng;
-        lat = [];  //can pass these values directly to Google maps
-        lng = [];
-        i =0;
-        $.each(result.Data, function(key, value) {
-            if ((value.LastLocation != null) && (value.LastLocation.Lat != null) && (value.LastLocation.Lng != null)) {
-                lat[i]= value.LastLocation.Lat;
-                lng[i]= value.LastLocation.Lng;
-                localStorage["latitude"] = value.LastLocation.Lat; //store long and lat into local storage
-                localStorage["longitude"] = value.LastLocation.Lng;
-                return i++;
-            }
-        });
-        console.log("location of vehicle is: LAT:"+ localStorage["latitude"]+" " + "LONG:" +localStorage["longitude"]);
-    //    console.log("location of vehicle is: LAT:"+ lat[1]+" " + "LONG:" +lng[1]);
-    });
-}
 
 function mojioLogout (){
 
@@ -121,22 +102,7 @@ function mojioLogout (){
         console.log("localStoreage token is:" +  localStorage["mojio_token"]);
 }
 
-function showToken(){
-    
-    mojio_client.token(function(error, result) {
-        if (error) {
-           // alert(error); //taken out for video demo
-        } else {
-            alert("token retained successfully.");
-            div = $("#welcome");
-            div.html('Authorization Result:');
-            div.append(JSON.stringify(result));
-        }
-    });
-        console.log("value of token outside is: " + localStorage["mojio_token"]); 
-
-}
-
+//not used right now
 function showTrip(){
     var Trip = mojio_client.model("Trip"); // Gets a trip model schema.
     mojio_client.get(Trip, {}, function(error, result) {

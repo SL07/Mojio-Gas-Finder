@@ -1,8 +1,11 @@
 :javascript
 
   $(document).ready(function(){
+    functionName();
+
     isLoggedIn = true;
-    changeLogoutIcon();    
+    mojioLoginCheck();  
+
   });  
   
   var App, MojioClient, config, mojio_client; //some variables needed to initialize data 
@@ -43,6 +46,7 @@
     mojio_client.auth_token = JSON.parse(localStorage["mojio_token"]); //need to destring before passing in
     } 
     */
+function mojioLoginCheck(){
   if (mojio_client.isLoggedIn() == false){  //use this to test for login status
       console.log("checking for login token");
               mojio_client.token(function(error, result) {
@@ -55,22 +59,21 @@
                       div.html('Authorization Result:');
                       div.append(JSON.stringify(result));
                       console.log(JSON.stringify(result));
-                      localStorage.removeItem["mojio_token"]; //clears the token before appending a new one
-                      localStorage["mojio_token"] = JSON.stringify(result);  //save the token into local storage
+                      //localStorage.removeItem["mojio_token"]; //clears the token before appending a new one
+                      sessionStorage["mojio_token"] = JSON.stringify(result);  //save the token into local storage
                       getVehicleData(); //update all long, lat and fuel level data on first load
                   }
               });
-              console.log("value of token is: " + localStorage["mojio_token"]);
-              mojio_client.auth_token = JSON.parse(localStorage["mojio_token"]); //need to destring before passing in
+              console.log("value of token is: " + sessionStorage["mojio_token"]);
+              mojio_client.auth_token = JSON.parse(sessionStorage["mojio_token"]); //need to destring before passing in
 
   }
   else if(mojio_client.isLoggedIn() == true){
     console.log("already logged in to Mojio");
-    console.log("value of token is: " + localStorage["mojio_token"]);
+    console.log("value of token is: " + sessionStorage["mojio_token"]);
 
-  }
-  
-
+  }  
+}
   function initialize() {
     geocoder = new google.maps.Geocoder();
     directionsDisplay = new google.maps.DirectionsRenderer();
