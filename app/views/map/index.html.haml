@@ -112,7 +112,7 @@
       
 
       $("#fuelDisplay").empty();
-      $("<p>"+ localStorage["correctFuelLevel"]+"%"+"</p>").appendTo( "#fuelDisplay" );
+      $("<span>"+ localStorage["correctFuelLevel"]+"%"+"</span>").appendTo( "#fuelDisplay" );
 
       if (localStorage["correctFuelLevel"] <= 15){
         if (lowFuelWarningdisplayed == false)
@@ -354,7 +354,7 @@
   #map
   %p
     Fuel level:
-    #fuelDisplay
+    %span#fuelDisplay
   %p
     #ResultField
   %P
