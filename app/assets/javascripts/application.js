@@ -32,7 +32,9 @@ config = {
         };
 
 $(document).ready(function(){
-     mojio_client = new MojioClient(config);
+  mojio_client = new MojioClient(config);
+  isLogin= mojio_client.isLoggedIn();
+  changeLogoutIcon();   
 });  
 
 

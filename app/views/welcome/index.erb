@@ -3,9 +3,7 @@ $(document).ready(function(){
   	isLoggedIn = mojio_client.isLoggedIn();
 });  
 
-
 function mojioLogin(){
- 
     if (isLoggedIn == true){
         console.log("got into part 2 of mojioLogin");
             mojio_client.token(function(error, result) {
@@ -19,33 +17,10 @@ function mojioLogin(){
                     console.log(JSON.stringify(result))
                 }
             });
-
     }
-    else if (isLoggedIn == false){
-            
-
-     //alert("starting mojio configuration"); //taken out for video demo
+    else if (isLoggedIn == false){           
         console.log("login status is:" + isLoggedIn);
-        /*
-        config = {
-            application: '434f01ce-504b-4f72-a919-5a81dee7d506', // Fill in your app id here!
-            redirect_uri: 'https://mojio.herokuapp.com/map', // Fill in you redirect uri here! (Ex. 'http://localhost:4093/index.html')
-            //for running on localhost, need to start a local server first using an application!!!!!!
-            hostname: 'api.moj.io',
-            version: 'v1',
-            port: '443',
-            scheme: 'https',
-            live: false // This will connect your app to the sandbox environment, change it to true to go live.
-        };
-        */
-        //mojio_client = new MojioClient(config);  //assume client made in application.js
-
-
-
-        //isLoggedIn = true;
-        
         mojio_client.authorize(config.redirect_uri);   
-        //console.log("login status after redirect is:" + isLoggedIn);
     }
 }
 
