@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require_tree 
 
 //var isLogin = false;
 
@@ -30,8 +30,8 @@ config = {
             scheme: 'https',
             live: isLive // This will connect your app to the sandbox environment, change it to true to go live. 
         };
-        
-mojio_client = new MojioClient(config);
+
+
 
 function changeLogoutIcon(){
   if(isLoggedIn == true) {
