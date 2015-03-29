@@ -5,6 +5,7 @@
      mojioAuthentication();
 
     isLoggedIn = mojio_client.isLoggedIn();
+    alert(isLoggedIn);
     changeLogoutIcon();    
   });  
   
@@ -61,11 +62,11 @@
                         console.log(JSON.stringify(result));
                         //localStorage.removeItem["mojio_token"]; //clears the token before appending a new one
                         sessionStorage["mojio_token"] = JSON.stringify(result);  //save the token into local storage
-                        getVehicleData(); //update all long, lat and fuel level data on first load
                     }
                 });
                 console.log("value of token is: " + sessionStorage["mojio_token"]);
                 mojio_client.auth_token = JSON.parse(sessionStorage["mojio_token"]); //need to destring before passing in
+                getVehicleData(); //update all long, lat and fuel level data on first load
 
     }
     else if(mojio_client.isLoggedIn() == true){
