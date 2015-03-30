@@ -149,7 +149,11 @@
       }
   }
 
-  
+  function isInfoWindowOpen(infoWindow){
+    var map = infoWindow.getMap();
+    return (map !== null && typeof map !== "undefined");
+  }
+
   function directToGasStation(stationAddress, Brand, Product, Price) {
       //infowindow.close();
       //setAllMap(null);
@@ -182,6 +186,7 @@
       });
 
 
+   
     var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
@@ -193,6 +198,15 @@
       '</div>'+
       '</div>';
 
+    //If the window was open previously, close the infowindow.
+    if (isInfoWindowOpen(infoWindow)){
+      infowindow.close();
+
+    } /*else {
+      /*infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+    }*/
 
     infowindow = new google.maps.InfoWindow({
         content: contentString
