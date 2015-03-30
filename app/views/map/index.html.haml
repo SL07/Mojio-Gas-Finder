@@ -83,25 +83,15 @@
     "http://maps.google.com/mapfiles/kml/pal4/icon62.png",
     null, /* size is determined at runtime */
     null, /* origin is 0,0 */
-    new google.maps.Point(20,20), /* anchor is bottom center of the scaled image */
+    new google.maps.Point(20,20), /* anchor is center of the scaled image */
     new google.maps.Size(40, 40)
     );
-   /* var image = {
-      url: 'https://maps.google.com/mapfiles/kml/pal4/icon15.png',
-      // This marker is 20 pixels wide by 32 pixels tall.
-      size: new google.maps.Size(40, 40)
-    };*/
-
-
-    //http://maps.google.com/mapfiles/kml/pal4/icon15.png
+  
     var marker = new google.maps.Marker({
       position: Carlatlng,
       map: map,
       title: 'Current Location',
-      //icon: iconBase + 'schools_maps.png'
-      //fillcolor: '#00FF00'
       icon: pinIcon
-     // icon : image
     });
     console.log("finished adding current location marker");
 
@@ -158,9 +148,13 @@
       }
   }
 
-  
+  function isInfoWindowOpen(infoWindow){
+    var map = infoWindow.getMap();
+    return (map !== null && typeof map !== "undefined");
+  }
+
   function directToGasStation(stationAddress, Brand, Product, Price) {
-      infowindow.close();
+      //infowindow.close();
       //setAllMap(null);
       var lat = parseFloat(localStorage["latitude"]);
       var lng = parseFloat(localStorage["longitude"]);
@@ -191,7 +185,7 @@
       });
 
 
-
+   
     var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
@@ -203,6 +197,15 @@
       '</div>'+
       '</div>';
 
+    //If the window was open previously, close the infowindow.
+    if (isInfoWindowOpen(infoWindow)){
+      infowindow.close();
+
+    } /*else {
+      /*infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+    }*/
 
     infowindow = new google.maps.InfoWindow({
         content: contentString
@@ -244,8 +247,6 @@
         alert("Geocode was not successful for the following reason: " + status);
       }
     });
-
-     //close the current infowindow 
 
     google.maps.event.addListener(stationMarker, 'click', function() {
       infowindow.open(map,stationMarker);
