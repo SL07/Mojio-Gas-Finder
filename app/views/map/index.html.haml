@@ -193,7 +193,7 @@
                 alert("Geocode was not successful for the following reason: " + status);
               }
           }); */
-            setMarker();
+            setMarker(stationAddress);
 
 
               directionsService.route(request, function(response, status) {
@@ -209,7 +209,7 @@
   }
 
 
-  function setMarker (){
+  function setMarker (address){
     var image = {
     url: 'gas_station.png',
     // This marker is 20 pixels wide by 32 pixels tall.
@@ -219,7 +219,7 @@
     // The anchor for this image is the base of the flagpole at 0,32.
     anchor: new google.maps.Point(0, 32)
   };
-    geocoder.geocode( { 'address': stationAddress}, function(results, status) {
+    geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       map.setCenter(results[0].geometry.location);
       var marker = new google.maps.Marker({
