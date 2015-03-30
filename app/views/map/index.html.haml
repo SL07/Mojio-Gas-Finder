@@ -32,9 +32,7 @@
   var lowFuelWarningdisplayed = false;
 
   var stationMarker;
-  var infowindow = new google.maps.InfoWindow({
-        content: "zero"
-    });
+  var infowindow;
        
   function mojioAuthentication(){
     var mojio_token;
@@ -148,11 +146,6 @@
       }
   }
 
-  function isInfoWindowOpen(infoWindow){
-    var map = infoWindow.getMap();
-    return (map !== null && typeof map !== "undefined");
-  }
-
   function directToGasStation(stationAddress, Brand, Product, Price) {
       //infowindow.close();
       //setAllMap(null);
@@ -183,7 +176,9 @@
             alert("Geocoder failed due to: " + status);
           }
       });
-
+      if(infowindow) {
+        infowindow.close();
+      }
 
    
     var contentString = '<div id="content">'+
@@ -197,16 +192,6 @@
       '</div>'+
       '</div>';
 
-    //If the window was open previously, close the infowindow.
-    if (isInfoWindowOpen(infoWindow)){
-      infowindow.close();
-      console.log("window is closed");
-
-    } /*else {
-      /*infowindow = new google.maps.InfoWindow({
-        content: contentString
-      });
-    }*/
 
     infowindow = new google.maps.InfoWindow({
         content: contentString
@@ -251,6 +236,9 @@
     });
 
     google.maps.event.addListener(stationMarker, 'click', function() {
+     /* if(infowindow) {
+        infowindow.close();
+      }*/
       infowindow.open(map,stationMarker);
       console.log("window is opened");
     });
