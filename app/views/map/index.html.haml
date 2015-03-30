@@ -352,7 +352,7 @@
         sessionStorage["range"] = "10";
     });
   });
-  
+  /*
   function preloadCheapest(){
   //to preload the values for getCheapest()
     .done(function( data ) {      
@@ -384,7 +384,7 @@
 
     });
   }
-
+  */
   function getCheapest(){
     $.get("map/getCheapest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"], distance_input: sessionStorage["range"]})
     .done(function( data ) {
