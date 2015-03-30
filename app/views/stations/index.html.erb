@@ -4,15 +4,16 @@
       "bPaginate": false,
        "scrollX": true
     });
-    
-  });  
-  
-  if (sessionStorage["mojio_token"] != null ){
-    mojio_client.auth_token = JSON.parse(sessionStorage["mojio_token"]); //load in token 
-  }
-  isLoggedIn = mojio_client.isLoggedIn();
-  console.log("New login status inside stations: "+ isLoggedIn);
-  changeLogoutIcon();
+     if(isLoggedIn == false)
+        if (sessionStorage["mojio_token"] !=  null){
+          var temp_token = sessionStorage["mojio_token"];
+          console.log("temp token is: "+ temp_token);
+          mojio_client.auth_token = JSON.parse(temp_token); //load in token if return to map page 
+          isLoggedIn = mojio_client.isLoggedIn();
+          console.log("new login status is from isloggedin = "+isLoggedIn);
+          changeLogoutIcon();          
+        }
+  });    
 </script>
 
 <div class="container-fluid">
