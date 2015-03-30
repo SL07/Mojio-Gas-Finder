@@ -226,7 +226,7 @@
       if (status == google.maps.GeocoderStatus.OK) {
         map.setCenter(results[0].geometry.location);
 
-
+        console.log("address station");
         if (stationMarker == null){
           stationMarker= new google.maps.Marker({
             map: map, 
@@ -234,6 +234,7 @@
             title: 'Gas Station',
             icon : pinIcon
           });
+          console.log("stationMarker !!!!!");
         } else {
           stationMarker.setPosition(results[0].geometry.location);
         }
