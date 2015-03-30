@@ -65,19 +65,20 @@
     console.log("Latitude of car is: "+ localStorage["longitude"]);
     var Carlatlng = new google.maps.LatLng(localStorage["latitude"],localStorage["longitude"]);  //for live demo
     console.log("adding current location marker");
-    var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+    var iconBase = 'https://maps.google.com/mapfiles/kml/paddle/';
     var marker = new google.maps.Marker({
       position: Carlatlng,
       map: map,
       title: 'Current Location',
       //icon: iconBase + 'schools_maps.png'
       //fillcolor: '#00FF00'
-      icon: iconBase + 'car_maps'
+      icon: iconBase + 'A.png'
     });
     console.log("finished adding current location marker");
     //map.panTo( center); //center map on vancouver 
     //map.panTo(center);
     directionsDisplay.setMap(map);
+    directionsDisplay.setOptions( { suppressMarkers: true } ); //Removing markers when routing
 
     directionsDisplay.setPanel(document.getElementById('directions-panel'));
 
@@ -160,6 +161,21 @@
             alert("Geocoder failed due to: " + status);
           }
       });
+
+      var image = 'https://maps.google.com/mapfiles/kml/shapes/';
+      geocoder.geocode( { 'address': station}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location,
+            icon : image + 'gas_stations.png'
+        });
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    });
+
     
   }
 
