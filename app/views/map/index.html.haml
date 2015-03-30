@@ -235,18 +235,8 @@
       }
     });
 
-    google.maps.event.addListener(stationMarker, 'click',  openInfowindow(stationMarker, Brand, Product, Price) {
-      //infowindow.open(map,stationMarker);
-      console.log("window is opened");
-    });
-
-   
-    
-  }
-
-
-  function openInfowindow(marker, brand, product, price){
-    var contentString = '<div id="content">'+
+    google.maps.event.addListener(stationMarker, 'click',  function(stationMarker, Brand, Product, Price) {
+      var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
       '<h1 id="firstHeading" class="firstHeading">Gas Station</h1>'+
@@ -256,22 +246,21 @@
       '<p><b>Price: '+ Price +
       '</div>'+
       '</div>';
-
-    if(infowindow) {
+      infowindow = new google.maps.InfoWindow({
+              content: contentString
+      });
+      if(infowindow) {
         infowindow.close();
-    }
-
-    infowindow = new google.maps.InfoWindow({
-        content: contentString
-    });
-
-
-    google.maps.event.addListener(marker, 'click', function() {
-    
-      infowindow.open(map,marker);
+      }
+      infowindow.open(map,stationMarker);
       console.log("window is opened");
     });
+
+   
+    
   }
+
+
 
 
   function getVehicleData(){   //move this function to map page later  
