@@ -242,9 +242,7 @@
       console.log("window is opened");
     });
     */    
-  }
 
-<<<<<<< HEAD
     var currentInfoWindow = false; 
     google.maps.event.addListener(stationMarker, 'click',  function() {
       
@@ -264,7 +262,7 @@
 
 
 
-=======
+
   /*
   function openInfowindow(marker, brand, product, price){
     var contentString = '<div id="content">'+
@@ -287,8 +285,7 @@
       console.log("window is opened");
     };
   */
-   
->>>>>>> 1476594558fa0387d24940219ba59c19e580b754
+
   function getVehicleData(){   //move this function to map page later  
     return mojio_client.get(mojio_client.model("Vehicle"), {}, function(error, result) {
         var i, lat, lng, fuellevel;
