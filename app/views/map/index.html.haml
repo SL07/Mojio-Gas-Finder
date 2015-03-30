@@ -238,9 +238,9 @@
             title: 'Gas Station',
             icon : pinIcon*/
         //});
+        infowindow.close();
 
         google.maps.event.addListener(stationMarker, 'click', function() {
-          infowindow.close();
           infowindow.open(map,stationMarker);
         });
       } else {
