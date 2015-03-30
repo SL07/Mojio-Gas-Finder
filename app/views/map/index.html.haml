@@ -159,7 +159,7 @@
 
   
   function directToGasStation(stationAddress, Brand, Product, Price) {
-
+      infowindow.close();
       //setAllMap(null);
       var lat = parseFloat(localStorage["latitude"]);
       var lng = parseFloat(localStorage["longitude"]);
@@ -238,16 +238,17 @@
             title: 'Gas Station',
             icon : pinIcon*/
         //});
-        infowindow.close();
 
-        google.maps.event.addListener(stationMarker, 'click', function() {
-          infowindow.open(map,stationMarker);
-        });
       } else {
         alert("Geocode was not successful for the following reason: " + status);
       }
     });
 
+     //close the current infowindow 
+
+    google.maps.event.addListener(stationMarker, 'click', function() {
+      infowindow.open(map,stationMarker);
+    });
     
   }
 
