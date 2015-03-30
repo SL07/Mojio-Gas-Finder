@@ -154,7 +154,7 @@
   }
 
   
-  function directToGasStation(stationAddress, Brand, Product, Price) {
+  function directToGasStation(stationAddress, Brand, Product, Price, flag) {
 
 
       var lat = parseFloat(localStorage["latitude"]);
@@ -192,9 +192,9 @@
       '</div>'+
       '<h1 id="firstHeading" class="firstHeading">Gas Station</h1>'+
       '<div id="bodyContent">'+
-      '<p><b>Brand: '+ Brand
-      '<p><b>Product: </b>Product</p>'+
-      '<p><b>Price: </b>Price</p>'+
+      '<p><b>Brand: '+ Brand +
+      '<p><b>Product: '+ Product +
+      '<p><b>Price: '+ Price +
       '</div>'+
       '</div>';
 
@@ -220,13 +220,34 @@
       geocoder.geocode( { 'address': stationAddress}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         map.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
+
+        if (flag==1){
+          var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location,
+            title: 'Closest Gas Station',
+            //icon : image + 'gas_stations.png'
+            icon : pinIcon
+          });
+        }
+        else {
+          var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location,
+            title: 'Nearest Gas Station',
+            //icon : image + 'gas_stations.png'
+            icon : pinIcon
+          });
+        }
+
+
+        /*var marker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location,
             title: 'Gas Station',
             //icon : image + 'gas_stations.png'
             icon : pinIcon
-        });
+        });*/
 
         google.maps.event.addListener(marker, 'click', function() {
         infowindow.open(map,marker);
@@ -387,7 +408,7 @@
       if(data.address_out == "No Result Found")
         $('#ResultField').append(message);
     }); 
-    directToGasStation(sessionStorage["stationAddress"], sessionStorage["stationBrand"], sessionStorage["stationProduct"], sessionStorage["stationPrice"]);
+    directToGasStation(sessionStorage["stationAddress"], sessionStorage["stationBrand"], sessionStorage["stationProduct"], sessionStorage["stationPrice"], 1);
   }
   
   function getClosest(){
@@ -413,7 +434,7 @@
       if(data.address_out == "No Result Found")
         $('#ResultField').append(message);
     }); 
-    directToGasStation(sessionStorage["stationAddress"], sessionStorage["stationBrand"], sessionStorage["stationProduct"], sessionStorage["stationPrice"]);
+    directToGasStation(sessionStorage["stationAddress"], sessionStorage["stationBrand"], sessionStorage["stationProduct"], sessionStorage["stationPrice"], 0);
   }
   
   
