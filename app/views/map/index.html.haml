@@ -30,6 +30,8 @@
   var directionsService = new google.maps.DirectionsService();
   
   var lowFuelWarningdisplayed = false;
+
+  var stationMarker;
        
   function mojioAuthentication(){
     var mojio_token;
@@ -218,11 +220,21 @@
         map.setCenter(results[0].geometry.location);
 
 
-        var marker = new google.maps.Marker({
-            map: map,
+        if (stationMarker == null){
+          stationMarker= new google.maps.Marker({
+            map: map, 
             position: results[0].geometry.location,
             title: 'Gas Station',
             icon : pinIcon
+          })
+        } else {
+          stationMarker.setPosition(results[0].geometry.location);
+        }
+        /*var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location,
+            title: 'Gas Station',
+            icon : pinIcon*/
         });
 
         google.maps.event.addListener(marker, 'click', function() {
