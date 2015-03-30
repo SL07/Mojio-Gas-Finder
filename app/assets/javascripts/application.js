@@ -42,13 +42,39 @@ $(document).ready(function(){
 
 function changeLogoutIcon(){
   if(isLoggedIn == true) {
-    $("#loginButton").replaceWith("<a id=\"logoutButton\" onClick=\"\">Logout</a>");
+    $("#loginButton").replaceWith("<a id=\"logoutButton\" onClick=\"mojioLogout()\">Logout</a>");
     redirectURL = 'https://mojio.herokuapp.com';
   }
   else {
-  	$("#logoutButton").replaceWith("<a id=\"loginButton\" onClick=\"mojioLogin()\">Login</a>");
+  	$("#logoutButton").replaceWith("<a id=\"loginButton\" onClick=\"mojioLogin2()\">Login</a>");
     redirectURL = 'https://mojio.herokuapp.com/map';
   }
     
 }
 
+function mojioLogout (){
+
+    localStorage.removeItem("mojio_token");
+    localStorage.removeItem("longitude");
+    localStorage.removeItem("latitude");
+
+    sessionStorage.removeItem("mojio_token");
+    sessionStorage.removeItem("longitude");
+    sessionStorage.removeItem("latitude");
+
+    isLoggedIn = false;
+    redirectURL = 'https://mojio.herokuapp.com';
+    mojio_client = new MojioClient(config);
+   	mojio_client.unauthorize(config.redirect_uri);
+    
+    if (mojio_client.isLoggedIn() == false)
+    	console.log("Logged out of Mojio API");
+    else console.log("still logged in to Mojio");
+        console.log("localStoreage token is:" +  localStorage["mojio_token"]);
+}
+
+function mojioLogin2(){
+	redirectURL = 'https://mojio.herokuapp.com/map';
+	mojio_client = new MojioClient(config);
+   	mojio_client.authorize(config.redirect_uri);   
+}
