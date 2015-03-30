@@ -58,6 +58,15 @@
   }  
   */
 
+  var goldStar = {
+    path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
+    fillColor: 'yellow',
+    fillOpacity: 0.8,
+    scale: 1,
+    strokeColor: 'gold',
+    strokeWeight: 14
+  };
+
   var gas_station_image = {
     url: '../assets/images/gas_station.png',
     // This marker is 20 pixels wide by 32 pixels tall.
@@ -172,7 +181,7 @@
               var marker = new google.maps.Marker({
                 map: map,
                 position: results[0].geometry.location,
-                //icon: gas_station_image
+                icon: goldstar
               });
             } else {
                 alert("Geocode was not successful for the following reason: " + status);
