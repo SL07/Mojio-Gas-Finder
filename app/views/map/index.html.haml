@@ -20,7 +20,7 @@
   var testLat = 49.25; 
   var testLong = -123.1;
 
-  var gasStationMarker;
+  //var gasStationMarker;
 
   localStorage["correctFuelLevel"] = 65;  //random number to initialize, will be over written 
 
@@ -219,15 +219,15 @@
         map.setCenter(results[0].geometry.location);
 
 
-        gasStationMarker = new google.maps.Marker({
+        var marker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location,
             title: 'Gas Station',
             icon : pinIcon
         });
 
-        google.maps.event.addListener(gasStationMarker, 'click', function() {
-        infowindow.open(map,gasStationmarker);
+        google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map,marker);
         });
       } else {
         alert("Geocode was not successful for the following reason: " + status);
@@ -384,7 +384,7 @@
 
       if(data.address_out == "No Result Found")
         $('#ResultField').append(message);
-    });  
+    }); 
     directToGasStation(sessionStorage["stationAddress"], sessionStorage["stationBrand"], sessionStorage["stationProduct"], sessionStorage["stationPrice"]);
 
   }
