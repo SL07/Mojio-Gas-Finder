@@ -4,7 +4,8 @@
       if(isLoggedIn == false)
       mojioAuthentication();
       else
-      mojio_client.auth_token = JSON.parse(sessionStorage["mojio_token"]); //load in token if return to map page 
+      var temp_token = sessionStorage["mojio_token"];
+      mojio_client.auth_token = JSON.parse(temp_token); //load in token if return to map page 
   });  
   
   //var App, MojioClient, config, mojio_client; //some variables needed to initialize data 
