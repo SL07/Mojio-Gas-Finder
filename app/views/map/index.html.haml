@@ -59,7 +59,7 @@
   */
 
   var gas_station_image = {
-    url: 'images/beachflag.png',
+    url: '../assets/images/gas_station.png',
     // This marker is 20 pixels wide by 32 pixels tall.
     size: new google.maps.Size(20, 32),
     // The origin for this image is 0,0.
@@ -165,12 +165,14 @@
             travelMode: google.maps.TravelMode.DRIVING
             };
 
+          // Marker for the Gas station
           geocoder.geocode( { 'address': stationAddress}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
               map.setCenter(results[0].geometry.location);
               var marker = new google.maps.Marker({
                 map: map,
-                position: results[0].geometry.location
+                position: results[0].geometry.location,
+                icon: gas_station_image
               });
             } else {
                 alert("Geocode was not successful for the following reason: " + status);
