@@ -30,11 +30,6 @@
   var directionsService = new google.maps.DirectionsService();
   
   var lowFuelWarningdisplayed = false;
-
-  var gasAddress;
-  var gasBrand;
-  var gasProduct;
-  var gasPrice;
        
   function mojioAuthentication(){
     var mojio_token;
@@ -352,39 +347,7 @@
         sessionStorage["range"] = "10";
     });
   });
-  /*
-  function preloadCheapest(){
-  //to preload the values for getCheapest()
-    .done(function( data ) {      
-      sessionStorage["stationAddress"] = data.address_out+",Canada";
-      sessionStorage["stationBrand"]= data.brand_out;
-      sessionStorage["stationProduct"] = data.product_out;
-      sessionStorage["stationPrice"] =data.price_out;
-      //load in range too?
-      console.log("preloaded station addresss is: "+sessionStorage["stationAddress"]);
-      console.log("preloaded brand is: "+sessionStorage["stationBrand"]);
-      console.log("preloaded product is: "+sessionStorage["stationProduct"]);
-      console.log("preloaded price is: "+sessionStorage["stationPrice"]);
-  
-    });
-  }
-
-  function preloadClosest(){
-  //to preload values for getClosest()
-    .done(function( data ) {      
-      sessionStorage["stationAddress"] = data.address_out+",Canada";
-      sessionStorage["stationBrand"]= data.brand_out;
-      sessionStorage["stationProduct"] = data.product_out;
-      sessionStorage["stationPrice"] =data.price_out;
-      //load in range too?
-      console.log("preloaded station addresss is: "+sessionStorage["stationAddress"]);
-      console.log("preloaded brand is: "+sessionStorage["stationBrand"]);
-      console.log("preloaded product is: "+sessionStorage["stationProduct"]);
-      console.log("preloaded price is: "+sessionStorage["stationPrice"]);
-
-    });
-  }
-  */
+ 
   function getCheapest(){
     $.get("map/getCheapest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"], distance_input: sessionStorage["range"]})
     .done(function( data ) {
@@ -414,8 +377,7 @@
       directToGasStation(data.address_out+",Canada", data.brand_out, data.product_out, data.price_out);
 
     }); 
-    //directToGasStation(sessionStorage["stationAddress"], sessionStorage["stationBrand"], sessionStorage["stationProduct"], sessionStorage["stationPrice"]);
-    //maybe put in data.address_out directly into  directToGasStation() to eliminiate 1 cycle lag 
+
   }
   
   function getClosest(){
@@ -438,7 +400,6 @@
       $("<p> Distance: "+data.distance_out+"</p>").appendTo( "#ResultField" );
       $("<p> Gas Type: "+data.product_out+"</p>").appendTo( "#ResultField" );
       $("<p> Price: "+data.price_out+"</p>").appendTo( "#ResultField" );
-
       if(data.address_out == "No Result Found")
         $('#ResultField').append(message);
       directToGasStation(data.address_out+",Canada", data.brand_out, data.product_out, data.price_out);
