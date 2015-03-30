@@ -32,6 +32,7 @@
   var lowFuelWarningdisplayed = false;
 
   var stationMarker;
+  var infowindow;
        
   function mojioAuthentication(){
     var mojio_token;
@@ -201,9 +202,14 @@
       '</div>'+
       '</div>';
 
-    var infowindow = new google.maps.InfoWindow({
+    if (infowindow == null){
+      infowindow = new google.maps.InfoWindow({
         content: contentString
-    });
+      });
+    } else {
+      infowindow.setContentHTML(contentString);
+    }
+    
 
 
     var pinIcon = new google.maps.MarkerImage(
@@ -238,7 +244,7 @@
         //});
 
         google.maps.event.addListener(stationMarker, 'click', function() {
-        infowindow.open(map,stationMarker);
+          infowindow.open(map,stationMarker);
         });
       } else {
         alert("Geocode was not successful for the following reason: " + status);
