@@ -176,12 +176,12 @@
             alert("Geocoder failed due to: " + status);
           }
       });
-      if(infowindow) {
+     /* if(infowindow) {
         infowindow.close();
-      }
+      }*/
 
    
-    var contentString = '<div id="content">'+
+    /*var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
       '<h1 id="firstHeading" class="firstHeading">Gas Station</h1>'+
@@ -195,7 +195,7 @@
 
     infowindow = new google.maps.InfoWindow({
         content: contentString
-    });
+    });*/
 
 
     var pinIcon = new google.maps.MarkerImage(
@@ -235,14 +235,42 @@
       }
     });
 
-    google.maps.event.addListener(stationMarker, 'click', function() {
-     /* if(infowindow) {
-        infowindow.close();
-      }*/
+    /*google.maps.event.addListener(stationMarker, 'click', function() {
       infowindow.open(map,stationMarker);
       console.log("window is opened");
-    });
+    });*/
+
+    openInfowindow(stationMarker, Brand, Product, Price);
     
+  }
+
+
+  function openInfowindow(marker, brand, product, price){
+    var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Gas Station</h1>'+
+      '<div id="bodyContent">'+
+      '<p><b>Brand: '+ Brand +
+      '<p><b>Product: '+ Product +
+      '<p><b>Price: '+ Price +
+      '</div>'+
+      '</div>';
+
+    if(infowindow) {
+        infowindow.close();
+    }
+
+    infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
+
+
+    google.maps.event.addListener(marker, 'click', function() {
+    
+      infowindow.open(map,marker);
+      console.log("window is opened");
+    });
   }
 
 
