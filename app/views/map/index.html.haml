@@ -442,9 +442,10 @@
 
       if(data.address_out == "No Result Found")
         $('#ResultField').append(message);
+      directToGasStation(data.address_out+",Canada", data.brand_out, data.product_out, data.price_out);
     }); 
     //directToGasStation(sessionStorage["stationAddress"], sessionStorage["stationBrand"], sessionStorage["stationProduct"], sessionStorage["stationPrice"]);
-    directToGasStation(gasAddress, gasBrand, gasProduct, gasPrice);
+    
   }
   
   
