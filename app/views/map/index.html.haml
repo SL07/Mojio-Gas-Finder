@@ -64,10 +64,12 @@
     console.log("Latitude of car is: "+ localStorage["longitude"]);
     var Carlatlng = new google.maps.LatLng(localStorage["latitude"],localStorage["longitude"]);  //for live demo
     console.log("adding current location marker");
+    var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
     var marker = new google.maps.Marker({
       position: Carlatlng,
       map: map,
-      title: 'Current Location'
+      title: 'Current Location',
+      icon: iconBase + 'schools_maps.png'
     });
     console.log("finished adding current location marker");
     //map.panTo( center); //center map on vancouver 
