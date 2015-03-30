@@ -226,7 +226,7 @@
             position: results[0].geometry.location,
             title: 'Gas Station',
             icon : pinIcon
-          })
+          });
         } else {
           stationMarker.setPosition(results[0].geometry.location);
         }
@@ -235,7 +235,7 @@
             position: results[0].geometry.location,
             title: 'Gas Station',
             icon : pinIcon*/
-        });
+        //});
 
         google.maps.event.addListener(marker, 'click', function() {
         infowindow.open(map,marker);
