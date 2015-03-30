@@ -154,7 +154,7 @@
   }
 
   
-  function directToGasStation(stationAddress) {
+  function directToGasStation(stationAddress, Brand, Product, Price) {
 
 
       var lat = parseFloat(localStorage["latitude"]);
@@ -186,6 +186,28 @@
       });
 
 
+
+    var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Gas Station</h1>'+
+      '<div id="bodyContent">'+
+      '<p><b>Brand: </b>Brand</p>'+
+      '<p><b>Product: </b>Product</p>'+
+      '<p><b>Price: </b>Price</p>'+
+      '</div>'+
+      '</div>';
+
+  var infowindow = new google.maps.InfoWindow({
+      content: contentString
+  });
+
+  
+
+
+
+
+
     var pinIcon = new google.maps.MarkerImage(
       "http://maps.google.com/mapfiles/kml/shapes/gas_stations.png",
       null, /* size is determined at runtime */
@@ -201,8 +223,13 @@
         var marker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location,
+            title: 'Gas Station',
             //icon : image + 'gas_stations.png'
             icon : pinIcon
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map,marker);
         });
       } else {
         alert("Geocode was not successful for the following reason: " + status);
@@ -342,6 +369,9 @@
       var message = '<div class="alert alert-warning alert-dismissible" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> <strong>Warning!</strong> No station found in the given search range. Please select a bigger search range. </div>';
       
       sessionStorage["stationAddress"] = data.address_out+",Canada";
+      sessionStorage["stationBrand"]= data.brand_out;
+      sessionStorage["stationProduct"] = data.product_out;
+      sessionStorage["stationPrice"] =data.price_out;
       console.log ( sessionStorage["stationAddress"]);
       $("#ResultField").empty();
       
@@ -355,7 +385,7 @@
       $("<p> Gas Type: "+data.product_out+"</p>").appendTo( "#ResultField" );
       $("<p> Price: "+data.price_out+"</p>").appendTo( "#ResultField" );
     }); 
-    directToGasStation(sessionStorage["stationAddress"]);
+    directToGasStation(sessionStorage["stationAddress"], sessionStorage["stationBrand"], sessionStorage["stationProduct"], sessionStorage["stationPrice"]);
   }
   
   function getClosest(){
@@ -364,6 +394,10 @@
       var message = '<div class="alert alert-warning alert-dismissible" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> <strong>Warning!</strong> No station found in the given search range. Please select a bigger search range. </div>';
     
       sessionStorage["stationAddress"] = data.address_out+",Canada";
+      sessionStorage["stationBrand"]= data.brand_out;
+      sessionStorage["stationProduct"] = data.product_out;
+      sessionStorage["stationPrice"] =data.price_out;
+      
       console.log ( sessionStorage["stationAddress"]);
       $("#ResultField").empty();
       
@@ -378,7 +412,7 @@
       $("<p> Gas Type: "+data.product_out+"</p>").appendTo( "#ResultField" );
       $("<p> Price: "+data.price_out+"</p>").appendTo( "#ResultField" );
     }); 
-    directToGasStation(sessionStorage["stationAddress"]);
+    directToGasStation(sessionStorage["stationAddress"], sessionStorage["stationBrand"], sessionStorage["stationProduct"], sessionStorage["stationPrice"]);
   }
   
   
