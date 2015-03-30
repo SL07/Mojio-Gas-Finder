@@ -20,6 +20,8 @@
   var testLat = 49.25; 
   var testLong = -123.1;
 
+  var gasStationMarker;
+
   localStorage["correctFuelLevel"] = 65;  //random number to initialize, will be over written 
 
   var gasStationAddress= "7282 Knight St, Vancouver";
@@ -156,7 +158,7 @@
   
   function directToGasStation(stationAddress, Brand, Product, Price) {
 
-      setAllMap(null);
+      //setAllMap(null);
       var lat = parseFloat(localStorage["latitude"]);
       var lng = parseFloat(localStorage["longitude"]);
       var latlng = new google.maps.LatLng(lat, lng);
@@ -198,14 +200,9 @@
       '</div>'+
       '</div>';
 
-  var infowindow = new google.maps.InfoWindow({
-      content: contentString
-  });
-
-  
-
-
-
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
 
 
     var pinIcon = new google.maps.MarkerImage(
@@ -222,16 +219,15 @@
         map.setCenter(results[0].geometry.location);
 
 
-        var marker = new google.maps.Marker({
+        gasStationMarker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location,
             title: 'Gas Station',
-            //icon : image + 'gas_stations.png'
             icon : pinIcon
         });
 
-        google.maps.event.addListener(marker, 'click', function() {
-        infowindow.open(map,marker);
+        google.maps.event.addListener(gasStationMarker, 'click', function() {
+        infowindow.open(map,gasStationmarker);
         });
       } else {
         alert("Geocode was not successful for the following reason: " + status);
