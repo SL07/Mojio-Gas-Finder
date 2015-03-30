@@ -103,7 +103,7 @@
     });
     console.log("finished adding current location marker");
     //map.panTo( center); //center map on vancouver 
-    map.panTo(Carlatlng); //center map on car
+    //map.panTo(center);
     directionsDisplay.setMap(map);
     directionsDisplay.setOptions( { suppressMarkers: true } ); //Removing markers when routing
 
@@ -202,14 +202,10 @@
       '</div>'+
       '</div>';
 
-    if (infowindow == null){
-      infowindow = new google.maps.InfoWindow({
+
+    infowindow = new google.maps.InfoWindow({
         content: contentString
-      });
-    } else {
-      infowindow.setContentHTML(contentString);
-    }
-    
+    });
 
 
     var pinIcon = new google.maps.MarkerImage(
@@ -244,6 +240,7 @@
         //});
 
         google.maps.event.addListener(stationMarker, 'click', function() {
+          infowindow.close();
           infowindow.open(map,stationMarker);
         });
       } else {
