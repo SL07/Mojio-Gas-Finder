@@ -76,7 +76,8 @@ function mojioAuthentication(){
 	      }       
 
 	    }
-	    mojio_client.auth_token = JSON.parse(mojio_token); //need to destring before passing in
+	    //mojio_client.auth_token = JSON.parse(mojio_token); //need to destring before passing in
+	    mojio_client.auth_token = JSON.parse(sessionStorage["mojio_token"]);
 	    isLoggedIn = mojio_client.isLoggedIn();
 	    //changeLogoutIcon();
 	    //getVehicleData(); //update all long, lat and fuel level data on first load
