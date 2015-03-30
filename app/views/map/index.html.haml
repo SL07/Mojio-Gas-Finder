@@ -2,10 +2,16 @@
 
   $(document).ready(function(){
       if(isLoggedIn == false)
-      mojioAuthentication();
-      else
-      var temp_token = sessionStorage["mojio_token"];
-      mojio_client.auth_token = JSON.parse(temp_token); //load in token if return to map page 
+        if (sessionStorage["mojio_token"] ==  null)
+          mojioAuthentication();
+        else{  //session token isnt null, returning to page
+          var temp_token = sessionStorage["mojio_token"];
+          console.log("temp token is: "+ temp_token);
+          mojio_client.auth_token = JSON.parse(temp_token); //load in token if return to map page 
+          isLoggedIn = mojio_client.isLoggedIn();
+          console.log("new login status is from isloggedin = "+isLoggedIn);
+          changeLogoutIcon();
+        } 
   });  
   
   //var App, MojioClient, config, mojio_client; //some variables needed to initialize data 
@@ -43,7 +49,7 @@
         isLoggedIn = mojio_client.isLoggedIn();
         changeLogoutIcon();
         getVehicleData(); //update all long, lat and fuel level data on first load
-        console.log("isLoggedIn= " + isLoggedIn + "Token " + mojio_token);
+        console.log("isLoggedIn= " + isLoggedIn + " Token " + mojio_token);
       });            
     }
     else if(mojio_client.isLoggedIn() == true){
