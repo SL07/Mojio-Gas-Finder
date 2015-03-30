@@ -137,7 +137,7 @@
   }
 
 
-  var gas_station_image = {
+/*  var gas_station_image = {
     url: '../../assets/images/gas_station.png',
     // This marker is 20 pixels wide by 32 pixels tall.
     size: new google.maps.Size(20, 32),
@@ -145,7 +145,7 @@
     origin: new google.maps.Point(0,0),
     // The anchor for this image is the base of the flagpole at 0,32.
     anchor: new google.maps.Point(0, 32)
-  };
+  };*/
 
   
   function directToGasStation(stationAddress) {
@@ -155,6 +155,16 @@
       var lat = parseFloat(localStorage["latitude"]);
       var lng = parseFloat(localStorage["longitude"]);
       var latlng = new google.maps.LatLng(lat, lng);
+
+      var image = new google.maps.MarkerImage('../../assets/images/gas_station.png',
+                  // This marker is 32 pixels wide by 37 pixels tall.
+                  new google.maps.Size(32, 37),
+                  // The origin for this image is 0,0.
+                  new google.maps.Point(0,0),
+                  // The anchor for this image is the base of the flagpole at 0,37.
+                  new google.maps.Point(0, 37));  
+
+
       geocoder.geocode({'latLng': latlng}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           if (results[1]) {
@@ -175,7 +185,7 @@
               var marker = new google.maps.Marker({
                 map: map,
                 position: results[0].geometry.location,
-                icon: gas_station_image
+                icon: image
               });
             } else {
                 alert("Geocode was not successful for the following reason: " + status);
