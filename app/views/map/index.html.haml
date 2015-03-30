@@ -156,7 +156,7 @@
   
   function directToGasStation(stationAddress, Brand, Product, Price) {
 
-
+      setAllMap(null);
       var lat = parseFloat(localStorage["latitude"]);
       var lng = parseFloat(localStorage["longitude"]);
       var latlng = new google.maps.LatLng(lat, lng);
