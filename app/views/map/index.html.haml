@@ -58,7 +58,7 @@
   }  
   */
 
-  var marker;
+
 
   function initialize() {
     getVehicleData(); //assuming have already logged in 
@@ -75,7 +75,7 @@
     console.log("Latitude of car is: "+ localStorage["longitude"]);
     var Carlatlng = new google.maps.LatLng(localStorage["latitude"],localStorage["longitude"]);  //for live demo
     console.log("adding current location marker");
-     marker = new google.maps.Marker({
+    var marker = new google.maps.Marker({
       position: Carlatlng,
       map: map,
       title: 'Current Location',
@@ -154,8 +154,7 @@
 
       var lat = parseFloat(localStorage["latitude"]);
       var lng = parseFloat(localStorage["longitude"]);
-      var latlng = new google.maps.LatLng(lat, lng)
-
+      var latlng = new google.maps.LatLng(lat, lng);
 
       geocoder.geocode({'latLng': latlng}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
@@ -170,23 +169,14 @@
             travelMode: google.maps.TravelMode.DRIVING
             };
 
-
-           /* var image = new google.maps.MarkerImage('gas_station.png',
-            // This marker is 32 pixels wide by 37 pixels tall.
-            new google.maps.Size(32, 37),
-            // The origin for this image is 0,0.
-            new google.maps.Point(0,0),
-            // The anchor for this image is the base of the flagpole at 0,37.
-            new google.maps.Point(0, 37));    */
-
           // Marker for the Gas station
           geocoder.geocode( { 'address': stationAddress}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
               map.setCenter(results[0].geometry.location);
               var marker = new google.maps.Marker({
                 map: map,
-                position: results[0].geometry.location
-               // icon : image
+                position: results[0].geometry.location,
+      
               });
             } else {
                 alert("Geocode was not successful for the following reason: " + status);
