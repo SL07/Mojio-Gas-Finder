@@ -149,13 +149,13 @@
 
 
 
- /* var image = new google.maps.MarkerImage('../../assets/images/gas_station.png',
+  var image = new google.maps.MarkerImage('gas_station.png',
                   // This marker is 32 pixels wide by 37 pixels tall.
                   new google.maps.Size(32, 37),
                   // The origin for this image is 0,0.
                   new google.maps.Point(0,0),
                   // The anchor for this image is the base of the flagpole at 0,37.
-                  new google.maps.Point(0, 37)); */ 
+                  new google.maps.Point(0, 37));  
   
   function directToGasStation(stationAddress) {
       //localStorage["latitude"]=49.277892;
@@ -186,7 +186,7 @@
               var marker = new google.maps.Marker({
                 map: map,
                 position: results[0].geometry.location,
-                icon: '../../assets/image/gas_station.png'
+                icon: image
               });
             } else {
                 alert("Geocode was not successful for the following reason: " + status);
