@@ -147,7 +147,6 @@
   }
 
   function directToGasStation(stationAddress, Brand, Product, Price) {
-      //infowindow.close();
       //setAllMap(null);
       var lat = parseFloat(localStorage["latitude"]);
       var lng = parseFloat(localStorage["longitude"]);
@@ -181,10 +180,9 @@
       }*/
 
    
-    /*var contentString = '<div id="content">'+
+    var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
-      '<h1 id="firstHeading" class="firstHeading">Gas Station</h1>'+
       '<div id="bodyContent">'+
       '<p><b>Brand: '+ Brand +
       '<p><b>Product: '+ Product +
@@ -195,7 +193,7 @@
 
     infowindow = new google.maps.InfoWindow({
         content: contentString
-    });*/
+    });
 
 
     var pinIcon = new google.maps.MarkerImage(
@@ -235,28 +233,19 @@
       }
     });
 
-    google.maps.event.addListener(stationMarker, 'click',  function(stationMarker, Brand, Product, Price) {
-      var contentString = '<div id="content">'+
-      '<div id="siteNotice">'+
-      '</div>'+
-      '<h1 id="firstHeading" class="firstHeading">Gas Station</h1>'+
-      '<div id="bodyContent">'+
-      '<p><b>Brand: '+ Brand +
-      '<p><b>Product: '+ Product +
-      '<p><b>Price: '+ Price +
-      '</div>'+
-      '</div>';
-      infowindow = new google.maps.InfoWindow({
-              content: contentString
-      });
-      if(infowindow) {
+    var currentInfoWindow = false; 
+    google.maps.event.addListener(stationMarker, 'click',  function() {
+      
+      if(currentInfoWindow == true) {
         infowindow.close();
       }
-      infowindow.open(map,stationMarker);
-      console.log("window is opened");
+      else{
+        infowindow.open(map,stationMarker);
+        currentInfoWindow = true;
+        console.log("window is opened");
+      }
+      
     });
-
-   
     
   }
 
