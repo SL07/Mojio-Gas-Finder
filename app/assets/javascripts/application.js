@@ -73,7 +73,10 @@ function mojioLogout (){
         console.log("localStoreage token is:" +  localStorage["mojio_token"]);
 }
 
+
+
 function mojioLogin2(){
+	console.log("redirecting to mojio login");
 	redirectURL = 'https://mojio.herokuapp.com/map';
 	mojio_client = new MojioClient(config);
    	mojio_client.authorize(config.redirect_uri);   
