@@ -69,7 +69,7 @@
     directionsDisplay = new google.maps.DirectionsRenderer();
     var latlng = new google.maps.LatLng(49.25, -123.100);
       var mapOptions = {
-        zoom: 14,
+        zoom: 10,
         center: latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
@@ -94,8 +94,8 @@
       icon: pinIcon
     });
     console.log("finished adding current location marker");
-    //map.panTo( center); //center map on vancouver 
-    //map.panTo(center);
+
+    map.panTo( latlng); //center map on vancouver 
     directionsDisplay.setMap(map);
     directionsDisplay.setOptions( { suppressMarkers: true } ); //Removing markers when routing
 
@@ -104,7 +104,6 @@
     var control = document.getElementById('control');
     control.style.display = 'block';
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
-
     moveMarker(map, marker);
   }
 
@@ -123,7 +122,7 @@
       //map.panTo( center );
       console.log("car marker position updated"); 
       
-      }, 2000 );  //update every 1.5 sec
+      }, 2000 );  //update every 2 sec
   };
 
   function correctFuelLevel(){
