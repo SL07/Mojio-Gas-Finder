@@ -219,15 +219,15 @@
         map.setCenter(results[0].geometry.location);
 
 
-        var gasStationMarker = new google.maps.Marker({
+        var marker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location,
             title: 'Gas Station',
             icon : pinIcon
         });
 
-        google.maps.event.addListener(gasStationMarker, 'click', function() {
-        infowindow.open(map,gasStationmarker);
+        google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map,marker);
         });
       } else {
         alert("Geocode was not successful for the following reason: " + status);
