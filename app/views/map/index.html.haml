@@ -243,9 +243,7 @@
       //infowindow.open(map,stationMarker);
       console.log("window is opened");
     });
-    */
-   
-    
+    */    
   }
 
 
@@ -260,22 +258,21 @@
       '<p><b>Price: '+ Price +
       '</div>'+
       '</div>';
-
-    if(infowindow) {
+      infowindow = new google.maps.InfoWindow({
+              content: contentString
+      });
+      if(infowindow) {
         infowindow.close();
-    }
-
-    infowindow = new google.maps.InfoWindow({
-        content: contentString
-    });
-
-
-    google.maps.event.addListener(marker, 'click', function() {
-    
-      infowindow.open(map,marker);
+      }
+      infowindow.open(map,stationMarker);
       console.log("window is opened");
     });
+
+   
+    
   }
+
+
 
 
   function getVehicleData(){   //move this function to map page later  
