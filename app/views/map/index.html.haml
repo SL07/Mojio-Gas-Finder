@@ -410,8 +410,11 @@
 
       if(data.address_out == "No Result Found")
         $('#ResultField').append(message);
+
+      directToGasStation(data.address_out+",Canada", data.brand_out, data.product_out, data.price_out);
+
     }); 
-    directToGasStation(sessionStorage["stationAddress"], sessionStorage["stationBrand"], sessionStorage["stationProduct"], sessionStorage["stationPrice"]);
+    //directToGasStation(sessionStorage["stationAddress"], sessionStorage["stationBrand"], sessionStorage["stationProduct"], sessionStorage["stationPrice"]);
     //maybe put in data.address_out directly into  directToGasStation() to eliminiate 1 cycle lag 
   }
   
@@ -425,10 +428,6 @@
       sessionStorage["stationProduct"] = data.product_out;
       sessionStorage["stationPrice"] =data.price_out;
 
-      gasAddress = data.address_out;
-      gasBrand =data.brand_out;
-      gasProduct =data.product_out;
-      gasPrice =data.price_out;
       
       console.log ( sessionStorage["stationAddress"]);
       $("#ResultField").empty();
