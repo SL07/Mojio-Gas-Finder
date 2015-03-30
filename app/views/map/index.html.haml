@@ -200,6 +200,7 @@
     //If the window was open previously, close the infowindow.
     if (isInfoWindowOpen(infoWindow)){
       infowindow.close();
+      console.log("window is closed");
 
     } /*else {
       /*infowindow = new google.maps.InfoWindow({
@@ -250,6 +251,7 @@
 
     google.maps.event.addListener(stationMarker, 'click', function() {
       infowindow.open(map,stationMarker);
+      console.log("window is opened");
     });
     
   }
