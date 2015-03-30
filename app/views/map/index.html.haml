@@ -58,7 +58,7 @@
   }  
   */
 
-  //var marker;
+  var marker;
 
   function initialize() {
     getVehicleData(); //assuming have already logged in 
@@ -75,11 +75,10 @@
     console.log("Latitude of car is: "+ localStorage["longitude"]);
     var Carlatlng = new google.maps.LatLng(localStorage["latitude"],localStorage["longitude"]);  //for live demo
     console.log("adding current location marker");
-     var marker = new google.maps.Marker({
+     marker = new google.maps.Marker({
       position: Carlatlng,
       map: map,
-      title: 'Current Location'
-      //fillcolor: 'green',
+      title: 'Current Location',
     });
     console.log("finished adding current location marker");
     //map.panTo( center); //center map on vancouver 
@@ -192,8 +191,7 @@
             } else {
                 alert("Geocode was not successful for the following reason: " + status);
               }
-          }); 
-           // setMarker(stationAddress);
+          });
 
 
               directionsService.route(request, function(response, status) {
@@ -209,30 +207,6 @@
   }
 
 
- /* function setMarker (address){
-    var image = {
-    url: 'gas_station.png',
-    // This marker is 20 pixels wide by 32 pixels tall.
-    size: new google.maps.Size(20, 32),
-    // The origin for this image is 0,0.
-    origin: new google.maps.Point(0,0),
-    // The anchor for this image is the base of the flagpole at 0,32.
-    anchor: new google.maps.Point(0, 32)
-  };
-    geocoder.geocode( { 'address': address}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      map.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-        map: map,
-        position: results[0].geometry.location,
-        icon : image
-      });
-    } else {
-        alert("Geocode was not successful for the following reason: " + status);
-      }
-  });*/
-
-  }
   function getVehicleData(){   //move this function to map page later  
     return mojio_client.get(mojio_client.model("Vehicle"), {}, function(error, result) {
         var i, lat, lng, fuellevel;
