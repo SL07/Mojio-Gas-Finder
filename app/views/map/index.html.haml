@@ -126,11 +126,10 @@
 
   
   function directToGasStation(stationAddress) {
-      localStorage["latitude"]=49.277892;
-      localStorage["longitude"]=-123.126777;
 
-      //var lat = parseFloat(localStorage["latitude"]);
-      //var lng = parseFloat(localStorage["longitude"]);
+
+      var lat = parseFloat(localStorage["latitude"]);
+      var lng = parseFloat(localStorage["longitude"]);
       var latlng = new google.maps.LatLng(lat, lng);
 
       geocoder.geocode({'latLng': latlng}, function(results, status) {
@@ -141,23 +140,23 @@
             console.log(address);
 
             var request = {                             //Get the direction from the current location to gas station 
-            origin:results[1].formatted_address,
-            destination:stationAddress,
-            travelMode: google.maps.TravelMode.DRIVING
+              origin:results[1].formatted_address,
+              destination:stationAddress,
+              travelMode: google.maps.TravelMode.DRIVING
             };
 
-              directionsService.route(request, function(response, status) {
+            directionsService.route(request, function(response, status) {
               if (status == google.maps.DirectionsStatus.OK) {
-              directionsDisplay.setDirections(response);
+                directionsDisplay.setDirections(response);
               }
             });
           }
         } else {
-          alert("Geocoder failed due to: " + status);
+            alert("Geocoder failed due to: " + status);
           }
-        });
-  
-    }
+      });
+    
+  }
 
 
   function getVehicleData(){   //move this function to map page later  
