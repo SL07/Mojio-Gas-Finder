@@ -1,7 +1,18 @@
 :javascript
+
+  /*
+  $(document).ready(function(){
+      if(isLoggedIn == true)
+
+     	//mojioAuthentication();
+
+  });  
+  */ 
+  var Current_marker = null;
   var App, MojioClient, config, mojio_client, Current_marker; //some variables needed to initialize data 
   var isLoggedIn = false;
   Current_marker = null;
+
   var count;
   var testLat = 49.25; 
   var testLong = -123.1;
@@ -16,54 +27,36 @@
   
   var lowFuelWarningdisplayed = false;
 
-  config = {
-            application: '434f01ce-504b-4f72-a919-5a81dee7d506', // Fill in your app id here!
-            redirect_uri: 'https://mojio.herokuapp.com/map', // Fill in you redirect uri here! (Ex. 'http://localhost:4093/index.html')
-            hostname: 'api.moj.io',
-            version: 'v1',
-            port: '443',
-            scheme: 'https',
-            live: false // This will connect your app to the sandbox environment, change it to true to go live. 
-        };
-        mojio_client = new MojioClient(config);
-    /*   
-    if (localStorage["mojio_token"] == null){
-       console.log("localStorge not made yet, need to login");   
-    }
-    else{
-    //clear previous token then set new one
-    //localStorage.removeItem("lastname"); syntax to clear localStorage
-    console.log("value of token is: " + localStorage["mojio_token"]);
-    mojio_client.auth_token = JSON.parse(localStorage["mojio_token"]); //need to destring before passing in
-    } 
-    */
-  if (mojio_client.isLoggedIn() == false){  //use this to test for login status
+  //may need to  moved to application.js      
+  /*
+  function mojioAuthentication(){
+    var mojio_token;
+    if (mojio_client.isLoggedIn() == false){  //use this to test for login status
       console.log("checking for login token");
-              mojio_client.token(function(error, result) {
-                  if (error) {
-                      console.log(error);
-                     // alert("Authorize Redirect, token could not be retreived:" + error); //take out later 
-                  } else {
-                    //  alert("Authorization Successful.");   //taken out for video demo
-                      div = $("#welcome");
-                      div.html('Authorization Result:');
-                      div.append(JSON.stringify(result));
-                      console.log(JSON.stringify(result));
-                      localStorage.removeItem["mojio_token"]; //clears the token before appending a new one
-                      localStorage["mojio_token"] = JSON.stringify(result);  //save the token into local storage
-                      getVehicleData(); //update all long, lat and fuel level data on first load
-                  }
-              });
-              console.log("value of token is: " + localStorage["mojio_token"]);
-              mojio_client.auth_token = JSON.parse(localStorage["mojio_token"]); //need to destring before passing in
-
-  }
-  else if(mojio_client.isLoggedIn() == true){
-    console.log("already logged in to Mojio");
-    console.log("value of token is: " + localStorage["mojio_token"]);
-
-  }
-  
+      mojio_client.token(function(error, result) {
+        if (error) {
+          console.log(error);             
+        } else {          
+          div = $("#welcome");
+          div.html('Authorization Result:');
+          div.append(JSON.stringify(result));
+          console.log(JSON.stringify(result));
+          mojio_token = JSON.stringify(result);
+          sessionStorage["mojio_token"] = JSON.stringify(result);  //save the token into local storage
+        }
+        mojio_client.auth_token = JSON.parse(mojio_token); //need to destring before passing in
+        isLoggedIn = mojio_client.isLoggedIn();
+        changeLogoutIcon();
+        getVehicleData(); //update all long, lat and fuel level data on first load
+        console.log("isLoggedIn= " + isLoggedIn + "Token " + mojio_token);
+      });            
+    }
+    else if(mojio_client.isLoggedIn() == true){
+      console.log("already logged in to Mojio");
+      console.log("value of token is: " + sessionStorage["mojio_token"]);
+    }
+  }  
+  */
 
   var gas_station_image = {
     url: 'images/beachflag.png',
@@ -76,6 +69,7 @@
   };
 
   function initialize() {
+    getVehicleData(); //assuming have already logged in 
     geocoder = new google.maps.Geocoder();
     directionsDisplay = new google.maps.DirectionsRenderer();
     var latlng = new google.maps.LatLng(49.25, -123.100);
@@ -194,8 +188,7 @@
           alert("Geocoder failed due to: " + status);
           }
         });
-  
-    }
+  }
 
 
   function getVehicleData(){   //move this function to map page later  
