@@ -282,18 +282,6 @@
 
   }
 
-  function mojioLogout (){
-
-    localStorage.removeItem("mojio_token");
-    localStorage.removeItem("longitude");
-    localStorage.removeItem("latitude");
-    isLoggedIn = false;
-    //mojio_client.unauthorize(config.redirect_uri);
-    if (mojio_client.isLoggedIn() == false)
-    console.log("Logged out of Mojio API"); //need to take a second try to update mojio_client.isLoggedIn() status
-    else console.log("still logged in to Mojio");
-        console.log("localStoreage token is:" +  localStorage["mojio_token"]);
-  } 
 
 
   function timeoutTest () {

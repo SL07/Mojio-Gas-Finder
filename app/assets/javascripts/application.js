@@ -42,7 +42,7 @@ $(document).ready(function(){
 
 function changeLogoutIcon(){
   if(isLoggedIn == true) {
-    $("#loginButton").replaceWith("<a id=\"logoutButton\" onClick=\"mojioLogout()\">Logout</a>");
+    $("#loginButton").replaceWith("<a id=\"logoutButton\" href=\"https://mojio.herokuapp.com\" onClick=\"\">Logout</a>");
     redirectURL = 'https://mojio.herokuapp.com';
   }
   else {
@@ -63,9 +63,9 @@ function mojioLogout (){
     sessionStorage.removeItem("latitude");
 
     isLoggedIn = false;
-    redirectURL = 'https://mojio.herokuapp.com';
-    mojio_client = new MojioClient(config);
-   	mojio_client.unauthorize(config.redirect_uri);
+    //redirectURL = 'https://mojio.herokuapp.com';
+    //mojio_client = new MojioClient(config);
+   	//mojio_client.unauthorize(config.redirect_uri);
     
     if (mojio_client.isLoggedIn() == false)
     	console.log("Logged out of Mojio API");
