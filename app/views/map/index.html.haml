@@ -342,7 +342,8 @@
       var message = '<div class="alert alert-warning alert-dismissible" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> <strong>Warning!</strong> No station found in the given search range. Please select a bigger search range. </div>';
       
       sessionStorage["stationAddress"] = data.address_out+",Canada";
-      console.log ( sessionStorage["stationAddress"]);
+      console.log ( "data.address_out is: "+  data.address_out);
+      console.log ( "session storage address is: "+sessionStorage["stationAddress"]);
       $("#ResultField").empty();
       
       $("<p> Search Result: </p>").appendTo( "#ResultField" );
