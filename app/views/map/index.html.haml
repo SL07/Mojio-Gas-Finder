@@ -20,7 +20,7 @@
   var testLat = 49.25; 
   var testLong = -123.1;
 
-  var gasStationMarker;
+  //var gasStationMarker;
 
   localStorage["correctFuelLevel"] = 65;  //random number to initialize, will be over written 
 
@@ -219,7 +219,7 @@
         map.setCenter(results[0].geometry.location);
 
 
-        gasStationMarker = new google.maps.Marker({
+        var gasStationMarker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location,
             title: 'Gas Station',
@@ -386,7 +386,6 @@
       //  $('#ResultField').append(message);
     }); 
 
-    $.get("map/getCheapest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"], distance_input: sessionStorage["range"]})
     .done(function( data ) {
       var message = '<div class="alert alert-warning alert-dismissible" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> <strong>Warning!</strong> No station found in the given search range. Please select a bigger search range. </div>';
       
