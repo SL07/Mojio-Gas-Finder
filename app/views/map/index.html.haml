@@ -178,7 +178,9 @@
             alert("Geocoder failed due to: " + status);
           }
       });
-
+      if(infowindow) {
+        infowindow.close();
+      }
 
    
     var contentString = '<div id="content">'+
@@ -236,9 +238,9 @@
     });
 
     google.maps.event.addListener(stationMarker, 'click', function() {
-      if(infowindow) {
+     /* if(infowindow) {
         infowindow.close();
-      }
+      }*/
       infowindow.open(map,stationMarker);
       console.log("window is opened");
     });
