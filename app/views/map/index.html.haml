@@ -66,7 +66,13 @@
     var Carlatlng = new google.maps.LatLng(localStorage["latitude"],localStorage["longitude"]);  //for live demo
     console.log("adding current location marker");
     var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-
+    var pinIcon = new google.maps.MarkerImage(
+    iconBase + 'cabs.png',
+    null, /* size is determined at runtime */
+    null, /* origin is 0,0 */
+    null, /* anchor is bottom center of the scaled image */
+    new google.maps.Size(42, 68)
+    );
    /* var image = {
       url: 'https://maps.google.com/mapfiles/kml/pal4/icon15.png',
       // This marker is 20 pixels wide by 32 pixels tall.
@@ -81,7 +87,7 @@
       title: 'Current Location',
       //icon: iconBase + 'schools_maps.png'
       //fillcolor: '#00FF00'
-      icon: iconBase + 'cabs.png'
+      icon: pinIcon
      // icon : image
     });
     console.log("finished adding current location marker");
