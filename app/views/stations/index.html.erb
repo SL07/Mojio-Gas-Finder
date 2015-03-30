@@ -13,11 +13,40 @@
           console.log("new login status is from isloggedin = "+isLoggedIn);
           changeLogoutIcon();          
         }
+        else
+          $('#loginError').modal({
+            keyboard: false,
+            backdrop: 'static',
+            show: true
+          });   
   });    
 </script>
 
 <div class="container-fluid">
   <h1>Listing stations</h1>
+
+  <div aria-hidden="true" aria-labelledby="basicModal" class="modal fade" id="loginError" role="dialog" tabindex="-1">
+    <div class="modal fade"></div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button aria-label="Close" class="close" data-dismiss="modal" type="button"></button>
+          <!--/%h4.modal-title Modal Warning !
+          -->
+          <h3 class="modal-title" id="myModalLabel" style="color:red">Warning!</h3>
+        </div>
+        <div class="modal-body" style="background-color:red">
+          <h4 style="color:white">Please login before accessing this page.</h4>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default">
+            <%= link_to "OK", root_path %>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <p> Last Updated: <%= @jobs.timestamp %></p>
 
