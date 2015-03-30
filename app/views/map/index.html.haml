@@ -83,25 +83,15 @@
     "http://maps.google.com/mapfiles/kml/pal4/icon62.png",
     null, /* size is determined at runtime */
     null, /* origin is 0,0 */
-    new google.maps.Point(20,20), /* anchor is bottom center of the scaled image */
+    new google.maps.Point(20,20), /* anchor is center of the scaled image */
     new google.maps.Size(40, 40)
     );
-   /* var image = {
-      url: 'https://maps.google.com/mapfiles/kml/pal4/icon15.png',
-      // This marker is 20 pixels wide by 32 pixels tall.
-      size: new google.maps.Size(40, 40)
-    };*/
-
-
-    //http://maps.google.com/mapfiles/kml/pal4/icon15.png
+  
     var marker = new google.maps.Marker({
       position: Carlatlng,
       map: map,
       title: 'Current Location',
-      //icon: iconBase + 'schools_maps.png'
-      //fillcolor: '#00FF00'
       icon: pinIcon
-     // icon : image
     });
     console.log("finished adding current location marker");
     //map.panTo( center); //center map on vancouver 
@@ -161,7 +151,7 @@
 
   
   function directToGasStation(stationAddress, Brand, Product, Price) {
-      infowindow.close();
+      //infowindow.close();
       //setAllMap(null);
       var lat = parseFloat(localStorage["latitude"]);
       var lng = parseFloat(localStorage["longitude"]);
@@ -190,7 +180,6 @@
             alert("Geocoder failed due to: " + status);
           }
       });
-
 
 
     var contentString = '<div id="content">'+
@@ -245,8 +234,6 @@
         alert("Geocode was not successful for the following reason: " + status);
       }
     });
-
-     //close the current infowindow 
 
     google.maps.event.addListener(stationMarker, 'click', function() {
       infowindow.open(map,stationMarker);
