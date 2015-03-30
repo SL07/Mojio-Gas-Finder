@@ -1,14 +1,18 @@
 :javascript
 
+/*
   $(document).ready(function(){
       if(isLoggedIn == true)
 
      	//mojioAuthentication();
 
   });  
-  
-  //var App, MojioClient, config, mojio_client; //some variables needed to initialize data 
+ */ 
   var Current_marker = null;
+  var App, MojioClient, config, mojio_client, Current_marker; //some variables needed to initialize data 
+  var isLoggedIn = false;
+  Current_marker = null;
+
   var count;
   var testLat = 49.25; 
   var testLong = -123.1;
@@ -22,6 +26,7 @@
   var directionsService = new google.maps.DirectionsService();
   
   var lowFuelWarningdisplayed = false;
+
   //may need to  moved to application.js      
   /*
   function mojioAuthentication(){
@@ -71,12 +76,14 @@
     var marker = new google.maps.Marker({
       position: Carlatlng,
       map: map,
-      title: 'Current Location'
+      title: 'Current Location',
+      fillColor: 'green'
     });
     console.log("finished adding current location marker");
     //map.panTo( center); //center map on vancouver 
     //map.panTo(center);
     directionsDisplay.setMap(map);
+    directionsDisplay.setOptions( { suppressMarkers: true } );
 
     directionsDisplay.setPanel(document.getElementById('directions-panel'));
 
@@ -116,12 +123,12 @@
       
 
       $("#fuelDisplay").empty();
-      $("<p>"+ localStorage["correctFuelLevel"]+"%"+"</p>").appendTo( "#fuelDisplay" );
+      $("<p>"+ localStorage["correctFuelLevel"]+"</p>").appendTo( "#fuelDisplay" );
+      //$("<span>"+ localStorage["correctFuelLevel"]+"%"+"</span>").appendTo( "#fuelDisplay" );
 
       if (localStorage["correctFuelLevel"] <= 15){
         if (lowFuelWarningdisplayed == false)
           $('#basicModal').modal('show');    //the pop up window for low fuel
-          //alert("Fuel level is low!!");
 
           // end of pop up window 
           lowFuelWarningdisplayed = true; 
@@ -220,7 +227,7 @@
     isLoggedIn = false;
     //mojio_client.unauthorize(config.redirect_uri);
     if (mojio_client.isLoggedIn() == false)
-    console.log("Logged out of Mojio API"); //need to take a second try to update mojio_client.isLoggedIn() status
+    console.log("Logged out of Mojio API");
     else console.log("still logged in to Mojio");
         console.log("localStoreage token is:" +  localStorage["mojio_token"]);
   } 
@@ -251,19 +258,19 @@
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="midGrade"]', function(event) {
-      sessionStorage["gasGrade"] = "Midgrade";
+    	sessionStorage["gasGrade"] = "Midgrade";
     });
   });
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="premium"]', function(event) {
-      sessionStorage["gasGrade"] = "Premium";
+    	sessionStorage["gasGrade"] = "Premium";
     });
   });
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="diesel"]', function(event) {
-      sessionStorage["gasGrade"] = "Diesel";
+    	sessionStorage["gasGrade"] = "Diesel";
     });
   });
   
@@ -301,7 +308,7 @@
       $("#ResultField").empty();
       
       if(data.address_out == "No Result Found")
-        $('#ResultField').append(message);
+      	$('#ResultField').append(message);
       
       $("<p> Search Result: </p>").appendTo( "#ResultField" );
       $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
@@ -323,7 +330,7 @@
       $("#ResultField").empty();
       
       if(data.address_out == "No Result Found")
-        $('#ResultField').append(message);
+      	$('#ResultField').append(message);
       
       
       $("<p> Search Result: </p>").appendTo( "#ResultField" );
@@ -335,30 +342,32 @@
     }); 
     directToGasStation(sessionStorage["stationAddress"]);
   }
-  
+
+
   
 .container-fluid   
   %h1 Map
   #basicModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "basicModal", :role => "dialog", :tabindex => "-1"}
 
-    .modal.fade
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-            %span{"aria-hidden" => "true"} ×
-          //%h4.modal-title Modal Warning !
-          %h3#myModalLabel.modal-title{:style => "color:white"} Warning!
-        .modal-body
-          //%p Gas Level Below
-          %h4{:style => "color:white"} Gas Level Below 15%.
-        .modal-footer
-          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+  .modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button", :onClick => "closeButton()"}
+          %span{"aria-hidden" => "true"} ×
+        //%h4.modal-title Modal Warning !
+        %h3#myModalLabel.modal-title{:style => "color:white"} Warning!
+      .modal-body
+        //%p Gas Level Below
+        %h4{:style => "color:white"} Gas Level Below 15%.
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+
 
   #map
   %p
     Fuel level:
-    #fuelDisplay
+    %span#fuelDisplay
   %p
     #ResultField
   %P
@@ -373,7 +382,7 @@
         %a.collapsed{"aria-controls" => "collapseOne", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseOne"}
           Find Closest Station
     #collapseOne.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel"}
-      .panel-body
+      .panel-body  
         %h4 Preference:
         %h5 Fuel Type:
         .btn-inline{"data-toggle" => "buttons"}
