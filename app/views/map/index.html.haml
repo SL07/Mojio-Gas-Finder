@@ -405,9 +405,32 @@
       $("<p> Gas Type: "+data.product_out+"</p>").appendTo( "#ResultField" );
       $("<p> Price: "+data.price_out+"</p>").appendTo( "#ResultField" );
 
+      //if(data.address_out == "No Result Found")
+      //  $('#ResultField').append(message);
+    }); 
+
+    .done(function( data ) {
+      var message = '<div class="alert alert-warning alert-dismissible" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> <strong>Warning!</strong> No station found in the given search range. Please select a bigger search range. </div>';
+      
+      sessionStorage["stationAddress"] = data.address_out+",Canada";
+      console.log ( "data.address_out is: "+  data.address_out);
+      console.log ( "session storage address is: "+sessionStorage["stationAddress"]);
+      sessionStorage["stationBrand"]= data.brand_out;
+      sessionStorage["stationProduct"] = data.product_out;
+      sessionStorage["stationPrice"] =data.price_out;
+
+      $("#ResultField").empty();
+      
+      $("<p> Search Result: </p>").appendTo( "#ResultField" );
+      $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
+      $("<p> Address: "+data.address_out+"</p>").appendTo( "#ResultField" );
+      $("<p> Distance: "+data.distance_out+"</p>").appendTo( "#ResultField" );
+      $("<p> Gas Type: "+data.product_out+"</p>").appendTo( "#ResultField" );
+      $("<p> Price: "+data.price_out+"</p>").appendTo( "#ResultField" );
+
       if(data.address_out == "No Result Found")
         $('#ResultField').append(message);
-    }); 
+    });
     directToGasStation(sessionStorage["stationAddress"], sessionStorage["stationBrand"], sessionStorage["stationProduct"], sessionStorage["stationPrice"], 1);
   }
   
