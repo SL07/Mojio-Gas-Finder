@@ -65,6 +65,16 @@
   }
   
 
+  var gas_station_image = {
+    url: 'images/beachflag.png',
+    // This marker is 20 pixels wide by 32 pixels tall.
+    size: new google.maps.Size(20, 32),
+    // The origin for this image is 0,0.
+    origin: new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 0,32.
+    anchor: new google.maps.Point(0, 32)
+  };
+
   function initialize() {
     geocoder = new google.maps.Geocoder();
     directionsDisplay = new google.maps.DirectionsRenderer();
@@ -83,7 +93,6 @@
       position: Carlatlng,
       map: map,
       title: 'Current Location',
-      fillColor: 'green'
     });
     console.log("finished adding current location marker");
     //map.panTo( center); //center map on vancouver 
@@ -161,11 +170,19 @@
             destination:stationAddress,
             travelMode: google.maps.TravelMode.DRIVING
             };
-             /* directionsService.route(request, function(result, status) {
-              if (status == google.maps.DirectionsStatus.OK) {
-              directionsDisplay.setDirections(result);
+
+          geocoder.geocode( { 'address': stationAddress}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              map.setCenter(results[0].geometry.location);
+              var marker = new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location
+              });
+            } else {
+                alert("Geocode was not successful for the following reason: " + status);
               }
-            });*/
+          });
+
 
               directionsService.route(request, function(response, status) {
               if (status == google.maps.DirectionsStatus.OK) {
