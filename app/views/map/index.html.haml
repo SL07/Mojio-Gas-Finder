@@ -40,7 +40,12 @@
       console.log("checking for login token");
       mojio_client.token(function(error, result) {
         if (error) {
-          console.log(error);             
+          console.log(error);
+          $('#loginError').modal({
+            keyboard: false,
+            backdrop: 'static',
+            show: true
+          });             
         } else {          
           div = $("#welcome");
           div.html('Authorization Result:');
@@ -110,7 +115,6 @@
       setInterval( function(){
       getVehicleData();
       correctFuelLevel(); 
-      printVehicle_data();
    //   printVehicle_data(); //testing all returned outputs
       //testLat += 0.0001;
       //testLong += 0.0001;
@@ -118,7 +122,7 @@
       center = new google.maps.LatLng(localStorage["latitude"], localStorage["longitude"]);
       marker.setPosition( center );
       //map.panTo( center );
-      console.log("car marker position updated"); 
+      console.log("car marker position updated at lat:"+localStorage["latitude"] +" long: "+localStorage["longitude"]); 
       
       }, 2000 );  //update every 2 sec
   };
@@ -130,7 +134,7 @@
       }
       else //non zero fuel level
         localStorage["correctFuelLevel"] = localStorage["fuellevel"]; //update to corrected fuel level
-      console.log("Last FuelLevel is: "+ localStorage["correctFuelLevel"]);
+      //console.log("Last FuelLevel is: "+ localStorage["correctFuelLevel"]);
       
 
       $("#fuelDisplay").empty();
@@ -232,7 +236,15 @@
         alert("Geocode was not successful for the following reason: " + status);
       }
     });
+    /*
+    google.maps.event.addListener(stationMarker, 'click',  openInfowindow(stationMarker, Brand, Product, Price) {
+      //infowindow.open(map,stationMarker);
+      console.log("window is opened");
+    });
+    */    
+  }
 
+<<<<<<< HEAD
     var currentInfoWindow = false; 
     google.maps.event.addListener(stationMarker, 'click',  function() {
       
@@ -252,6 +264,31 @@
 
 
 
+=======
+  /*
+  function openInfowindow(marker, brand, product, price){
+    var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Gas Station</h1>'+
+      '<div id="bodyContent">'+
+      '<p><b>Brand: '+ Brand +
+      '<p><b>Product: '+ Product +
+      '<p><b>Price: '+ Price +
+      '</div>'+
+      '</div>';
+      infowindow = new google.maps.InfoWindow({
+              content: contentString
+      });
+      if(infowindow) {
+        infowindow.close();
+      }
+      infowindow.open(map,stationMarker);
+      console.log("window is opened");
+    };
+  */
+   
+>>>>>>> 1476594558fa0387d24940219ba59c19e580b754
   function getVehicleData(){   //move this function to map page later  
     return mojio_client.get(mojio_client.model("Vehicle"), {}, function(error, result) {
         var i, lat, lng, fuellevel;
@@ -278,7 +315,7 @@
         
 
         console.log("location of vehicle is: LAT:"+ localStorage["latitude"]+" " + "LONG:" +localStorage["longitude"]);
-        console.log("Fuel level of car: "+ localStorage["fuellevel"]);
+        //console.log("Fuel level of car: "+ localStorage["fuellevel"]);
     });
   }
 
@@ -427,20 +464,31 @@
 .container-fluid   
   %h1 Map
   #basicModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "basicModal", :role => "dialog", :tabindex => "-1"}
+    .modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header{:style =>"background-color: #636060"}
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h3#myModalLabel.modal-title{:style => "color:white"} Warning!
+        .modal-body{:style =>"background-color: #636060"}
+          %h4{:style => "color:white"} Gas Level Below 15%.
+        .modal-footer{:style =>"background-color: #636060"}
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
 
+  #loginError.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "basicModal", :role => "dialog", :tabindex => "-1"}
     .modal.fade
     .modal-dialog
       .modal-content
         .modal-header
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-            %span{"aria-hidden" => "true"} ×
           //%h4.modal-title Modal Warning !
-          %h3#myModalLabel.modal-title{:style => "color:white"} Warning!
-        .modal-body
-          //%p Gas Level Below
-          %h4{:style => "color:white"} Gas Level Below 15%.
+          %h3#myModalLabel.modal-title{:style => "color:red"} Warning!
+        .modal-body{:style =>"background-color:red"}
+          %h4{:style => "color:white"} Please login before accessing this page.
         .modal-footer
-          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+          %button.btn.btn-default
+            = link_to "OK", root_path
 
   #map
   %p
