@@ -16,10 +16,6 @@ $(document).ready(function(){
     //mojio_client = new MojioClient(config);
     //mojio_client.unauthorize(config.redirect_uri);
     
-    if (mojio_client.isLoggedIn() == false)
-        console.log("Logged out of Mojio API");
-    else console.log("still logged in to Mojio");
-        console.log("localStoreage token is:" +  localStorage["mojio_token"]); 
 
 function mojioLogin(){
     if (isLoggedIn == true){
