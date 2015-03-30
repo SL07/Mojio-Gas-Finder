@@ -181,7 +181,7 @@
             new google.maps.Point(0, 37));    */
 
           // Marker for the Gas station
-         /* geocoder.geocode( { 'address': stationAddress}, function(results, status) {
+          geocoder.geocode( { 'address': stationAddress}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
               map.setCenter(results[0].geometry.location);
               var marker = new google.maps.Marker({
@@ -192,8 +192,8 @@
             } else {
                 alert("Geocode was not successful for the following reason: " + status);
               }
-          }); */
-            setMarker(stationAddress);
+          }); 
+           // setMarker(stationAddress);
 
 
               directionsService.route(request, function(response, status) {
@@ -209,7 +209,7 @@
   }
 
 
-  function setMarker (address){
+ /* function setMarker (address){
     var image = {
     url: 'gas_station.png',
     // This marker is 20 pixels wide by 32 pixels tall.
@@ -230,7 +230,7 @@
     } else {
         alert("Geocode was not successful for the following reason: " + status);
       }
-  });
+  });*/
 
   }
   function getVehicleData(){   //move this function to map page later  
