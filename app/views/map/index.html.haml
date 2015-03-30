@@ -1,8 +1,9 @@
 :javascript
 
   $(document).ready(function(){
-      if(isLoggedIn == false)
-     	mojioAuthentication();
+      if(isLoggedIn == true)
+
+     	//mojioAuthentication();
 
   });  
   
@@ -21,7 +22,8 @@
   var directionsService = new google.maps.DirectionsService();
   
   var lowFuelWarningdisplayed = false;
-       
+  //may need to  moved to application.js      
+  /*
   function mojioAuthentication(){
     var mojio_token;
     if (mojio_client.isLoggedIn() == false){  //use this to test for login status
@@ -49,8 +51,10 @@
       console.log("value of token is: " + sessionStorage["mojio_token"]);
     }
   }  
+  */
 
   function initialize() {
+    getVehicleData(); //assuming have already logged in 
     geocoder = new google.maps.Geocoder();
     directionsDisplay = new google.maps.DirectionsRenderer();
     var latlng = new google.maps.LatLng(49.25, -123.100);
