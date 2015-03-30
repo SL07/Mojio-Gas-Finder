@@ -65,7 +65,15 @@
     console.log("Latitude of car is: "+ localStorage["longitude"]);
     var Carlatlng = new google.maps.LatLng(localStorage["latitude"],localStorage["longitude"]);  //for live demo
     console.log("adding current location marker");
-    var iconBase = 'https://maps.google.com/mapfiles/kml/pal4/';
+    var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+
+   /* var image = {
+      url: 'https://maps.google.com/mapfiles/kml/pal4/icon15.png',
+      // This marker is 20 pixels wide by 32 pixels tall.
+      size: new google.maps.Size(40, 40)
+    };*/
+
+
     //http://maps.google.com/mapfiles/kml/pal4/icon15.png
     var marker = new google.maps.Marker({
       position: Carlatlng,
@@ -73,7 +81,8 @@
       title: 'Current Location',
       //icon: iconBase + 'schools_maps.png'
       //fillcolor: '#00FF00'
-      icon: iconBase + 'icon15.png'
+      icon: iconBase + 'cabs.png'
+     // icon : image
     });
     console.log("finished adding current location marker");
     //map.panTo( center); //center map on vancouver 
