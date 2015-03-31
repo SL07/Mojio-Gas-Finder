@@ -194,11 +194,13 @@
       '</div>'+
       '</div>';
       console.log(contentString);
-
-    infowindow = new google.maps.InfoWindow({
+    if (true) {
+      infowindow = new google.maps.InfoWindow({
         content: contentString
-    });
-
+      });
+      console.log("infowindow created");
+    }
+    
 
     var pinIcon = new google.maps.MarkerImage(
       "http://maps.google.com/mapfiles/kml/shapes/gas_stations.png",
@@ -231,7 +233,20 @@
             title: 'Gas Station',
             icon : pinIcon*/
         //});
-
+      var currentInfoWindow = false; 
+      google.maps.event.addListener(stationMarker, 'click',  function() {
+      
+      if(currentInfoWindow == true) {
+        infowindow.close();
+        currentInfoWindow = false;
+      }
+      else{
+        infowindow.open(map,stationMarker);
+        currentInfoWindow = true;
+        console.log("window is opened");
+      }
+      });
+      
       } else {
         alert("Geocode was not successful for the following reason: " + status);
       }
@@ -243,20 +258,7 @@
     });
     */    
 
-    var currentInfoWindow = false; 
-    google.maps.event.addListener(stationMarker, 'click',  function() {
-      
-      if(currentInfoWindow == true) {
-        infowindow.close();
-        currentInfoWindow = false;
-      }
-      else{
-        infowindow.open(map,stationMarker);
-        currentInfoWindow = true;
-        console.log("window is opened");
-      }
-      
-    });
+    
     
   }
 
