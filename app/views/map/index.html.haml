@@ -386,18 +386,9 @@
     .done(function( data ) {
       var message = '<div class="alert alert-warning alert-dismissible" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> <strong>Warning!</strong> No station found in the given search range. Please select a bigger search range. </div>';
       
-      sessionStorage["stationAddress"] = data.address_out+",Canada";
-      console.log ( "data.address_out is: "+  data.address_out);
-      console.log ( "session storage address is: "+sessionStorage["stationAddress"]);
-      sessionStorage["stationBrand"]= data.brand_out;
-      sessionStorage["stationProduct"] = data.product_out;
-      sessionStorage["stationPrice"] =data.price_out;
-
-
-
       $("#ResultField").empty();
       
-      $("<p> Search Result: </p>").appendTo( "#ResultField" );
+      $("<p><b> Search Result: </b></p>").appendTo( "#ResultField" );
       $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
       $("<p> Address: "+data.address_out+"</p>").appendTo( "#ResultField" );
       $("<p> Distance: "+data.distance_out+"</p>").appendTo( "#ResultField" );
@@ -408,37 +399,28 @@
         $('#ResultField').append(message);
 
       directToGasStation(data.address_out+",Canada", data.brand_out, data.product_out, data.price_out);
-
     }); 
-
   }
   
   function getClosest(){
     $.get("map/getClosest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"]})
     .done(function( data ) {
       var message = '<div class="alert alert-warning alert-dismissible" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> <strong>Warning!</strong> No station found in the given search range. Please select a bigger search range. </div>';
-    
-      sessionStorage["stationAddress"] = data.address_out+",Canada";
-      sessionStorage["stationBrand"]= data.brand_out;
-      sessionStorage["stationProduct"] = data.product_out;
-      sessionStorage["stationPrice"] =data.price_out;
 
-      
-      console.log ( sessionStorage["stationAddress"]);
       $("#ResultField").empty();
       
-      $("<p> Search Result: </p>").appendTo( "#ResultField" );
+      $("<p><b> Search Result: </b></p>").appendTo( "#ResultField" );
       $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
       $("<p> Address: "+data.address_out+"</p>").appendTo( "#ResultField" );
       $("<p> Distance: "+data.distance_out+"</p>").appendTo( "#ResultField" );
       $("<p> Gas Type: "+data.product_out+"</p>").appendTo( "#ResultField" );
       $("<p> Price: "+data.price_out+"</p>").appendTo( "#ResultField" );
+      
       if(data.address_out == "No Result Found")
         $('#ResultField').append(message);
+      
       directToGasStation(data.address_out+",Canada", data.brand_out, data.product_out, data.price_out);
-    }); 
-    //directToGasStation(sessionStorage["stationAddress"], sessionStorage["stationBrand"], sessionStorage["stationProduct"], sessionStorage["stationPrice"]);
-    
+    });     
   }
   
   
@@ -469,11 +451,12 @@
           %h4{:style => "color:white"} Please login before accessing this page.
         .modal-footer
           %a.btn.btn-default{:href => "/", :type => "button"} OK
+  
+  %span.pull-right
+      Fuel level:
+    %span#fuelDisplay
 
   #map
-  %p
-    Fuel level:
-    %span#fuelDisplay
   %p
     #ResultField
   %P
