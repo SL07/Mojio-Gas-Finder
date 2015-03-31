@@ -316,24 +316,28 @@
   jQuery(function ($) {
     $(document).on('click', 'label[id^="regular"]', function(event) {
         sessionStorage["gasGrade"] = "Unleaded";
+        console.log("clicked");
     });
   });
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="midGrade"]', function(event) {
       sessionStorage["gasGrade"] = "Midgrade";
+      console.log("clicked");
     });
   });
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="premium"]', function(event) {
       sessionStorage["gasGrade"] = "Premium";
+      console.log("clicked");
     });
   });
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="diesel"]', function(event) {
       sessionStorage["gasGrade"] = "Diesel";
+      console.log("clicked");
     });
   });
   
