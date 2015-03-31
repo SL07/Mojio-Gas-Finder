@@ -137,6 +137,22 @@
         localStorage["correctFuelLevel"] = localStorage["fuellevel"]; //update to corrected fuel level
       //console.log("Last FuelLevel is: "+ localStorage["correctFuelLevel"]);
       
+      var bar = document.getElementById("progress-bar");
+      var fuel = document.getElementById("fuel-panel");
+      console.log(bar);
+      if (localStorage["correctFuelLevel"] >= 50) {
+        bar.className = "progress-bar progress-bar-success progress-bar-striped";
+        fuel.className = "panel panel-success";
+      }
+      else if (localStorage["correctFuelLevel"] < 50 && localStorage["correctFuelLevel"] > 15) {
+        bar.className = "progress-bar progress-bar-warning progress-bar-striped";
+        fuel.className = "panel panel-warning";
+      }
+      else if (localStorage["correctFuelLevel"] <= 15) {
+        bar.className = "progress-bar progress-bar-danger progress-bar-striped";
+        fuel.className = "panel panel-danger";
+      }
+
       $("#progress-bar")
         .css("width", localStorage["correctFuelLevel"] + "%")
         .attr("aria-valuenow", localStorage["correctFuelLevel"])
@@ -411,6 +427,7 @@
 
   function getClosestForWarning(){
     if($('#regular').val() == '' && $('#midGrade').val() == '' && $('#premium').val() == '' && $('#diesel').val() == ''){
+    //if(sessionStorage==null)
       console.log("no grades checked");
     }else{
       getClosest();
@@ -471,7 +488,7 @@
   #map
 
 
-  .panel.panel-warning
+  .panel.panel-warning {:id => "fuel-panel"}
     .panel-heading
       %h3.panel-title
         %b Fuel Level
