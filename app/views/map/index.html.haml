@@ -431,7 +431,7 @@
           %span.centered
             .btn-inline{"data-toggle" => "buttons"}
             %label#regular.btn.btn-primary{:style => "margin-top:5px"}
-              %input#regular{:autocomplete => "off", :checked => "checked", :name => "options", :type => "radio"}/
+              %input#regular{:autocomplete => "off",  :name => "options", :type => "radio"}/
               Regular
             %label#midGrade.btn.btn-primary{:style => "margin-top:5px"}
               %input#midGrade{:autocomplete => "off", :name => "options", :type => "radio"}/
@@ -472,7 +472,7 @@
         %b Fuel Level
     .panel-body
       .progress
-        .progress-bar.progress-bar-warning{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow"=> "100" , :id => "progress-bar", :role => "progressbar", :style => "width: 100%"}
+        .progress-bar.progress-bar-warning{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow"=> "100" , :id => "progress-bar", :role => "progressbar", :style => "width: 60%"}
           100%
       %p
         %span{:style => "color:grey"} *The warning sign will pop up when the fuel level is lower than 15%
