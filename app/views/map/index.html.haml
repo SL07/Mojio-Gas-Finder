@@ -398,7 +398,13 @@
     });     
   }
   
-  
+
+  $('#searchButton').click(function(){
+     if($('#regular').val() == ''){
+        alert('Select the grade for gas');
+    }
+  });
+
 .container-fluid   
   
 
@@ -427,7 +433,7 @@
               Diesel
         .modal-footer{:style =>"background-color: #636060"}
           %h4{:style => "color:white"} Find Closest Gas Station
-          %input.btn.btn-default{:type => "button", :value => "Search", :onClick => "getClosest()"}
+          %input.btn.btn-default{:type => "button", :value => "Search", :id => "searchButton", :onClick => "getClosest()"}
           %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Later
 
 
