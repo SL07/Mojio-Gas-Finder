@@ -332,28 +332,24 @@
   jQuery(function ($) {
     $(document).on('click', 'label[id^="regular"]', function(event) {
         sessionStorage["gasGrade"] = "Unleaded";
-        console.log("clicked");
     });
   });
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="midGrade"]', function(event) {
       sessionStorage["gasGrade"] = "Midgrade";
-      console.log("clicked");
     });
   });
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="premium"]', function(event) {
       sessionStorage["gasGrade"] = "Premium";
-      console.log("clicked");
     });
   });
   
   jQuery(function ($) {
     $(document).on('click', 'label[id^="diesel"]', function(event) {
       sessionStorage["gasGrade"] = "Diesel";
-      console.log("clicked");
     });
   });
   
@@ -527,7 +523,7 @@
         %h5 Fuel Type:
         .btn-inline{"data-toggle" => "buttons"}
           %label#regular.btn.btn-primary{:style => "margin-top:5px"}
-            %input#regular{:autocomplete => "off", :checked => "checked", :name => "options", :type => "radio"}/
+            %input#regular{:autocomplete => "off",  :name => "options", :type => "radio"}/
             Regular
           %label#midGrade.btn.btn-primary{:style => "margin-top:5px"}
             %input#midGrade{:autocomplete => "off", :name => "options", :type => "radio"}/
@@ -551,7 +547,7 @@
         %h5 Fuel Type:
         .btn-inline{"data-toggle" => "buttons"}
           %label#regular.btn.btn-primary{:style => "margin-top:5px"}
-            %input#regular{:autocomplete => "off", :checked => "checked", :name => "options", :type => "radio"}/
+            %input#regular{:autocomplete => "off", :name => "options", :type => "radio"}/
             Regular
           %label#midGrade.btn.btn-primary{:style => "margin-top:5px"}
             %input#midGrade{:autocomplete => "off", :name => "options", :type => "radio"}/
