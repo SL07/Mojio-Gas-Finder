@@ -235,11 +235,12 @@
       //When click the icon
       google.maps.event.addListener(stationMarker, 'click',  function() {
       if(prevInfoWindow) {
-        prevInfoWindow.close();
+        infowindow.close();
       }
       else{
+        //infowindow.open(map,stationMarker);
+        prevInfoWindow = infowindow;
         infowindow.open(map,stationMarker);
-        prevInfoWindow = true;
         console.log("window is opened");
       }
       });
