@@ -400,18 +400,37 @@
   
 .container-fluid   
   
-  #basicModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "basicModal", :role => "dialog", :tabindex => "-1"}
+
+#basicModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "basicModal", :role => "dialog", :tabindex => "-1"}
     .modal.fade
     .modal-dialog
       .modal-content
         .modal-header{:style =>"background-color: #636060"}
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
             %span{"aria-hidden" => "true"} ×
-          %h3#myModalLabel.modal-title{:style => "color:white"} Warning!
+          %h3#myModalLabel.modal-title{:style => "color:white"} Warning! Gas Level Below 15%.
         .modal-body{:style =>"background-color: #636060"}
-          %h4{:style => "color:white"} Gas Level Below 15%.
+          %span.centered
+            .btn-inline{"data-toggle" => "buttons"}
+            %label#regular.btn.btn-primary{:style => "margin-top:5px"}
+              %input#regular{:autocomplete => "off", :checked => "checked", :name => "options", :type => "radio"}/
+              Regular
+            %label#midGrade.btn.btn-primary{:style => "margin-top:5px"}
+              %input#midGrade{:autocomplete => "off", :name => "options", :type => "radio"}/
+              Mid-Grade
+            %label#premium.btn.btn-primary{:style => "margin-top:5px"}
+              %input#premium{:autocomplete => "off", :name => "options", :type => "radio"}/
+              Premium
+            %label#diesel.btn.btn-primary{:style => "margin-top:5px"}
+              %input#diesel{:autocomplete => "off", :name => "options", :type => "radio"}/
+              Diesel
         .modal-footer{:style =>"background-color: #636060"}
-          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+          %h4{:style => "color:white"} Find Closest Gas Station
+          %input.btn.btn-default{:type => "button", :value => "Search", :onClick => "getClosest()"}
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Later
+
+
+
 
   #loginError.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "basicModal", :role => "dialog", :tabindex => "-1"}
     .modal.fade
