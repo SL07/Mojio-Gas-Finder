@@ -239,12 +239,13 @@
       }
       
       //var prevInfoWindow = false;
-        var prevInfoWindow = true; 
+      var prevInfoWindow = true; 
 
       //When click the icon
       google.maps.event.addListener(stationMarker, 'click',  function() {
       if(prevInfoWindow) {
         infowindow.close();
+        prevInfoWindow = true;
       }
       else{
         //infowindow.open(map,stationMarker);
