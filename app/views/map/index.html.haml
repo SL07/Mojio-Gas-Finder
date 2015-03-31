@@ -313,23 +313,6 @@
 
   }
 
-
-
-  function timeoutTest () {
-    console.log("GOT INTO timeoutTest");
-    setTimeout(timeoutTest, 1500); //rerun every 1.5 seconds
-  }
-
- 
-  //var myVar = setInterval(function () {myTimer()}, 3000); //enable this to call repeating function(ie: AutoUpdate() function)  
-
-  function myTimer() {
-    //var d = new Date();
-    //document.getElementById("demo").innerHTML = d.toLocaleTimeString();
-    console.log("inside timer function");
-    autoUpdate();
-  }
-
   google.maps.event.addDomListener(window, "load", initialize);
   
   jQuery(function ($) {
@@ -467,8 +450,7 @@
         .modal-body{:style =>"background-color:red"}
           %h4{:style => "color:white"} Please login before accessing this page.
         .modal-footer
-          %button.btn.btn-default
-            = link_to "OK", root_path
+          %a.btn.btn-default{:href => "/", :type => "button"} OK
 
   #map
   %p
