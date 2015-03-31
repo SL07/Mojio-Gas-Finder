@@ -385,9 +385,7 @@
  
   function getClosest(){
     if($('#regular').val() == '' && $('#midGrade').val() == '' && $('#premium').val() == '' && $('#diesel').val() == ''){
-        $("#searchButton").prop('disabled', true);
       }else{
-        $("#searchButton").prop('disabled', false);
             $('#basicModal').modal('hide');
         $.get("map/getClosest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"]})
       .done(function( data ) {
