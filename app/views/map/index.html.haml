@@ -108,21 +108,6 @@
     control.style.display = 'block';
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
     moveMarker(map, marker);
-
-    var currentInfoWindow = false; 
-    google.maps.event.addListener(stationMarker, 'click',  function() {
-      
-      if(currentInfoWindow == true) {
-        infowindow.close();
-        currentInfoWindow = false;
-      }
-      else{
-        infowindow.open(map,stationMarker);
-        currentInfoWindow = true;
-        console.log("window is opened");
-      }
-      
-    });
   }
 
   function moveMarker ( map, marker){    
@@ -248,7 +233,20 @@
             title: 'Gas Station',
             icon : pinIcon*/
         //});
-
+      var currentInfoWindow = false; 
+      google.maps.event.addListener(stationMarker, 'click',  function() {
+      
+      if(currentInfoWindow == true) {
+        infowindow.close();
+        currentInfoWindow = false;
+      }
+      else{
+        infowindow.open(map,stationMarker);
+        currentInfoWindow = true;
+        console.log("window is opened");
+      }
+      });
+      
       } else {
         alert("Geocode was not successful for the following reason: " + status);
       }
