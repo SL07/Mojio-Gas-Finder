@@ -109,6 +109,8 @@
     control.style.display = 'block';
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
     moveMarker(map, marker);
+
+    sessionStorage.clear();
   }
 
   function moveMarker ( map, marker){    
