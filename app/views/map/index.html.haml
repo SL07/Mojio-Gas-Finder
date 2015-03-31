@@ -364,12 +364,11 @@
       
       $("#ResultField").empty();
       
-      //$("<p><b> Search Result: </b></p>").appendTo( "#ResultField" );
-      $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
-      $("<p> Address: "+data.address_out+"</p>").appendTo( "#ResultField" );
-      $("<p> Distance: "+data.distance_out+"</p>").appendTo( "#ResultField" );
-      $("<p> Gas Type: "+data.product_out+"</p>").appendTo( "#ResultField" );
-      $("<p> Price: "+data.price_out+"</p>").appendTo( "#ResultField" );
+      $("<p><b> Brand: </b>"+data.brand_out+"</p>").appendTo( "#ResultField" );
+      $("<p><b> Address: </b>"+data.address_out+"</p>").appendTo( "#ResultField" );
+      $("<p><b> Distance: </b>"+data.distance_out+"</p>").appendTo( "#ResultField" );
+      $("<p><b> Gas Type: </b>"+data.product_out+"</p>").appendTo( "#ResultField" );
+      $("<p><b> Price: </b>"+data.price_out+"</p>").appendTo( "#ResultField" );
 
       if(data.address_out == "No Result Found")
         $('#ResultField').append(message);
@@ -385,12 +384,11 @@
 
       $("#ResultField").empty();
       
-      //$("<p><b> Search Result: </b></p>").appendTo( "#ResultField" );
-      $("<p> Brand: "+data.brand_out+"</p>").appendTo( "#ResultField" );
-      $("<p> Address: "+data.address_out+"</p>").appendTo( "#ResultField" );
-      $("<p> Distance: "+data.distance_out+"</p>").appendTo( "#ResultField" );
-      $("<p> Gas Type: "+data.product_out+"</p>").appendTo( "#ResultField" );
-      $("<p> Price: "+data.price_out+"</p>").appendTo( "#ResultField" );
+      $("<p><b> Brand: </b>"+data.brand_out+"</p>").appendTo( "#ResultField" );
+      $("<p><b> Address: </b>"+data.address_out+"</p>").appendTo( "#ResultField" );
+      $("<p><b> Distance: </b>"+data.distance_out+"</p>").appendTo( "#ResultField" );
+      $("<p><b> Gas Type: </b>"+data.product_out+"</p>").appendTo( "#ResultField" );
+      $("<p><b> Price: </b>"+data.price_out+"</p>").appendTo( "#ResultField" );
       
       if(data.address_out == "No Result Found")
         $('#ResultField').append(message);
@@ -401,7 +399,7 @@
   
   
 .container-fluid   
-  %h1 Map
+  
   #basicModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "basicModal", :role => "dialog", :tabindex => "-1"}
     .modal.fade
     .modal-dialog
