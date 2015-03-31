@@ -426,10 +426,9 @@
   function getClosestForWarning(){
     //if($('#regular').val() == '' && $('#midGrade').val() == '' && $('#premium').val() == '' && $('#diesel').val() == ''){
     if(!sessionStorage["gasGrade"]){
-      console.log("no grades checked " );
+      $("<p><b>*Select the grade for gas </b></p>").appendTo("#searchButton");
     }else{
-      getClosest();
-      console.log("grade checked "+ sessionStorage["gasGrade"]);   
+      getClosest();  
       }
   }  
 
@@ -464,7 +463,7 @@
               Diesel
         .modal-footer{:style =>"background-color: #636060"}
           %h4{:style => "color:white"} Find Closest Gas Station
-          %input.btn.btn-default{:type => "button", :value => "Search", :onClick => "getClosestForWarning()"}
+          %input.btn.btn-default{:type => "button", :value => "Search", :id=>"searchButton", :onClick => "getClosestForWarning()"}
           %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Later
 
 
@@ -563,7 +562,7 @@
         %h5 Search Range (km):
         .btn{"data-toggle" => "buttons"}
           %label#range_1.btn.btn-primary
-            %input#range_1{:autocomplete => "off", :name => "options", :type => "radio"}/
+            %input#range_1{:autocomplete => "off", :checked => "checked", :name => "options", :type => "radio"}/
             1
           %label#range_2.btn.btn-primary
             %input#range_2{:autocomplete => "off", :name => "options", :type => "radio"}/
