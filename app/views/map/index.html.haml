@@ -382,7 +382,7 @@
     }); 
   }
   
- function getClosest(){
+  function getClosest(){
 
     $('#basicModal').modal('hide');
     $.get("map/getClosest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"]})
