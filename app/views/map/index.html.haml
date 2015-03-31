@@ -427,11 +427,13 @@
           %h4{:style => "color:white"} Please login before accessing this page.
         .modal-footer
           %a.btn.btn-default{:href => "/", :type => "button"} OK
-  
+
+
   %span.pull-right
-    %b
-      Fuel level:
-    %span#fuelDisplay
+    .alert.alert-warning{:role => "alert"}
+      %a.alert-link{:href => "#"}
+        %b FuelLevel :
+        %span#fuelDisplay
 
   #map
   %p
