@@ -194,12 +194,13 @@
       '</div>'+
       '</div>';
       console.log(contentString);
-
-    infowindow = new google.maps.InfoWindow({
+    if (true) {
+      infowindow = new google.maps.InfoWindow({
         content: contentString
-        console.log("creating new infowindow");
-    });
-
+      });
+      console.log("infowindow created");
+    }
+    
 
     var pinIcon = new google.maps.MarkerImage(
       "http://maps.google.com/mapfiles/kml/shapes/gas_stations.png",
