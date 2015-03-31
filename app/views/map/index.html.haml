@@ -34,8 +34,6 @@
   var stationMarker;
   var infowindow;
   var firstLoad = true;
-
-  var marker;
        
   function mojioAuthentication(){
     var mojio_token;
@@ -93,7 +91,7 @@
       new google.maps.Size(40, 40)
     );
   
-    marker = new google.maps.Marker({
+    var marker = new google.maps.Marker({
       position: Carlatlng,
       map: map,
       title: 'Current Location',
@@ -245,12 +243,6 @@
         } else {
           stationMarker.setPosition(results[0].geometry.location);
         }
-
-      var bounds = new google.maps.LatLngBounds();
-      bounds.extend(stationMarker.getPosition());
-      bounds.extend(marker.getPosition());
-
-      map.fitBounds(bounds);
 
       if (infowindow==null) {
         infowindow = new google.maps.InfoWindow({
