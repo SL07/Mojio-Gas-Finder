@@ -453,9 +453,13 @@
       Fuel level:
     %span#fuelDisplay
 
-  .progress
-  .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%;"}
-    60%  
+    
+  .panel.panel-default
+    .panel-body
+      %b Fuel Level
+    .progress
+      .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%;"}
+        60%
   
   .panel.panel-info
     .panel-heading
