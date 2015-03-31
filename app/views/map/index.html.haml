@@ -427,7 +427,7 @@
 
   function getClosestForWarning(){
     //if($('#regular').val() == '' && $('#midGrade').val() == '' && $('#premium').val() == '' && $('#diesel').val() == ''){
-    if(sessionStorage.length == 0){
+    if(!sessionStorage["gasGrade"]){
       console.log("no grades checked");
     }else{
       getClosest();
