@@ -33,6 +33,7 @@
 
   var stationMarker;
   var infowindow;
+  var firstLoad = true;
        
   function mojioAuthentication(){
     var mojio_token;
@@ -156,7 +157,7 @@
       var lng = parseFloat(localStorage["longitude"]);
       var latlng = new google.maps.LatLng(lat, lng);
       
-      var firstLoad = true;
+    
       var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
@@ -242,6 +243,7 @@
         currentInfoWindow = false;
       }
       else{
+        infowindow.setContent(contentString);
         infowindow.open(map,stationMarker);
         currentInfoWindow = true;
         console.log("window is opened");
