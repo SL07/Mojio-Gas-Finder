@@ -383,7 +383,6 @@
   }
   
   function getClosest(){
-
     $('#basicModal').modal('hide');
     $.get("map/getClosest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"]})
     .done(function( data ) {
@@ -401,35 +400,36 @@
         $('#ResultField').append(message);
       
       directToGasStation(data.address_out+",Canada", data.brand_out, data.product_out, data.price_out);
-    });   
+    });
+  }   
 
 
 
   function getClosestForWarning(){
     if($('#regular').val() == '' && $('#midGrade').val() == '' && $('#premium').val() == '' && $('#diesel').val() == ''){
-      }else{
+
+    }else{
         $('#basicModal').modal('hide');
         $.get("map/getClosest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"]})
-      .done(function( data ) {
-        var message = '<div class="alert alert-warning alert-dismissible" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> <strong>Warning!</strong> No station found in the given search range. Please select a bigger search range. </div>';
+        .done(function( data ) {
+          var message = '<div class="alert alert-warning alert-dismissible" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> <strong>Warning!</strong> No station found in the given search range. Please select a bigger search range. </div>';
 
-        $("#ResultField").empty();
-        
-        $("<p><b> Brand: </b>"+data.brand_out+"</p>").appendTo( "#ResultField" );
-        $("<p><b> Address: </b>"+data.address_out+"</p>").appendTo( "#ResultField" );
-        $("<p><b> Distance: </b>"+data.distance_out+" km</p>").appendTo( "#ResultField" );
-        $("<p><b> Gas Type: </b>"+data.product_out+"</p>").appendTo( "#ResultField" );
-        $("<p><b> Price: </b>"+data.price_out+"</p>").appendTo( "#ResultField" );
-        
-        if(data.address_out == "No Result Found")
-          $('#ResultField').append(message);
-        
-        directToGasStation(data.address_out+",Canada", data.brand_out, data.product_out, data.price_out);
-      });     
-      }   
+          $("#ResultField").empty();
+          
+          $("<p><b> Brand: </b>"+data.brand_out+"</p>").appendTo( "#ResultField" );
+          $("<p><b> Address: </b>"+data.address_out+"</p>").appendTo( "#ResultField" );
+          $("<p><b> Distance: </b>"+data.distance_out+" km</p>").appendTo( "#ResultField" );
+          $("<p><b> Gas Type: </b>"+data.product_out+"</p>").appendTo( "#ResultField" );
+          $("<p><b> Price: </b>"+data.price_out+"</p>").appendTo( "#ResultField" );
+          
+          if(data.address_out == "No Result Found")
+            $('#ResultField').append(message);
+          
+          directToGasStation(data.address_out+",Canada", data.brand_out, data.product_out, data.price_out);
+        });     
+      }
+  }  
 
-
-  }
 
 
 
