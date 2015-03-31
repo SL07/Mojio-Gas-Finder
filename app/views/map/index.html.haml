@@ -383,7 +383,15 @@
   
   function getClosest(){
 
+    $('#searchButton').click(function(){
+      if($('#regular').val() == '' && $('#midGrade').val() == '' && $('#premium').val() == '' && $('#diesel').val() == ''){
+          alert('Select the grade for gas');
 
+           $("#searchButton").prop('disabled', false);
+      }else{
+           $("#searchButton").prop('disabled', true);
+      }   
+    });
 
     $('#basicModal').modal('hide');
     $.get("map/getClosest", {longitude_input: localStorage["longitude"], latitude_input: localStorage["latitude"], product_input: sessionStorage["gasGrade"]})
