@@ -228,16 +228,18 @@
         }
 
        infowindow.open(map,stationMarker);
-    
-      var prevInfoWindow = false; 
-      google.maps.event.addListener(stationMarker, 'click',  function() {
       
+      //var prevInfoWindow = false;
+        var prevInfoWindow = true; 
+
+      //When click the icon
+      google.maps.event.addListener(stationMarker, 'click',  function() {
       if(prevInfoWindow) {
         prevInfoWindow.close();
       }
       else{
         infowindow.open(map,stationMarker);
-        prevInfoWindow = infowindow;
+        prevInfoWindow = true;
         console.log("window is opened");
       }
       });
