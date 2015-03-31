@@ -426,7 +426,7 @@
   function getClosestForWarning(){
     //if($('#regular').val() == '' && $('#midGrade').val() == '' && $('#premium').val() == '' && $('#diesel').val() == ''){
     if(!sessionStorage["gasGrade"]){
-      $("<p><b>*Select the grade for gas </b></p>");
+      $("<p><b>*Select the grade for gas </b></p>").appendTo("basicModal");
     }else{
       getClosest();  
       }
