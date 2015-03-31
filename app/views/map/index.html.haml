@@ -6,10 +6,10 @@
           mojioAuthentication();
         else{  //session token isnt null, returning to page
           var temp_token = sessionStorage["mojio_token"];
-          console.log("temp token is: "+ temp_token);
+          //console.log("temp token is: "+ temp_token);
           mojio_client.auth_token = JSON.parse(temp_token); //load in token if return to map page 
           isLoggedIn = mojio_client.isLoggedIn();
-          console.log("new login status is from isloggedin = "+isLoggedIn);
+          //console.log("new login status is from isloggedin = "+isLoggedIn);
           changeLogoutIcon();
         } 
   });  
@@ -51,7 +51,7 @@
           div = $("#welcome");
           div.html('Authorization Result:');
           div.append(JSON.stringify(result));
-          console.log(JSON.stringify(result));
+          //console.log(JSON.stringify(result));
           mojio_token = JSON.stringify(result);
           sessionStorage["mojio_token"] = JSON.stringify(result);  //save the token into local storage
         }
@@ -63,8 +63,8 @@
       });            
     }
     else if(mojio_client.isLoggedIn() == true){
-      console.log("already logged in to Mojio");
-      console.log("value of token is: " + sessionStorage["mojio_token"]);
+      //console.log("already logged in to Mojio");
+      //console.log("value of token is: " + sessionStorage["mojio_token"]);
     }
   }  
 
@@ -366,7 +366,7 @@
       
       $("<p><b> Brand: </b>"+data.brand_out+"</p>").appendTo( "#ResultField" );
       $("<p><b> Address: </b>"+data.address_out+"</p>").appendTo( "#ResultField" );
-      $("<p><b> Distance: </b>"+data.distance_out+"</p>").appendTo( "#ResultField" );
+      $("<p><b> Distance: </b>"+data.distance_out+" km</p>").appendTo( "#ResultField" );
       $("<p><b> Gas Type: </b>"+data.product_out+"</p>").appendTo( "#ResultField" );
       $("<p><b> Price: </b>"+data.price_out+"</p>").appendTo( "#ResultField" );
 
@@ -386,7 +386,7 @@
       
       $("<p><b> Brand: </b>"+data.brand_out+"</p>").appendTo( "#ResultField" );
       $("<p><b> Address: </b>"+data.address_out+"</p>").appendTo( "#ResultField" );
-      $("<p><b> Distance: </b>"+data.distance_out+"</p>").appendTo( "#ResultField" );
+      $("<p><b> Distance: </b>"+data.distance_out+" km</p>").appendTo( "#ResultField" );
       $("<p><b> Gas Type: </b>"+data.product_out+"</p>").appendTo( "#ResultField" );
       $("<p><b> Price: </b>"+data.price_out+"</p>").appendTo( "#ResultField" );
       
