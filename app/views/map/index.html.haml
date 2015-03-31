@@ -137,6 +137,10 @@
         localStorage["correctFuelLevel"] = localStorage["fuellevel"]; //update to corrected fuel level
       //console.log("Last FuelLevel is: "+ localStorage["correctFuelLevel"]);
       
+      $("#progress-bar")
+        .css("width", localStorage["correctFuelLevel"] + "%")
+        .attr("aria-valuenow", localStorage["correctFuelLevel"])
+        .text(localStorage["correctFuelLevel"] + "%");
 
       $("#fuelDisplay").empty();
       $("<span>"+ localStorage["correctFuelLevel"]+"%"+"</span>").appendTo( "#fuelDisplay" );
@@ -470,7 +474,7 @@
         %b Fuel Level
     .panel-body
       .progress
-        .progress-bar.progress-bar-warning{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%"}
+        .progress-bar.progress-bar-warning{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :id => "progress-bar", :role => "progressbar", :style => "width: 60%"}
           60%
       %p
         %span{:style => "color:red"} **The warning sign will pop up when the fule level is lower than 15%
