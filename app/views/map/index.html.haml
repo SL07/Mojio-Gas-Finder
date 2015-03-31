@@ -401,17 +401,16 @@
       
       directToGasStation(data.address_out+",Canada", data.brand_out, data.product_out, data.price_out);
     });
-    alert("geting the clsoe");
   }   
 
 
 
   function getClosestForWarning(){
     if($('#regular').val() == '' && $('#midGrade').val() == '' && $('#premium').val() == '' && $('#diesel').val() == ''){
-
+      consoel.log("no grades checked");
     }else{
       getClosest();
-      alert("hello");    
+      console.log("grade checked");   
       }
   }  
 
