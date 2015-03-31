@@ -229,7 +229,7 @@
       google.maps.event.addListener(stationMarker, 'click',  function() {
       
       if(prevInfoWindow) {
-        infowindow.close();
+        prevInfoWindow.close();
       }
       else{
         infowindow.open(map,stationMarker);
