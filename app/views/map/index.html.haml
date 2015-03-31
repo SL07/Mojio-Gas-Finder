@@ -169,13 +169,7 @@
       '</div>';
       console.log(contentString);
     
-    if (true) {
-      infowindow = new google.maps.InfoWindow({
-        content: contentString
-      });
-      console.log("infowindow created");
-    }
-    
+ 
     //Calculating distance 
       geocoder.geocode({'latLng': latlng}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
@@ -227,7 +221,22 @@
           stationMarker.setPosition(results[0].geometry.location);
         }
 
-       infowindow.open(map,stationMarker);
+
+      if (infowindow==null) {
+        infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+        console.log("infowindow is null");
+        infowindow.open(map,stationMarker);
+      }
+      else{
+        infowindow.close();
+        infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+        console.log("infowindow not null");
+        infowindow.open(map,stationMarker);
+      }
       
       //var prevInfoWindow = false;
         var prevInfoWindow = true; 
