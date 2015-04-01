@@ -16,7 +16,7 @@
 
 //var isLogin = false;
 
-var isLive = false;
+var isLive = true;
 var isLoggedIn = false; //for mojioLogin() and mojioLogout() 
 var App, MojioClient, config, mojio_client;
 var redirectURL = 'https://mojio.herokuapp.com/map';  //to be changed 
